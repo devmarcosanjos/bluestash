@@ -1,6 +1,8 @@
 import {NextResponse, type NextRequest} from 'next/server'
 
-import {updateSession} from '@/libs/supabase/refresh-sesion-middleware'
+import {updateSession} from '@/libs/supabase/refresh-sesion.middleware'
+
+import {verifyAuthentication} from './server/middlewares/verify-authentication.middleware'
 
 export async function middleware(request: NextRequest) {
   const privateRoutes = ['/admin']
@@ -11,16 +13,7 @@ export async function middleware(request: NextRequest) {
 
   if (isPrivate || isAuthRoute) {
     const {response, user} = await updateSession(request)
-    const isAuthenticated = !!user.data.user
-
-    if (isAuthRoute) {
-      if (isAuthenticated) return NextResponse.redirect(new URL('/admin', request.url))
-      return response
-    }
-
-    // PRIVATE ROUTES
-    if (isAuthenticated) return response
-    return NextResponse.redirect(new URL(`/auth`, request.url))
+    return verifyAuthentication({request, response, user: user.data.user, isAuthRoute})
   }
 
   return NextResponse.next()
