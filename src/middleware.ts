@@ -1,11 +1,31 @@
-import {type NextRequest} from 'next/server'
+import {NextResponse, type NextRequest} from 'next/server'
 
 import {updateSession} from '@/libs/supabase/refresh-sesion-middleware'
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+  const privateRoutes = ['/admin']
+  const authRoute = '/auth'
+  const pathname = request.nextUrl.pathname
+  const isPrivate = privateRoutes.some(route => pathname.startsWith(route))
+  const isAuthRoute = pathname.startsWith(authRoute)
+
+  if (isPrivate || isAuthRoute) {
+    const {response, user} = await updateSession(request)
+    const isAuthenticated = !!user.data.user
+
+    if (isAuthRoute) {
+      if (isAuthenticated) return NextResponse.redirect(new URL('/admin', request.url))
+      return response
+    }
+
+    // PRIVATE ROUTES
+    if (isAuthenticated) return response
+    return NextResponse.redirect(new URL(`/auth`, request.url))
+  }
+
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
+  matcher: ['/admin/:path*', '/auth/:path*', '/about', '/another-page'],
 }
