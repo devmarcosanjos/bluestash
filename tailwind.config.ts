@@ -51,7 +51,6 @@ const config: Config = {
           '--animation-btn': '.25s',
           '--animation-input': '.2s',
 
-          '--btn-text-case': 'uppercase',
           '--navbar-padding': '.5rem',
           '--border-btn': '1px',
         },
