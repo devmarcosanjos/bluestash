@@ -7,16 +7,30 @@ export const GET = async (request: NextRequest) => {
   const supabase = supabaseCreateClient()
 
   const {searchParams} = new URL(request.url)
-  const token_hash = searchParams.get('token_hash')!
+  const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType
-  //   console.log(code)
+  const redirectUrl = new URL('/auth', request.url)
 
-  const {data, error} = await supabase.auth.verifyOtp({token_hash, type})
+  if (!token_hash && !type) {
+    redirectUrl.searchParams.append('status', 'missing-params')
+    return NextResponse.redirect(redirectUrl)
+  }
 
-  console.log(data)
-  console.log(error)
+  const {error} = await supabase.auth.verifyOtp({token_hash: token_hash!, type})
 
-  return NextResponse.json({
-    banana: true,
-  })
+  if (error) {
+    redirectUrl.searchParams.append('status', 'login-failed')
+    return NextResponse.redirect(redirectUrl)
+  }
+
+  // TODO:
+  // VERIFY IF USER EXISTS IN THE DATABASE
+  // IF EXISTS: DO NOTHING
+  // REDIRECT TO /ADMIN
+  // -------------
+  // IF NOT EXISTS
+  // CREATE USER IN THE DATABASE
+  // REDIRECT TO /ADMIN
+
+  return NextResponse.redirect(new URL('/admin', request.url))
 }
