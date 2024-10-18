@@ -4,7 +4,7 @@ import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
 import {EmailOtpType} from '@supabase/supabase-js'
 
 export const GET = async (request: NextRequest) => {
-  const supabase = supabaseCreateClient()
+  const supabase = await supabaseCreateClient()
 
   const {searchParams} = new URL(request.url)
   const token_hash = searchParams.get('token_hash')

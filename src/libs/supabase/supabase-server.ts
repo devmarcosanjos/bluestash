@@ -4,8 +4,8 @@ import {SUPABASE_URL} from '@/config/env-client'
 import {SUPABASE_SERVICE_ROLE} from '@/config/env-server'
 import {createServerClient} from '@supabase/ssr'
 
-export const supabaseCreateClient = () => {
-  const cookieStore = cookies()
+export const supabaseCreateClient = async () => {
+  const cookieStore = await cookies()
 
   return createServerClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE, {
     cookies: {
