@@ -22,10 +22,10 @@ export const updateSession = async (request: NextRequest) => {
     },
   })
 
-  const user = await supabase.auth.getUser()
+  const {data} = await supabase.auth.getUser()
 
   return {
     response,
-    user,
+    user: data.user,
   }
 }
