@@ -1,21 +1,15 @@
 import {APP_URL} from '@/config/env-client'
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
 
-export const siginInWithMagicLink = async (formData: FormData) => {
+export const siginInWithMagicLink = async (email: string) => {
   const supabase = supabaseCreateClient()
 
-  const {error, data} = await supabase.auth.signInWithOtp({
-    email: formData.get('email') as string,
+  const {error} = await supabase.auth.signInWithOtp({
+    email: email,
     options: {
       emailRedirectTo: `${APP_URL}/auth/callback`,
     },
   })
 
-  console.log('form-data', formData)
-  console.log('data', data)
-
-  if (error) {
-    console.error('erro login', error)
-    return
-  }
+  if (error) throw 'Error to send magic link email'
 }
