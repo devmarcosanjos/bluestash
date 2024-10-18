@@ -17,7 +17,7 @@
 - 🤖 **React**
 - 🪄 **DaisyUi**
 
-## Estrutura do Boileroplate
+## Estrutura do Boilerplate
 
 ### Configurações setup
 
@@ -46,6 +46,7 @@
 - `./src/config`: Contém arquivos de configuração para gerenciar e exportar variáves de ambiente. Neste diretório as variáveis são separadas entre as que precisam ser acessiveis lado front-end as do lado server.
 - `./src/libs`: Armazena bibliotecas de funcionalidades que são reutilizadas em várias partes da aplicação. Por exemplo, integração com serviço de banco de dados Supabase, deixando encapsulado a logica e sua inicialização de clientes.
 - `./src/utils`: Contém funções "helpers".
+- `./src/server`: Armazena regras de negocios performadas no server side como por exemplo os middlewares da aplicação.
 
 ### Como me localizar no projeto
 
