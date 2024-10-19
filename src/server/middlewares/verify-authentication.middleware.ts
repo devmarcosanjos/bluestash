@@ -1,6 +1,6 @@
+import {User} from '@supabase/supabase-js'
 import {NextRequest, NextResponse} from 'next/server'
 
-import {User} from '@supabase/supabase-js'
 
 type Props = {
   request: NextRequest
