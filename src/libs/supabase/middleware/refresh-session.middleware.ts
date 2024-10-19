@@ -1,8 +1,8 @@
+import {createServerClient} from '@supabase/ssr'
 import {NextRequest, NextResponse} from 'next/server'
 
 import {SUPABASE_URL} from '@/config/env-client'
 import {SUPABASE_SERVICE_ROLE} from '@/config/env-server'
-import {createServerClient} from '@supabase/ssr'
 
 export const updateSession = async (request: NextRequest) => {
   let response = NextResponse.next({request})

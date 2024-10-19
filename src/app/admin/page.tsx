@@ -1,9 +1,9 @@
 'use client'
 
+import {User} from '@supabase/supabase-js'
 import {useEffect, useState} from 'react'
 
 import {supabase} from '@/libs/supabase/supabase-client'
-import {User} from '@supabase/supabase-js'
 
 export default function Page() {
   const [user, setUser] = useState<User | null>(null)

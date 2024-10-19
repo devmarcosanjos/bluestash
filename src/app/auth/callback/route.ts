@@ -1,7 +1,7 @@
+import {EmailOtpType} from '@supabase/supabase-js'
 import {NextRequest, NextResponse} from 'next/server'
 
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
-import {EmailOtpType} from '@supabase/supabase-js'
 
 export const GET = async (request: NextRequest) => {
   const supabase = await supabaseCreateClient()

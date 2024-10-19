@@ -1,8 +1,9 @@
+import {verifyAuthentication} from './server/middlewares/verify-authentication.middleware'
+
 import {NextResponse, type NextRequest} from 'next/server'
 
 import {updateSession} from '@/libs/supabase/middleware/refresh-session.middleware'
 
-import {verifyAuthentication} from './server/middlewares/verify-authentication.middleware'
 
 export async function middleware(request: NextRequest) {
   const privateRoutes = ['/admin']
