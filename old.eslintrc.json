@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript", "prettier", "plugin:mobx/recommended"],
+  "extends": [],
   "plugins": [
     "react",
     "import",
@@ -11,17 +11,40 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "object-property-newline": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+
+    "@typescript-eslint/no-explicit-any": "off",
+
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/no-tabs": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/no-explicit-any": "off",
     "curly": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ],
+    "import/no-cycle": "warn",
+    "import/no-dynamic-require": "warn",
+    "import/no-nodejs-modules": "warn",
     "import/no-unresolved": "error",
     "import/prefer-default-export": "off",
     "indent": "off",
@@ -36,23 +59,15 @@
     "mobx/missing-observer": "off",
     "no-console": "off",
     "no-tabs": "error",
-    "import/no-cycle": "warn",
     "no-unused-vars": [
-      "error", // or "error"
+      "error",
       {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/no-unused-vars": [
-      "error", // or "error"
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "caughtErrorsIgnorePattern": "^_"
-      }
-    ],
+    "object-property-newline": "off",
     "react/display-name": "off",
     "react/jsx-uses-vars": "error",
     "react/no-unescaped-entities": "off",
@@ -60,33 +75,6 @@
     "react/react-in-jsx-scope": "off",
     "semi": "off",
     "space-before-function-paren": "off",
-    "unused-imports/no-unused-imports": "error",
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        "selector": "classMethod",
-        "format": ["camelCase"]
-      },
-      {
-        "selector": "interface",
-        "format": ["PascalCase"]
-      },
-      {
-        "selector": "variable",
-        "modifiers": ["destructured"],
-        "format": null
-      }
-    ],
-    "import-helpers/order-imports": [
-      "warn",
-      {
-        "newlinesBetween": "always",
-        "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
-        "alphabetize": {
-          "order": "asc",
-          "ignoreCase": true
-        }
-      }
-    ]
+    "unused-imports/no-unused-imports": "error"
   }
 }

@@ -1,7 +1,5 @@
-import {APP_URL, SUPABASE_ANON_KEY} from '@/config/env-client'
+import {APP_URL} from '@/config/env-client'
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
-
-const a = 0
 
 export const signinInWithMagicLink = async (email: string) => {
   const supabase = await supabaseCreateClient()

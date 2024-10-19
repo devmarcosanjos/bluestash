@@ -7,7 +7,7 @@ export const handleLoginForm = async (state: any, formData: FormData) => {
     await signinInWithMagicLink(formData.get('email') as string)
 
     return {status: true}
-  } catch (error) {
+  } catch (_error) {
     return {status: false}
   }
 }
