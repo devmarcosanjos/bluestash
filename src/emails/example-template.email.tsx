@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import {
   Tailwind,
   Img,
@@ -12,22 +14,20 @@ import {
   Text,
   Link,
 } from '@react-email/components'
-import * as React from 'react'
 
 import {APP_URL} from '@/config/env-client'
-
 import {supportedLanguages} from '@/locales/config'
 
 type Props = {
-  name: string
   emailConfirmationUrl: string
   lang: (typeof supportedLanguages)[number]
+  name: string
 }
 
 const baseUrl = APP_URL ?? '/static'
 const supportEmail = 'support@email.com'
 
-export const ExampleEmailTemplate = ({name, emailConfirmationUrl, lang}: Props) => {
+export const ExampleEmailTemplate = ({emailConfirmationUrl, lang, name}: Props) => {
   return (
     <Html lang={lang}>
       <Head />
@@ -41,7 +41,7 @@ export const ExampleEmailTemplate = ({name, emailConfirmationUrl, lang}: Props) 
             <Container className='box-border rounded border border-solid border-[#eaeaea] p-[20px]'>
               <Row>
                 <Column className='mb-5 block text-center'>
-                  <Img width={250} src={`${baseUrl}/logo.png`} className='inline' alt='Logo' />
+                  <Img alt='Logo' width={250} className='inline' src={`${baseUrl}/logo.png`} />
                 </Column>
               </Row>
               <Section className='text-base-300'>
@@ -94,9 +94,9 @@ export const ExampleEmailTemplate = ({name, emailConfirmationUrl, lang}: Props) 
 }
 
 ExampleEmailTemplate.PreviewProps = {
-  name: 'Josy Silva',
   confirmUrl: 'https://example.com/confirm-email',
   lang: 'en-US',
+  name: 'Josy Silva',
 }
 
 export default ExampleEmailTemplate

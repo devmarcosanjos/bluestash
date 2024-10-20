@@ -1,15 +1,16 @@
-import {User} from '@supabase/supabase-js'
 import {NextRequest, NextResponse} from 'next/server'
+
+import {User} from '@supabase/supabase-js'
 
 
 type Props = {
+  isAuthRoute: boolean
   request: NextRequest
   response: NextResponse
   user: User | null
-  isAuthRoute: boolean
 }
 
-export const verifyAuthentication = ({request, response, user, isAuthRoute}: Props) => {
+export const verifyAuthentication = ({isAuthRoute, request, response, user}: Props) => {
   const isAuthenticated = !!user
 
   if (isAuthRoute) {

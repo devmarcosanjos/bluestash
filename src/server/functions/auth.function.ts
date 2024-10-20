@@ -1,5 +1,4 @@
 import {APP_URL} from '@/config/env-client'
-
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
 
 export const signinInWithMagicLink = async (email: string) => {

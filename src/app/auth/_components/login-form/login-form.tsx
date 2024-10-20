@@ -1,14 +1,14 @@
 'use client'
 
-import {Check, CircleX} from 'lucide-react'
 import {useActionState} from 'react'
+
+import {Check, CircleX} from 'lucide-react'
 
 import {handleLoginForm} from '@/app/auth/actions'
 
 type StateProps = {
   status: boolean | null
 }
-
 export function LoginForm() {
   const [state, submitForm, isPending] = useActionState<StateProps, FormData>(handleLoginForm, {
     status: null,
@@ -20,16 +20,16 @@ export function LoginForm() {
         <div className='form-control '>
           <span className='label-text'>Email</span>
 
-          <input className='input input-bordered' name='email' required type='email' />
+          <input required name='email' type='email' className='input input-bordered' />
         </div>
 
-        <button className='btn btn-accent btn-md' type='submit'>
+        <button type='submit' className='btn btn-accent btn-md'>
           {isPending ? <span className='loading loading-spinner' /> : 'Login'}
         </button>
       </form>
 
       {state.status === true && (
-        <div className='alert alert-success mt-5 text-white' role='alert'>
+        <div role='alert' className='alert alert-success mt-5 text-white'>
           <Check size={18} />
 
           <span>Verifique sua caixa de entrada e clique no link para acessar sua conta.</span>
@@ -37,7 +37,7 @@ export function LoginForm() {
       )}
 
       {state.status === false && (
-        <div className='alert alert-error mt-5 text-white' role='alert'>
+        <div role='alert' className='alert alert-error mt-5 text-white'>
           <CircleX size={18} />
 
           <span>
