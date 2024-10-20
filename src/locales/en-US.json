@@ -1,0 +1,17 @@
+{
+  "some-page": {
+    "token": "text",
+    "token1": "text",
+    "token2": "text"
+  },
+  "other-page": {
+    "token": "text",
+    "token1": "text",
+    "token2": "text"
+  },
+  "module-name": {
+    "token": "text",
+    "token1": "text",
+    "token2": "text"
+  }
+}
