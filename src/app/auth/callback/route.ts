@@ -1,5 +1,6 @@
-import {EmailOtpType} from '@supabase/supabase-js'
 import {NextRequest, NextResponse} from 'next/server'
+
+import {EmailOtpType} from '@supabase/supabase-js'
 
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
 

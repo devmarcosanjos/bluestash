@@ -1,11 +1,12 @@
 // @ts-check
-import {fixupConfigRules} from '@eslint/compat'
-import {FlatCompat} from '@eslint/eslintrc'
-import eslintJs from '@eslint/js'
-import eslintConfigPrettier from 'eslint-config-prettier'
-import unusedImports from 'eslint-plugin-unused-imports'
 import globals from 'globals'
+import eslintJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
+import {FlatCompat} from '@eslint/eslintrc'
+import {fixupConfigRules} from '@eslint/compat'
+import perfectionist from 'eslint-plugin-perfectionist'
+import unusedImports from 'eslint-plugin-unused-imports'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
@@ -15,9 +16,9 @@ import {fileURLToPath} from 'node:url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
+  allConfig: eslintJs.configs.all,
   baseDirectory: __dirname,
   recommendedConfig: eslintJs.configs.recommended,
-  allConfig: eslintJs.configs.all,
 })
 const patchedConfig = fixupConfigRules([...compat.extends('next/core-web-vitals')])
 
@@ -54,97 +55,123 @@ const config = [
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     plugins: {
+      'perfectionist': perfectionist,
       'unused-imports': unusedImports,
     },
     rules: {
-      'import/no-cycle': 'warn',
-      'import/no-unresolved': 'error',
-      'react/display-name': 'off',
-      'react/no-unescaped-entities': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/naming-convention': [
         'error',
-        {selector: 'classMethod', format: ['camelCase']},
-        {selector: 'interface', format: ['PascalCase']},
-        {selector: 'variable', modifiers: ['destructured'], format: null},
+        {format: ['camelCase'], selector: 'classMethod'},
+        {format: ['PascalCase'], selector: 'interface'},
+        {format: null, modifiers: ['destructured'], selector: 'variable'},
       ],
-      'no-unused-vars': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
+      'import/no-cycle': 'warn',
+      'import/no-unresolved': 'error',
+      'no-unused-vars': 'off',
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          customGroups: {
+            type: {
+              next: ['next', 'next-*', 'next/*'],
+              react: ['react', 'react-*', 'react/*'],
+            },
+            value: {
+              next: ['next', 'next-*', 'next/*'],
+              react: ['react', 'react-*', 'react/*'],
+            },
+          },
+          environment: 'node',
+          groups: [
+            'react',
+            'next',
+            ['external', 'external-type'],
+            'type',
+            'builtin',
+            ['parent-type', 'sibling-type', 'index-type'],
+            ['internal-type', 'internal'],
+            ['parent', 'sibling', 'index'],
+            'object',
+            'unknown',
+          ],
+          ignoreCase: true,
+          internalPattern: ['@/**'],
+          matcher: 'minimatch',
+          maxLineLength: undefined,
+          newlinesBetween: 'always',
+          order: 'asc',
+          specialCharacters: 'keep',
+          type: 'line-length',
+        },
+      ],
+      'perfectionist/sort-interfaces': [
+        'error',
+        {
+          ignoreCase: true,
+          order: 'asc',
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-intersection-types': [
+        'error',
+        {
+          ignoreCase: true,
+          order: 'asc',
+          type: 'line-length',
+        },
+      ],
+      'perfectionist/sort-jsx-props': [
+        'error',
+        {
+          customGroups: {},
+          groups: [],
+          ignoreCase: true,
+          ignorePattern: [],
+          matcher: 'minimatch',
+          order: 'asc',
+          specialCharacters: 'keep',
+          type: 'line-length',
+        },
+      ],
+      'perfectionist/sort-object-types': [
+        'error',
+        {
+          ignoreCase: true,
+          order: 'asc',
+          partitionByComment: false,
+          partitionByNewLine: false,
+          specialCharacters: 'keep',
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-objects': [
+        'error',
+        {
+          customGroups: {},
+          groups: [],
+          ignoreCase: true,
+          ignorePattern: [],
+          matcher: 'minimatch',
+          order: 'asc',
+          partitionByComment: false,
+          partitionByNewLine: false,
+          specialCharacters: 'keep',
+          styledComponents: true,
+          type: 'alphabetical',
+        },
+      ],
+      'react/display-name': 'off',
+      'react/no-unescaped-entities': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
         {
-          vars: 'all',
-          varsIgnorePattern: '^_',
           args: 'after-used',
           argsIgnorePattern: '^_',
-        },
-      ],
-      'import/order': [
-        'error',
-        {
-          'newlines-between': 'always',
-          'distinctGroup': true,
-          'alphabetize': {
-            order: 'asc',
-          },
-          'groups': [
-            'index',
-            'type',
-            'sibling',
-            'parent',
-            'internal',
-            'external',
-            'builtin',
-            'object',
-          ],
-          'pathGroups': [
-            {
-              pattern: '@/config/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/emails/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/libs/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/server/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/constants/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/locales/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/types/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/utils/**',
-              group: 'external',
-              position: 'after',
-            },
-            {
-              pattern: '@/**',
-              group: 'external',
-              position: 'after',
-            },
-          ],
+          vars: 'all',
+          varsIgnorePattern: '^_',
         },
       ],
     },
