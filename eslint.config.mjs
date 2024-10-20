@@ -22,31 +22,35 @@ const compat = new FlatCompat({
 const patchedConfig = fixupConfigRules([...compat.extends('next/core-web-vitals')])
 
 const config = [
+  {
+    ignores: [
+      '.github/**',
+      '.next/**',
+      '.swc/**',
+      '.vscode/**',
+      'coverage/**',
+      'node_modules/**',
+      'build/**',
+      'dist/**',
+      'public/**',
+      '**/@types/**',
+      '**/index.js',
+      '**/*.d.ts',
+      '**/*.js',
+    ],
+  },
+  {
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
   eslintConfigPrettier,
   eslintJs.configs.recommended,
   ...patchedConfig,
   ...tseslint.configs.recommended,
   // pluginReact.configs.flat.recommended, // no needed when using next/core-web-vitals
   // pluginReact.configs.flat['jsx-runtime'], // no needed when using next/core-web-vitals
-  {
-    languageOptions: {
-      globals: globals.browser,
-    },
-    ignores: [
-      '**/node_modules/',
-      '**/babel.config.js',
-      '**/index.js',
-      '**/.vscode/',
-      '**/.next/',
-      '**/build/',
-      '**/*.js',
-      '**/*.png',
-      '**/*.jpg',
-      '**/*.ttf',
-      '**/*.svg',
-      '**/*.json',
-    ],
-  },
+
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     plugins: {
@@ -55,7 +59,8 @@ const config = [
     rules: {
       'import/no-cycle': 'warn',
       'import/no-unresolved': 'error',
-
+      'react/display-name': 'off',
+      'react/no-unescaped-entities': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/naming-convention': [
         'error',
@@ -85,15 +90,55 @@ const config = [
           },
           'groups': [
             'index',
+            'type',
             'sibling',
             'parent',
             'internal',
             'external',
             'builtin',
             'object',
-            'type',
           ],
           'pathGroups': [
+            {
+              pattern: '@/config/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/emails/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/libs/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/server/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/constants/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/locales/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/types/**',
+              group: 'external',
+              position: 'after',
+            },
+            {
+              pattern: '@/utils/**',
+              group: 'external',
+              position: 'after',
+            },
             {
               pattern: '@/**',
               group: 'external',
