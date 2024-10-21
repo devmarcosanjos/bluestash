@@ -106,22 +106,6 @@ const config = [
           type: 'line-length',
         },
       ],
-      'perfectionist/sort-interfaces': [
-        'error',
-        {
-          ignoreCase: true,
-          order: 'asc',
-          type: 'alphabetical',
-        },
-      ],
-      'perfectionist/sort-intersection-types': [
-        'error',
-        {
-          ignoreCase: true,
-          order: 'asc',
-          type: 'line-length',
-        },
-      ],
       'perfectionist/sort-jsx-props': [
         'error',
         {
@@ -133,33 +117,6 @@ const config = [
           order: 'asc',
           specialCharacters: 'keep',
           type: 'line-length',
-        },
-      ],
-      'perfectionist/sort-object-types': [
-        'error',
-        {
-          ignoreCase: true,
-          order: 'asc',
-          partitionByComment: false,
-          partitionByNewLine: false,
-          specialCharacters: 'keep',
-          type: 'alphabetical',
-        },
-      ],
-      'perfectionist/sort-objects': [
-        'error',
-        {
-          customGroups: {},
-          groups: [],
-          ignoreCase: true,
-          ignorePattern: [],
-          matcher: 'minimatch',
-          order: 'asc',
-          partitionByComment: false,
-          partitionByNewLine: false,
-          specialCharacters: 'keep',
-          styledComponents: true,
-          type: 'alphabetical',
         },
       ],
       'react/display-name': 'off',
