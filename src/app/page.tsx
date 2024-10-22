@@ -1,5 +1,4 @@
-import Link from 'next/link'
-
+import {Header, Hero} from '@/app/_components'
 import {loadUserData} from '@/server/functions/user.function'
 
 export default async function Home() {
@@ -8,11 +7,9 @@ export default async function Home() {
   console.log({res})
 
   return (
-    <div className='flex h-screen w-full flex-col items-center justify-center'>
-      <h1>Home page</h1>
-      <Link href='/auth' className='btn btn-primary btn-wide'>
-        Login
-      </Link>
+    <div className='flex h-screen w-full flex-col items-center'>
+      <Header />
+      <Hero />
     </div>
   )
 }
