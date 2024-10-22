@@ -1,15 +1,9 @@
 import Link from 'next/link'
 
-import {prisma} from '@/libs/prisma/config'
+import {loadUserData} from '@/server/functions/user.function'
 
 export default async function Home() {
-  const res = await prisma.users.findFirst({
-    where: {
-      id: {
-        equals: 1,
-      },
-    },
-  })
+  const res = await loadUserData()
 
   console.log({res})
 
