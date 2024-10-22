@@ -4,7 +4,6 @@ import {updateSession} from '@/libs/supabase/middleware/refresh-session.middlewa
 
 import {verifyAuthentication} from './server/middlewares/verify-authentication.middleware'
 
-
 export async function middleware(request: NextRequest) {
   const privateRoutes = ['/admin']
   const authRoute = '/auth'
