@@ -8,7 +8,7 @@ export const Header = () => {
     <div className='navbar max-w-screen-lg bg-base-100'>
       <div className='navbar-start'>
         <Link href={APP_URL} className='btn btn-ghost text-xl'>
-          <Image alt='Logo' width={120} height={80} src='/auth/logo.svg' />
+          <Image alt='Logo' width={120} height={80} src='/logo/logo.svg' />
         </Link>
       </div>
       <div className='navbar-end'>

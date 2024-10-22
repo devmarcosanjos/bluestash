@@ -14,7 +14,7 @@ export default function Page() {
         </Link>
 
         <div className='mb-5 flex justify-center text-center'>
-          <Image alt='Logo' width={177} height={100} src='/auth/logo.svg' />
+          <Image alt='Logo' width={177} height={100} src='/logo/logo.svg' />
         </div>
 
         <LoginForm />

@@ -5,6 +5,13 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'img.daisyui.com',
+      },
+    ],
+  },
 }
 
 export default nextConfig

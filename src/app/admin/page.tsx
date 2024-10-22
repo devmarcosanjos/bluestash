@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react'
 
 import {User} from '@supabase/supabase-js'
 
+import {HeaderAdmin} from '@/app/admin/_components'
 import {supabase} from '@/libs/supabase/supabase-client'
 
 export default function Page() {
@@ -18,9 +19,11 @@ export default function Page() {
   }, [])
 
   return (
-    <div className='flex h-screen w-full flex-col items-center justify-center'>
-      <h1 className=''>Admin</h1>
-      <p>{user?.email}</p>
+    <div className='flex h-screen w-full flex-col items-center'>
+      <HeaderAdmin user={user} />
+      <div className='flex flex-1 items-center justify-center'>
+        <h1 className='text-3xl'>Admin</h1>
+      </div>
     </div>
   )
 }
