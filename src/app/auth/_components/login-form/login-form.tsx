@@ -20,10 +20,16 @@ export function LoginForm() {
         <div className='form-control '>
           <span className='label-text'>Email</span>
 
-          <input required name='email' type='email' className='input input-bordered' />
+          <input
+            required
+            name='email'
+            type='email'
+            placeholder='Enter your email'
+            className='input input-bordered'
+          />
         </div>
 
-        <button type='submit' className='btn btn-accent btn-md'>
+        <button type='submit' className='btn btn-primary btn-md'>
           {isPending ? <span className='loading loading-spinner' /> : 'Login'}
         </button>
       </form>
