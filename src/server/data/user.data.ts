@@ -3,13 +3,13 @@ import 'server-only'
 import {cache} from 'react'
 
 import {prisma} from '@/libs/prisma/config'
-import {CreateUserModel} from '@/types/models'
+import {CreateUserModel, UserModel} from '@/types/models'
 import {getAuthenticatedUser} from '@/server/functions/auth.function'
 
 export const getCurrentUser = cache(async () => {
   const authenticatedUser = await getAuthenticatedUser()
 
-  const currentUser = await prisma.users.findFirst({
+  const currentUser = await prisma.users.findFirstOrThrow({
     select: {
       id: true,
       email: true,
@@ -23,7 +23,7 @@ export const getCurrentUser = cache(async () => {
     },
   })
 
-  return currentUser
+  return currentUser as UserModel
 })
 
 export const getUserByUid = async (uid: string) => {

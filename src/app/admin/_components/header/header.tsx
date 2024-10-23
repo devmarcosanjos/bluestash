@@ -17,10 +17,10 @@ export const HeaderAdmin = ({user}: Props) => {
           <Image alt='Logo' width={120} height={80} src='/logo/logo.svg' />
         </Link>
       </div>
-      <div className='navbar-center hidden lg:flex'>
+      <div className='navbar-center flex'>
         <ul className='menu menu-horizontal px-1'>
           <li>
-            <a>Item 1</a>
+            <Link href='/admin/todo'>Todo</Link>
           </li>
           <li>
             <a>Item 2</a>
