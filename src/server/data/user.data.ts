@@ -3,12 +3,8 @@ import 'server-only'
 import {cache} from 'react'
 
 import {prisma} from '@/libs/prisma/config'
+import {CreateUserModel} from '@/types/models'
 import {getAuthenticatedUser} from '@/server/functions/auth.function'
-
-export const getUserExample = async () => {
-  // perform some operation in the database.
-  // Here it will goes prisma/drizzle queries
-}
 
 export const getCurrentUser = cache(async () => {
   const authenticatedUser = await getAuthenticatedUser()
@@ -29,3 +25,32 @@ export const getCurrentUser = cache(async () => {
 
   return currentUser
 })
+
+export const getUserByUid = async (uid: string) => {
+  const user = await prisma.users.findFirst({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      uid: true,
+    },
+    where: {
+      uid: {
+        equals: uid,
+      },
+    },
+    take: 1,
+  })
+
+  return user
+}
+
+export const createUser = async (user: CreateUserModel) => {
+  await prisma.users.create({
+    data: {
+      uid: id,
+      email: email!,
+      name: '',
+    },
+  })
+}

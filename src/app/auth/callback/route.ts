@@ -2,6 +2,7 @@ import {NextRequest, NextResponse} from 'next/server'
 
 import {EmailOtpType} from '@supabase/supabase-js'
 
+import {createUser, getUserByUid} from '@/server/data/user.data'
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
 
 export const GET = async (request: NextRequest) => {
@@ -17,21 +18,18 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.redirect(redirectUrl)
   }
 
-  const {error} = await supabase.auth.verifyOtp({token_hash: token_hash!, type})
+  const {error, data} = await supabase.auth.verifyOtp({token_hash: token_hash!, type})
 
-  if (error) {
+  if (error || !data.user) {
     redirectUrl.searchParams.append('status', 'login-failed')
     return NextResponse.redirect(redirectUrl)
   }
 
-  // TODO:
-  // VERIFY IF USER EXISTS IN THE DATABASE
-  // IF EXISTS: DO NOTHING
-  // REDIRECT TO /ADMIN
-  // -------------
-  // IF NOT EXISTS
-  // CREATE USER IN THE DATABASE
-  // REDIRECT TO /ADMIN
+  const user = await getUserByUid(data.user.id)
+
+  if (!user) {
+    await createUser(data.user.id, data.user.email!)
+  }
 
   return NextResponse.redirect(new URL('/admin', request.url))
 }
