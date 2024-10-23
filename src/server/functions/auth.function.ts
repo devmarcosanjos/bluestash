@@ -20,6 +20,8 @@ export const getAuthenticatedUser = async () => {
   const {data, error} = await supabase.auth.getUser()
   const authenticatedUser = data.user
 
+  console.log({data, error})
+
   if (error || !authenticatedUser) throw 'Could not get current user'
 
   return authenticatedUser

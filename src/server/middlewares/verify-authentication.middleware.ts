@@ -2,7 +2,6 @@ import {NextRequest, NextResponse} from 'next/server'
 
 import {User} from '@supabase/supabase-js'
 
-
 type Props = {
   isAuthRoute: boolean
   request: NextRequest
@@ -20,5 +19,6 @@ export const verifyAuthentication = ({isAuthRoute, request, response, user}: Pro
 
   // PRIVATE ROUTES
   if (isAuthenticated) return response
+
   return NextResponse.redirect(new URL(`/auth`, request.url))
 }

@@ -8,7 +8,7 @@ import {getAuthenticatedUser} from '@/server/functions/auth.function'
 
 export const getCurrentUser = cache(async () => {
   const authenticatedUser = await getAuthenticatedUser()
-
+  console.log(authenticatedUser)
   const currentUser = await prisma.users.findFirstOrThrow({
     select: {
       id: true,

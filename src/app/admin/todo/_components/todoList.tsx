@@ -1,8 +1,23 @@
+'use client'
+
+import {useEffect} from 'react'
+
+import {TodoModel} from '@/types/models'
 import {APP_URL} from '@/config/env-client'
 
-export const TodoList = async () => {
-  const response = await fetch(`${APP_URL}/api/users`)
-  const users = await response.json()
+export const TodoList = () => {
+  const todos = []
+
+  useEffect(() => {
+    const getData = async () => {
+      const todosResponse = await fetch(`${APP_URL}/api/todo`)
+      const todos = (await todosResponse.json()) as TodoModel[]
+
+      console.log({todos})
+    }
+
+    getData()
+  }, [])
 
   return (
     <div className='overflow-x-auto'>
@@ -11,17 +26,17 @@ export const TodoList = async () => {
         <thead>
           <tr>
             <th></th>
-            <th>uID</th>
-            <th>Email</th>
+            <th>Nome</th>
+            <th>Descrição</th>
           </tr>
         </thead>
         <tbody>
           {/* row 1 */}
-          {users.map((user, i) => (
-            <tr key={i} className='bg-base-200'>
-              <th>{user.id}</th>
-              <td>{user.uid}</td>
-              <td>{user.email}</td>
+          {todos.map(todo => (
+            <tr key={todo.id} className='bg-base-200'>
+              <th>{todo.id}</th>
+              <td>{todo.name}</td>
+              <td>{todo.description}</td>
             </tr>
           ))}
         </tbody>
