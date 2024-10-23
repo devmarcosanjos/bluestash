@@ -21,7 +21,7 @@ model todo {
 model users {
   id        Int       @id @default(autoincrement())
   uid       String    @unique(map: "users_uid_unique")
-  name      String
+  name      String?    
   email     String    @unique(map: "users_email_unique")
   createdAt DateTime  @default(now()) @db.Date
   updatedAt DateTime? @db.Date

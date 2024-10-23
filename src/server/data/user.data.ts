@@ -47,10 +47,6 @@ export const getUserByUid = async (uid: string) => {
 
 export const createUser = async (user: CreateUserModel) => {
   await prisma.users.create({
-    data: {
-      uid: id,
-      email: email!,
-      name: '',
-    },
+    data: user,
   })
 }

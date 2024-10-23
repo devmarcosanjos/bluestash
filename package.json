@@ -10,7 +10,7 @@
     "prepare": "husky",
     "prisma:generate": "prisma generate",
     "test:ci": "prettier",
-    "postinstall": "prisma:generate"
+    "postinstall": "yarn prisma:generate"
   },
   "prisma": {
     "schema": "./src/libs/prisma/schema.prisma"
@@ -22,7 +22,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
     "next": "^15.0.0-rc.1",
-    "prisma": "^5.21.1",
+    "prisma": "5.21.1",
     "react": "19.0.0-rc-b8ae38f8-20241018",
     "react-dom": "19.0.0-rc-b8ae38f8-20241018",
     "server-only": "^0.0.1",

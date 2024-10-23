@@ -28,7 +28,11 @@ export const GET = async (request: NextRequest) => {
   const user = await getUserByUid(data.user.id)
 
   if (!user) {
-    await createUser(data.user.id, data.user.email!)
+    await createUser({
+      email: data.user.email!,
+      uid: data.user.id,
+      name: null,
+    })
   }
 
   return NextResponse.redirect(new URL('/admin', request.url))
