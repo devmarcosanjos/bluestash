@@ -8,9 +8,9 @@ export const privateRoute = (callback: CallbackProps) => {
   return async (...params: any) => {
     const supabase = await supabaseCreateClient()
     const {data} = await supabase.auth.getUser()
-    const isAutenticated = !!data.user
+    const isAuthenticated = !!data.user
 
-    if (isAutenticated) {
+    if (isAuthenticated) {
       return callback(...params)
     }
 
