@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky",
-    "prisma:generate": "prisma generate",
     "test:ci": "prettier",
+    "email:dev": "email dev -d ./src/emails -p 3333",
+    "email:build": "email build -d ./src/emails",
+    "email:export": "email export -d ./src/emails",
+    "prisma:generate": "prisma generate",
+    "prepare": "husky",
     "postinstall": "yarn prisma:generate"
   },
   "prisma": {
@@ -17,6 +20,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "@react-email/components": "0.0.25",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
     "clsx": "^2.1.1",
@@ -25,6 +29,8 @@
     "prisma": "5.21.1",
     "react": "19.0.0-rc-d49123f7-20241019",
     "react-dom": "19.0.0-rc-d49123f7-20241019",
+    "react-email": "3.0.1",
+    "resend": "^4.0.0",
     "server-only": "^0.0.1",
     "tailwind-merge": "^2.5.4"
   },

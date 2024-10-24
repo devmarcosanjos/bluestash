@@ -19,7 +19,7 @@ import {APP_URL} from '@/config/env-client'
 import {supportedLanguages} from '@/locales/config'
 
 type Props = {
-  emailConfirmationUrl: string
+  confirmUrl: string
   lang: (typeof supportedLanguages)[number]
   name: string
 }
@@ -27,7 +27,7 @@ type Props = {
 const baseUrl = APP_URL ?? '/static'
 const supportEmail = 'support@email.com'
 
-export const ExampleEmailTemplate = ({emailConfirmationUrl, lang, name}: Props) => {
+export const ExampleEmailTemplate = ({confirmUrl, lang, name}: Props) => {
   return (
     <Html lang={lang}>
       <Head />
@@ -48,7 +48,7 @@ export const ExampleEmailTemplate = ({emailConfirmationUrl, lang, name}: Props) 
                 <Row>
                   <Text className='text-md mt-2'>
                     {lang === 'pt-BR' && `Olá ${name},`}
-                    {lang === 'en-US' && `Hello {name},`}
+                    {lang === 'en-US' && `Hello ${name},`}
                   </Text>
 
                   <Text className='text-md mt-2'>
@@ -65,7 +65,7 @@ export const ExampleEmailTemplate = ({emailConfirmationUrl, lang, name}: Props) 
                 <Row>
                   <Column className='w-full pb-3 pt-3'>
                     <Link
-                      href={emailConfirmationUrl}
+                      href={confirmUrl}
                       className='box-border block w-full rounded-lg bg-[#000] px-8 py-3 text-center font-semibold text-white'>
                       <span>
                         {lang === 'pt-BR' && 'Confirmar meu e-mail'}
