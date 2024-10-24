@@ -1,1 +1,1 @@
-export * from './example.utility'
+export * from './email.utility'
