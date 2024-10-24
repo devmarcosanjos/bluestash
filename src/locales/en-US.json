@@ -1,8 +1,7 @@
 {
-  "some-page": {
-    "token": "text",
-    "token1": "text",
-    "token2": "text"
+  "privacy-policy-page": {
+    "title": "Privacy policy",
+    "description": "description"
   },
   "other-page": {
     "token": "text",

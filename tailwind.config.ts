@@ -1,4 +1,6 @@
+import daisyUI from 'daisyui'
 import type {Config} from 'tailwindcss'
+import typography from '@tailwindcss/typography'
 
 const config: Config = {
   content: [
@@ -6,7 +8,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  plugins: [require('daisyui')],
+  plugins: [typography, daisyUI],
   daisyui: {
     darkTheme: 'dark', // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default
