@@ -1,16 +1,14 @@
 import {NextResponse} from 'next/server'
 
-import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
+import {getAuthenticatedUser} from '@/server/functions/auth.function'
 
 type CallbackProps = (...params: any) => Promise<Response>
 
 export const privateRoute = (callback: CallbackProps) => {
   return async (...params: any) => {
-    const supabase = await supabaseCreateClient()
-    const {data} = await supabase.auth.getUser()
-    const isAuthenticated = !!data.user
+    const user = await getAuthenticatedUser()
 
-    if (isAuthenticated) {
+    if (user) {
       return callback(...params)
     }
 

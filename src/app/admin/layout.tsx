@@ -16,6 +16,7 @@ type Props = {
 
 export default async function Layout({children}: Props) {
   const user = await loadUserData()
+
   return (
     <div className='flex h-screen w-full flex-col items-center'>
       <HeaderAdmin user={user} />

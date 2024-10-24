@@ -2,8 +2,6 @@ import {getCurrentUser} from '@/server/data/user.data'
 import {getAllTodosByUserId} from '@/server/data/todo.data'
 import {privateRoute} from '@/server/functions/private-route.function'
 
-export const dynamic = 'force-dynamic'
-
 export const GET = privateRoute(async () => {
   try {
     const user = await getCurrentUser()

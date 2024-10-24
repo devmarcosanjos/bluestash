@@ -1,3 +1,5 @@
+'use server'
+
 import {APP_URL} from '@/config/env-client'
 import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
 
