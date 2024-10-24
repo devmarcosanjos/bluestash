@@ -1,42 +1,21 @@
 import {NextRequest} from 'next/server'
 
-import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
+import {getCurrentUser} from '@/server/data/user.data'
+import {getAllTodosByUserId} from '@/server/data/todo.data'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET(_request: NextRequest) {
   try {
-    const supabase = await supabaseCreateClient()
+    const user = await getCurrentUser()
+    const todos = await getAllTodosByUserId(user.id)
 
-    const {data, error} = await supabase.auth.getSession()
-
-    console.log({data})
-    console.log({error})
-
-    // TODO: ROUTER HANDER
-
-    // const user = await getCurrentUser()
-    // const todos = await prisma.todo.findMany({
-    //   select: {
-    //     id: true,
-    //     name: true,
-    //     description: true,
-    //   },
-    //   where: {
-    //     userId: {
-    //       equals: user.id,
-    //     },
-    //   },
-    // })
-
-    // console.log({todos})
-    return Response.json([], {
+    return Response.json(todos, {
       status: 200,
     })
   } catch (error) {
-    console.log(error)
-    return Response.json([], {
-      status: 200,
+    return Response.json('Internal server error.', {
+      status: 500,
     })
   }
 }

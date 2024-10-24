@@ -1,19 +1,19 @@
 'use client'
 
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 
 import {TodoModel} from '@/types/models'
 import {APP_URL} from '@/config/env-client'
 
 export const TodoList = () => {
-  const todos = []
+  // component => bussiness layer (functions) => data => database
+  const [todos, setTodos] = useState<TodoModel[]>([])
 
   useEffect(() => {
     const getData = async () => {
       const todosResponse = await fetch(`${APP_URL}/api/todo`)
       const todos = (await todosResponse.json()) as TodoModel[]
-
-      console.log({todos})
+      setTodos(todos)
     }
 
     getData()
