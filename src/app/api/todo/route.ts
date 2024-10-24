@@ -1,21 +1,16 @@
-import {NextRequest} from 'next/server'
-
 import {getCurrentUser} from '@/server/data/user.data'
 import {getAllTodosByUserId} from '@/server/data/todo.data'
+import {privateRoute} from '@/server/functions/private-route.function'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(_request: NextRequest) {
+export const GET = privateRoute(async () => {
   try {
     const user = await getCurrentUser()
     const todos = await getAllTodosByUserId(user.id)
 
-    return Response.json(todos, {
-      status: 200,
-    })
+    return Response.json(todos, {status: 200})
   } catch (error) {
-    return Response.json('Internal server error.', {
-      status: 500,
-    })
+    return Response.json('Internal server error.', {status: 500})
   }
-}
+})

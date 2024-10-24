@@ -11,17 +11,16 @@ export async function middleware(request: NextRequest) {
 
   const isPrivate = privateRoutes.some(route => pathname.startsWith(route))
   const isAuthRoute = pathname.startsWith(authRoute)
-  const isApiRoute = pathname.startsWith('/api')
 
-  if (isPrivate || isAuthRoute || isApiRoute) {
+  if (isPrivate || isAuthRoute) {
     const {response, user} = await updateSession(request)
 
-    return verifyAuthentication({isAuthRoute, isApiRoute, request, response, user})
+    return verifyAuthentication({isAuthRoute, request, response, user})
   }
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/auth/:path*', '/api/:path*'],
+  matcher: ['/admin/:path*', '/auth/:path*'],
 }
