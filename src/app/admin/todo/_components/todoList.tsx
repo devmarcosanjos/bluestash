@@ -2,20 +2,17 @@
 
 import {useEffect, useState} from 'react'
 
+import {todoApi} from '@/apis/todo.api'
 import {TodoModel} from '@/types/models'
-import {APP_URL} from '@/config/env-client'
 
 export const TodoList = () => {
-  // component => bussiness layer (functions) => data => database
   const [todos, setTodos] = useState<TodoModel[]>([])
 
   useEffect(() => {
     const getData = async () => {
-      const todosResponse = await fetch(`${APP_URL}/api/todo`)
-      const todos = (await todosResponse.json()) as TodoModel[]
+      const todos = await todoApi.getAllTodos()
       setTodos(todos)
     }
-
     getData()
   }, [])
 
