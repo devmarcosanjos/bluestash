@@ -10,12 +10,12 @@ const config: Config = {
   ],
   plugins: [typography, daisyUI],
   daisyui: {
-    darkTheme: 'dark', // name of one of the included themes for dark mode
+    darkTheme: 'defaultDark', // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components
     utils: true, // adds responsive and modifier utility classes
     prefix: '', // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
-    logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
+    logs: false, // Shows info about daisyUI version and used config in the console when building your CSS
     themeRoot: ':root', // The element that receives theme color CSS variables
     themes: [
       {
@@ -56,8 +56,35 @@ const config: Config = {
           '--navbar-padding': '.5rem',
           '--border-btn': '1px',
         },
+        defaultDark: {
+          'primary': '#ffb3d9',
+          'primary-focus': '#ff80bf',
+          'primary-content': '#1b1c22',
+
+          'secondary': '#b9ffb3',
+          'secondary-focus': '#8aff80',
+          'secondary-content': '#1b1c22',
+
+          'accent': '#ffffb3',
+          'accent-focus': '#ffff80',
+          'accent-content': '#1b1c22',
+
+          'neutral': '#22212c',
+          'neutral-focus': '#1b1c22',
+          'neutral-content': '#d5ccff',
+
+          'base-100': '#302f3d',
+          'base-200': '#22212c',
+          'base-300': '#1b1c22',
+          'base-content': '#d5ccff',
+
+          'info': '#1c92f2',
+          'success': '#009485',
+          'warning': '#ff9900',
+          'error': '#ff5724',
+        },
       },
-    ], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    ],
   },
 }
 

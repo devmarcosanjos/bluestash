@@ -18,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${roboto.className} antialiased`}>{children}</body>
+      <body className={`${roboto.className} antialiased`}>
+        <main data-theme='default' className='min-h-screen w-full'>
+          {children}
+        </main>
+      </body>
     </html>
   )
 }

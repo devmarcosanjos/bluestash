@@ -11,7 +11,7 @@ export default function Page() {
             <h1 className='text-center text-2xl font-semibold text-black sm:text-3xl'>
               Contact us
             </h1>
-            <p className='mt-5'>
+            <p className='mt-5 text-center'>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae culpa quidem rerum,
               voluptate dignissimos impedit exercitationem quod consequatur veritatis alias
               repudiandae.
