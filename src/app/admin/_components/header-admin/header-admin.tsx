@@ -1,9 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import {redirect} from 'next/navigation'
 
 import {LogOut} from 'lucide-react'
 
 import {UserModel} from '@/types/models'
+import {supabase} from '@/libs/supabase/supabase-client'
 
 type Props = {
   user: UserModel
@@ -11,6 +15,11 @@ type Props = {
 
 export const HeaderAdmin = ({user}: Props) => {
   const userInitial = user?.email.split('@')[0][0]
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    redirect('/')
+  }
 
   return (
     <div className='navbar bg-base-300'>
@@ -45,7 +54,7 @@ export const HeaderAdmin = ({user}: Props) => {
               <Link href='/admin/profile'>My profile</Link>
             </li>
             <li>
-              <button className='text-error'>
+              <button onClick={handleLogout} className='text-error'>
                 <LogOut size={18} />
                 Logout
               </button>
