@@ -3,13 +3,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import {Moon, Sun} from 'lucide-react'
-import {observer} from 'mobx-react-lite'
-
 import {APP_URL} from '@/config/env-client'
-import {themeStore} from '@/app/_stores/theme.store'
+import {ThemeToggle} from '@/app/_components/theme-toggle'
 
-export const Header = observer(() => {
+export const Header = () => {
   return (
     <div className='navbar max-w-screen-lg bg-base-100'>
       <div className='navbar-start'>
@@ -19,21 +16,11 @@ export const Header = observer(() => {
       </div>
 
       <div className='navbar-end'>
-        <label className='swap swap-rotate ml-2 mr-2'>
-          <input
-            value='dark'
-            type='checkbox'
-            className='theme-controller'
-            onChange={() => themeStore.toggle()}
-            checked={themeStore.theme != 'default'}
-          />
-          <Sun size={25} className='swap-off  fill-current' />
-          <Moon size={25} className='swap-on  fill-current' />
-        </label>
+        <ThemeToggle />
         <Link href='/auth' className='btn btn-primary px-8'>
           Login
         </Link>
       </div>
     </div>
   )
-})
+}

@@ -4,18 +4,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {redirect} from 'next/navigation'
 
-import {observer} from 'mobx-react-lite'
-import {LogOut, Moon, Sun} from 'lucide-react'
+import {LogOut} from 'lucide-react'
 
 import {UserModel} from '@/types/models'
-import {themeStore} from '@/app/_stores/theme.store'
+import {ThemeToggle} from '@/app/_components'
 import {supabase} from '@/libs/supabase/supabase-client'
 
 type Props = {
   user: UserModel
 }
 
-export const HeaderAdmin = observer(({user}: Props) => {
+export const HeaderAdmin = ({user}: Props) => {
   const userInitial = user?.email.split('@')[0][0]
 
   const handleLogout = async () => {
@@ -41,18 +40,7 @@ export const HeaderAdmin = observer(({user}: Props) => {
         </ul>
       </div>
       <div className='navbar-end'>
-        <label className='swap swap-rotate mr-2'>
-          <input
-            value='dark'
-            type='checkbox'
-            className='theme-controller'
-            onChange={() => themeStore.toggle()}
-            checked={themeStore.theme === 'defaultDark'}
-          />
-          <Sun size={25} className='swap-off  fill-current' />
-          <Moon size={25} className='swap-on  fill-current' />
-        </label>
-
+        <ThemeToggle />
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
             <div className='avatar placeholder'>
@@ -78,4 +66,4 @@ export const HeaderAdmin = observer(({user}: Props) => {
       </div>
     </div>
   )
-})
+}
