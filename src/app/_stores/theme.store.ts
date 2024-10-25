@@ -6,8 +6,7 @@ class ThemeStore {
   theme: ThemeOptions = 'default'
   constructor() {
     makeAutoObservable(this)
-    const theme = localStorage.getItem('theme')
-    console.log(theme)
+    const theme = localStorage.getItem('theme') as ThemeOptions
     this.setTheme(theme as ThemeOptions)
   }
 
