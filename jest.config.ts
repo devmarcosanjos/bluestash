@@ -25,7 +25,7 @@ const config: Config = {
   coverageReporters: ['html', 'text'],
   coverageDirectory: '<rootDir>/coverage',
   moduleNameMapper: {
-    '^@/(.*)$': ['./src/$1'],
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   clearMocks: true,
   restoreMocks: true,
