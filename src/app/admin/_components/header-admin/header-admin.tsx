@@ -4,16 +4,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {redirect} from 'next/navigation'
 
+import {observer} from 'mobx-react-lite'
 import {LogOut, Moon, Sun} from 'lucide-react'
 
 import {UserModel} from '@/types/models'
+import {themeStore} from '@/app/_stores/theme.store'
 import {supabase} from '@/libs/supabase/supabase-client'
 
 type Props = {
   user: UserModel
 }
 
-export const HeaderAdmin = ({user}: Props) => {
+export const HeaderAdmin = observer(({user}: Props) => {
   const userInitial = user?.email.split('@')[0][0]
 
   const handleLogout = async () => {
@@ -40,7 +42,13 @@ export const HeaderAdmin = ({user}: Props) => {
       </div>
       <div className='navbar-end'>
         <label className='swap swap-rotate mr-2'>
-          <input value='dark' type='checkbox' className='theme-controller' />
+          <input
+            value='dark'
+            type='checkbox'
+            className='theme-controller'
+            onChange={() => themeStore.toggle()}
+            checked={themeStore.theme === 'defaultDark'}
+          />
           <Sun size={25} className='swap-off  fill-current' />
           <Moon size={25} className='swap-on  fill-current' />
         </label>
@@ -70,4 +78,4 @@ export const HeaderAdmin = ({user}: Props) => {
       </div>
     </div>
   )
-}
+})

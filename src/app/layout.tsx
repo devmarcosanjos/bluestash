@@ -3,6 +3,7 @@ import type {Metadata} from 'next'
 import {Roboto} from 'next/font/google'
 
 import './globals.css'
+import {LayoutWapper} from './_components'
 
 const roboto = Roboto({subsets: ['latin'], weight: ['400', '500', '700']})
 
@@ -19,9 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${roboto.className} antialiased`}>
-        <main data-theme='default' className='min-h-screen w-full'>
-          {children}
-        </main>
+        <LayoutWapper>{children}</LayoutWapper>
       </body>
     </html>
   )
