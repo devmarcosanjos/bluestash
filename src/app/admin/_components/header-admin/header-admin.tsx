@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import {LogOut} from 'lucide-react'
+import {LogOut, Moon, Sun} from 'lucide-react'
 
 import {UserModel} from '@/types/models'
 
@@ -30,6 +30,12 @@ export const HeaderAdmin = ({user}: Props) => {
         </ul>
       </div>
       <div className='navbar-end'>
+        <label className='swap swap-rotate mr-2'>
+          <input value='dark' type='checkbox' className='theme-controller' />
+          <Sun size={25} className='swap-off  fill-current' />
+          <Moon size={25} className='swap-on  fill-current' />
+        </label>
+
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
             <div className='avatar placeholder'>
