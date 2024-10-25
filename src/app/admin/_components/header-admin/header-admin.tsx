@@ -22,10 +22,10 @@ export const HeaderAdmin = ({user}: Props) => {
       <div className='navbar-center flex'>
         <ul className='menu menu-horizontal px-1'>
           <li>
-            <Link href='/admin/todo'>Todo</Link>
+            <Link href='/admin'>Dashboard</Link>
           </li>
           <li>
-            <a>Item 2</a>
+            <Link href='/admin/todo'>Todo</Link>
           </li>
         </ul>
       </div>
