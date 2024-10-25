@@ -1,19 +1,38 @@
 import {faker} from '@faker-js/faker'
 
-import * as authActions from './actions'
+import {signinInWithMagicLink} from '@/server/functions/auth.function'
 
-jest.mock('./actions')
+import {handleLoginForm} from './actions'
+
+jest.mock('@/server/functions/auth.function')
+
+const makeSUT = async () => {
+  const initialState = faker.word.noun()
+  const initialFormData = new FormData()
+  initialFormData.set('email', faker.internet.email())
+
+  const sut = await handleLoginForm(initialState, initialFormData)
+
+  return {
+    sut,
+    initialState,
+    initialFormData,
+  }
+}
 
 describe('handleLoginForm()', () => {
-  it('must call the function correctly', () => {
-    const fakeState = faker.word.noun()
-    const fakeFormData = new FormData()
-    fakeFormData.set('email', faker.internet.email())
+  it('should execute and return an object with status equals true', async () => {
+    const {sut, initialFormData} = await makeSUT()
 
-    const sutSpy = jest.spyOn(authActions, 'handleLoginForm')
+    expect(signinInWithMagicLink).toHaveBeenCalledWith(initialFormData.get('email'))
+    expect(sut).toStrictEqual({status: true})
+  })
 
-    authActions.handleLoginForm(fakeState, fakeFormData)
+  it('should execute and return an object with status equals false', async () => {
+    jest.mocked(signinInWithMagicLink).mockRejectedValue('some error')
 
-    expect(sutSpy).toHaveBeenCalledWith(fakeState, fakeFormData)
+    const {sut} = await makeSUT()
+
+    expect(sut).toStrictEqual({status: false})
   })
 })
