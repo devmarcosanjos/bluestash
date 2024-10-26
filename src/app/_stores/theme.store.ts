@@ -1,21 +1,26 @@
-import {makeAutoObservable} from 'mobx'
+import { makeAutoObservable } from 'mobx'
+
+import { CACHE_THEME } from '@/config/tokens'
+import { localCache } from '@/libs/local-cache/local-cache'
 
 type ThemeOptions = 'default' | 'defaultDark'
 
 class ThemeStore {
-  theme: ThemeOptions = 'default'
+  theme: ThemeOptions | null = null
   constructor() {
     makeAutoObservable(this)
-    const theme = localStorage.getItem('theme') as ThemeOptions
-    this.setTheme(theme as ThemeOptions)
+
+    const theme = localCache.get<ThemeOptions | null>(CACHE_THEME)
+    if (theme) this.setTheme(theme)
   }
 
   setTheme(theme: ThemeOptions) {
+    console.log({ theme })
     this.theme = theme
   }
 
   private updateCache(theme: ThemeOptions) {
-    localStorage.setItem('theme', theme)
+    localCache.set(CACHE_THEME, theme)
   }
   toggle() {
     if (this.theme === 'default') {
