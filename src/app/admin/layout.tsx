@@ -1,10 +1,10 @@
-import {ReactNode} from 'react'
+import { ReactNode } from 'react'
 
-import {Metadata} from 'next'
+import { Metadata } from 'next'
 
-import {loadUserData} from '@/server/functions/user.function'
+import { getCurrentUser } from '@/server/functions/user.function'
 
-import {HeaderAdmin} from './_components'
+import { HeaderAdmin } from './_components'
 export const metadata: Metadata = {
   description: '',
   title: 'Admin',
@@ -14,8 +14,8 @@ type Props = {
   children: ReactNode
 }
 
-export default async function Layout({children}: Props) {
-  const user = await loadUserData()
+export default async function Layout({ children }: Props) {
+  const user = await getCurrentUser()
 
   return (
     <div className='flex h-screen w-full flex-col items-center'>

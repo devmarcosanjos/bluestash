@@ -1,11 +1,11 @@
-import {redirect} from 'next/navigation'
+import { redirect } from 'next/navigation'
 
-import {getCurrentUser} from '@/server/data/user.data'
-import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
+import { getAuthenticatedUser } from '@/server/data/user.data'
+import { supabaseCreateClient } from '@/libs/supabase/supabase-server'
 
-export const loadUserData = async () => {
+export const getCurrentUser = async () => {
   try {
-    return await getCurrentUser()
+    return await getAuthenticatedUser()
   } catch (error) {
     const supabase = await supabaseCreateClient()
     await supabase.auth.signOut()

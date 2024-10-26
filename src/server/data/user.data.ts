@@ -6,7 +6,7 @@ import { prisma } from '@/libs/prisma/config'
 import { CreateUserModel, UserModel } from '@/types/models'
 import { getAuthenticatedSupabaseUser } from '@/server/functions/auth.function'
 
-export const getCurrentUser = cache(async () => {
+export const getAuthenticatedUser = cache(async () => {
   const authenticatedUser = await getAuthenticatedSupabaseUser()
   const currentUser = await prisma.users.findFirstOrThrow({
     select: {
