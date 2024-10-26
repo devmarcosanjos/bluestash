@@ -1,17 +1,17 @@
-import {NextResponse} from 'next/server'
+import { NextResponse } from 'next/server'
 
-import {getAuthenticatedUser} from '@/server/functions/auth.function'
+import { getAuthenticatedSupabaseUser } from '@/server/functions/auth.function'
 
 type CallbackProps = (...params: any) => Promise<Response>
 
 export const privateRoute = (callback: CallbackProps) => {
   return async (...params: any) => {
-    const user = await getAuthenticatedUser()
+    const user = await getAuthenticatedSupabaseUser()
 
     if (user) {
       return callback(...params)
     }
 
-    return NextResponse.json('No authorized', {status: 401})
+    return NextResponse.json('No authorized', { status: 401 })
   }
 }

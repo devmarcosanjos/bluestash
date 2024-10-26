@@ -16,7 +16,7 @@ export const signinInWithMagicLink = async (email: string) => {
   if (error) throw 'Could not send magic-link email'
 }
 
-export const getAuthenticatedUser = async () => {
+export const getAuthenticatedSupabaseUser = async () => {
   const supabase = await supabaseCreateClient()
 
   const { data, error } = await supabase.auth.getUser()

@@ -1,13 +1,13 @@
 import 'server-only'
 
-import {cache} from 'react'
+import { cache } from 'react'
 
-import {prisma} from '@/libs/prisma/config'
-import {CreateUserModel, UserModel} from '@/types/models'
-import {getAuthenticatedUser} from '@/server/functions/auth.function'
+import { prisma } from '@/libs/prisma/config'
+import { CreateUserModel, UserModel } from '@/types/models'
+import { getAuthenticatedSupabaseUser } from '@/server/functions/auth.function'
 
 export const getCurrentUser = cache(async () => {
-  const authenticatedUser = await getAuthenticatedUser()
+  const authenticatedUser = await getAuthenticatedSupabaseUser()
   const currentUser = await prisma.users.findFirstOrThrow({
     select: {
       id: true,

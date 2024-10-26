@@ -2,7 +2,10 @@ import { faker } from '@faker-js/faker'
 
 import { APP_URL } from '@/config/env-client'
 import { supabaseCreateClient } from '@/libs/supabase/supabase-server'
-import { getAuthenticatedUser, signinInWithMagicLink } from '@/server/functions/auth.function'
+import {
+  getAuthenticatedSupabaseUser,
+  signinInWithMagicLink,
+} from '@/server/functions/auth.function'
 
 jest.mock('@/libs/supabase/supabase-server')
 
@@ -42,7 +45,7 @@ describe('signinInWithMagicLink', () => {
   })
 })
 
-describe('getAuthenticatedUser', () => {
+describe('getAuthenticatedSupabaseUser', () => {
   const mockSupabaseClient = { auth: { getUser: jest.fn() } }
 
   beforeEach(() => {
@@ -58,7 +61,7 @@ describe('getAuthenticatedUser', () => {
     mockSupabaseClient.auth.getUser.mockResolvedValue({ error: null, data: { user: user } })
 
     // Act
-    const sut = getAuthenticatedUser()
+    const sut = getAuthenticatedSupabaseUser()
 
     // Assert
     await expect(sut).resolves.toEqual(user)
@@ -69,7 +72,7 @@ describe('getAuthenticatedUser', () => {
     mockSupabaseClient.auth.getUser.mockResolvedValue({ error: true, data: { user: null } })
 
     // Act
-    const sut = getAuthenticatedUser()
+    const sut = getAuthenticatedSupabaseUser()
 
     // Assert
     await expect(sut).rejects.toEqual('Could not get current user')
