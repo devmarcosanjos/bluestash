@@ -19,6 +19,30 @@ describe('FetchHttpClient', () => {
     fetch.reset()
   })
 
+  describe('setToken', () => {
+    it('Should set token value ', () => {
+      const { sut, basePath } = makeSut('')
+      const token = faker.string.uuid()
+      sut.setToken(token)
+
+      const getMock = sut.get('/example')
+
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
+
+      expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
+        method: 'GET',
+        body: undefined,
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+
+      expect(getMock).resolves.toStrictEqual({ body: true, status: 200 })
+    })
+  })
+
   describe('FAIL', () => {
     it('should throw a custom error when the server responded with a failure. e.g: 5xx, 4xx', () => {
       const { sut } = makeSut()
