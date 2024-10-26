@@ -11,18 +11,36 @@ jest.mock('next/server', () => ({
 jest.mock('@/server/functions/auth.function')
 
 describe('privateRoute()', () => {
-  it('should response with 401 when the user is not authenticated', async () => {
+  const mockCallback = jest.fn()
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('should response with 401 if the user is not authenticated', async () => {
     //  Arrange
     ;(getAuthenticatedSupabaseUser as jest.Mock).mockRejectedValue(new Error('  '))
-    const mockCallback = jest.fn()
     const sut = privateRoute(mockCallback)
 
     // Act
-    await sut('test')
+    await sut()
 
     // Asset
     expect(getAuthenticatedSupabaseUser).toHaveBeenCalledTimes(1)
     expect(mockCallback).not.toHaveBeenCalled()
     expect(NextResponse.json).toHaveBeenCalledWith('Not authorized', { status: 401 })
+  })
+
+  it('should call the callback if the user is authenticated', async () => {
+    //  Arrange
+    ;(getAuthenticatedSupabaseUser as jest.Mock).mockResolvedValue(true)
+    const sut = privateRoute(mockCallback)
+
+    // Act
+    await sut()
+
+    // Asset
+    expect(getAuthenticatedSupabaseUser).toHaveBeenCalledTimes(1)
+    expect(mockCallback).toHaveBeenCalled()
   })
 })

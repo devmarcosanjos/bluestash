@@ -8,6 +8,7 @@ export const privateRoute = (callback: CallbackProps) => {
   return async (...params: any) => {
     try {
       await getAuthenticatedSupabaseUser()
+
       return callback(...params)
     } catch (error) {
       return NextResponse.json('Not authorized', { status: 401 })
