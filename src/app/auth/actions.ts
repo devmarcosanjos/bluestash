@@ -1,13 +1,13 @@
 'use server'
 
-import {signinInWithMagicLink} from '@/server/functions/auth.function'
+import { signinInWithMagicLink } from '@/server/functions/auth.function'
 
-export const handleLoginForm = async (state: any, formData: FormData) => {
+export const handleLoginForm = async (_state: any, formData: FormData) => {
   try {
     await signinInWithMagicLink(formData.get('email') as string)
 
-    return {status: true}
-  } catch (_error) {
-    return {status: false}
+    return { status: true }
+  } catch (error) {
+    return { status: false, message: error }
   }
 }
