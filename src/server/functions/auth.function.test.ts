@@ -16,16 +16,14 @@ describe('signinInWithMagicLink', () => {
     supabaseCreateClientMock.mockResolvedValue(mockSupabaseClient)
   })
 
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
+  afterEach(() => jest.clearAllMocks())
 
-  it('should throw an error if signInWithOtp returns an error', () => {
+  it('should throw an error if signInWithOtp returns an error', async () => {
     mockSupabaseClient.auth.signInWithOtp.mockResolvedValue({ error: true })
     const email = faker.internet.email()
     const sut = signinInWithMagicLink(email)
 
-    expect(sut).rejects.toEqual('Could not send magic-link email')
+    await expect(sut).rejects.toEqual('Could not send magic-link email')
   })
 
   it('should call signInWithOtp with the correct parameters', async () => {
