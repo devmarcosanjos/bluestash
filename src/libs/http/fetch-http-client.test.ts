@@ -1,17 +1,16 @@
 import fetch from 'jest-mock-fetch'
-import {faker} from '@faker-js/faker'
+import { faker } from '@faker-js/faker'
 
-import {FetchHttpClient} from './fetch-http-client'
+import { FetchHttpClient } from './fetch-http-client'
 
-const makeSut = () => {
+const makeSut = (token: string = faker.string.uuid()) => {
   const basePath = 'http://localhost'
-  const fakeToken = faker.string.uuid()
-  const sut = new FetchHttpClient(basePath, fakeToken)
+  const sut = new FetchHttpClient(basePath, token)
 
   return {
     sut,
     basePath,
-    fakeToken,
+    token,
   }
 }
 
@@ -22,7 +21,7 @@ describe('FetchHttpClient', () => {
 
   describe('FAIL', () => {
     it('should throw a custom error when the server responded with a failure. e.g: 5xx, 4xx', () => {
-      const {sut} = makeSut()
+      const { sut } = makeSut()
       const requestMock = sut.get('/example')
 
       fetch.mockResponse({
@@ -35,7 +34,7 @@ describe('FetchHttpClient', () => {
     })
 
     it('should throw a custom error when the server responded with a failure and the `error` property must be null', () => {
-      const {sut} = makeSut()
+      const { sut } = makeSut()
       const requestMock = sut.get('/example')
 
       fetch.mockResponse({
@@ -48,7 +47,7 @@ describe('FetchHttpClient', () => {
     })
 
     it(`should throw an generic error when the request couldn't be made`, () => {
-      const {sut} = makeSut()
+      const { sut } = makeSut()
       const requestMock = sut.get('/example')
 
       fetch.mockError('Generic internal error')
@@ -59,10 +58,10 @@ describe('FetchHttpClient', () => {
 
   describe('GET', () => {
     it('Should call GET method properly with the correct response', () => {
-      const {sut, basePath, fakeToken} = makeSut()
+      const { sut, basePath, token } = makeSut()
       const getMock = sut.get('/example')
 
-      fetch.mockResponse({json: () => Promise.resolve(true)})
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
 
       expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
         method: 'GET',
@@ -70,62 +69,102 @@ describe('FetchHttpClient', () => {
         headers: {
           'Accept': '*/*',
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `Bearer ${fakeToken}`,
+          'Authorization': `Bearer ${token}`,
         },
       })
 
-      expect(getMock).resolves.toStrictEqual({body: true, status: 200})
+      expect(getMock).resolves.toStrictEqual({ body: true, status: 200 })
+    })
+
+    it('Should call GET method properly without Authorization header', () => {
+      const { sut, basePath } = makeSut('')
+      const getMock = sut.get('/example')
+
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
+
+      expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
+        method: 'GET',
+        body: undefined,
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization': '',
+        },
+      })
+
+      expect(getMock).resolves.toStrictEqual({ body: true, status: 200 })
     })
   })
 
   describe('POST', () => {
     it('Should call POST method properly with the correct response', () => {
-      const {sut, basePath, fakeToken} = makeSut()
-      const postMock = sut.post('/example', {data: true})
+      const { sut, basePath, token } = makeSut()
+      const postMock = sut.post('/example', { data: true })
 
-      fetch.mockResponse({json: () => Promise.resolve(true)})
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
 
       expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
         method: 'POST',
-        body: JSON.stringify({data: true}),
+        body: JSON.stringify({ data: true }),
         headers: {
           'Accept': '*/*',
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `Bearer ${fakeToken}`,
+          'Authorization': `Bearer ${token}`,
         },
       })
 
-      expect(postMock).resolves.toStrictEqual({body: true, status: 200})
+      expect(postMock).resolves.toStrictEqual({ body: true, status: 200 })
     })
   })
 
   describe('PUT', () => {
     it('Should call PUT method properly with the correct response', () => {
-      const {sut, basePath, fakeToken} = makeSut()
-      const putMock = sut.put('/example', {data: true})
+      const { sut, basePath, token } = makeSut()
+      const putMock = sut.put('/example', { data: true })
 
-      fetch.mockResponse({json: () => Promise.resolve(true)})
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
 
       expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
         method: 'PUT',
-        body: JSON.stringify({data: true}),
+        body: JSON.stringify({ data: true }),
         headers: {
           'Accept': '*/*',
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `Bearer ${fakeToken}`,
+          'Authorization': `Bearer ${token}`,
         },
       })
 
-      expect(putMock).resolves.toStrictEqual({body: true, status: 200})
+      expect(putMock).resolves.toStrictEqual({ body: true, status: 200 })
+    })
+  })
+
+  describe('PATCH', () => {
+    it('Should call PUT method properly with the correct response', () => {
+      const { sut, basePath, token } = makeSut()
+      const putMock = sut.patch('/example', { data: true })
+
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
+
+      expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
+        method: 'PATCH',
+        body: JSON.stringify({ data: true }),
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+
+      expect(putMock).resolves.toStrictEqual({ body: true, status: 200 })
     })
   })
 
   describe('DELETE', () => {
     it('Should call DELETE method properly with the correct response', () => {
-      const {sut, basePath, fakeToken} = makeSut()
+      const { sut, basePath, token } = makeSut()
       const deleteMock = sut.delete('/example')
 
-      fetch.mockResponse({json: () => Promise.resolve(true)})
+      fetch.mockResponse({ json: () => Promise.resolve(true) })
 
       expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
         method: 'DELETE',
@@ -133,11 +172,11 @@ describe('FetchHttpClient', () => {
         headers: {
           'Accept': '*/*',
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': `Bearer ${fakeToken}`,
+          'Authorization': `Bearer ${token}`,
         },
       })
 
-      expect(deleteMock).resolves.toStrictEqual({body: true, status: 200})
+      expect(deleteMock).resolves.toStrictEqual({ body: true, status: 200 })
     })
   })
 })
