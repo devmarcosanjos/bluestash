@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 
 import { APP_URL } from '@/config/env-client'
 import { supabaseCreateClient } from '@/libs/supabase/supabase-server'
-import { signinInWithMagicLink } from '@/server/functions/auth.function'
+import { getAuthenticatedUser, signinInWithMagicLink } from '@/server/functions/auth.function'
 
 jest.mock('@/libs/supabase/supabase-server')
 
@@ -39,5 +39,39 @@ describe('signinInWithMagicLink', () => {
       email,
       options: { emailRedirectTo: `${APP_URL}/auth/callback` },
     })
+  })
+})
+
+describe('getAuthenticatedUser', () => {
+  const mockSupabaseClient = { auth: { getUser: jest.fn() } }
+
+  beforeEach(() => {
+    const supabaseCreateClientMock = supabaseCreateClient as jest.Mock
+    supabaseCreateClientMock.mockImplementation(() => mockSupabaseClient)
+  })
+
+  afterEach(() => jest.clearAllMocks())
+
+  it('should call getUser and return the authenticated user', async () => {
+    // Arrange
+    const user = faker.person.fullName()
+    mockSupabaseClient.auth.getUser.mockResolvedValue({ error: null, data: { user: user } })
+
+    // Act
+    const sut = getAuthenticatedUser()
+
+    // Assert
+    await expect(sut).resolves.toEqual(user)
+  })
+
+  it('should throw and error if getUser returns an error ', async () => {
+    // Arrange
+    mockSupabaseClient.auth.getUser.mockResolvedValue({ error: true, data: { user: null } })
+
+    // Act
+    const sut = getAuthenticatedUser()
+
+    // Assert
+    await expect(sut).rejects.toEqual('Could not get current user')
   })
 })
