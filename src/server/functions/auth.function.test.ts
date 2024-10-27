@@ -37,7 +37,7 @@ describe('signinInWithMagicLink', () => {
     // Act
     await signinInWithMagicLink(email)
 
-    // Asset
+    // Assert
     expect(mockSupabaseClient.auth.signInWithOtp).toHaveBeenCalledWith({
       email,
       options: { emailRedirectTo: `${APP_URL}/auth/callback` },

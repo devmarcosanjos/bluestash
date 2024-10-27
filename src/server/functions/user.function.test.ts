@@ -18,7 +18,7 @@ describe('getCurrentUser', () => {
     // Act
     const user = await getCurrentUser()
 
-    // Asset
+    // Assert
     expect(getAuthenticatedUser).toHaveBeenCalledTimes(1)
     expect(user).toEqual(userMock)
   })
@@ -32,7 +32,7 @@ describe('getCurrentUser', () => {
     // Act
     await getCurrentUser()
 
-    // Asset
+    // Assert
     expect(getAuthenticatedUser).toHaveBeenCalledTimes(1)
     expect(mockSupabaseClient.auth.signOut).toHaveBeenCalledTimes(1)
     expect(redirect).toHaveBeenCalledWith('/auth')

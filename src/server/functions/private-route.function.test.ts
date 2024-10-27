@@ -25,7 +25,7 @@ describe('privateRoute()', () => {
     // Act
     await sut()
 
-    // Asset
+    // Assert
     expect(getAuthenticatedSupabaseUser).toHaveBeenCalledTimes(1)
     expect(mockCallback).not.toHaveBeenCalled()
     expect(NextResponse.json).toHaveBeenCalledWith('Not authorized', { status: 401 })
@@ -39,7 +39,7 @@ describe('privateRoute()', () => {
     // Act
     await sut()
 
-    // Asset
+    // Assert
     expect(getAuthenticatedSupabaseUser).toHaveBeenCalledTimes(1)
     expect(mockCallback).toHaveBeenCalled()
   })
