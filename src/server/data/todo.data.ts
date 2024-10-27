@@ -1,4 +1,4 @@
-import {prisma} from '@/libs/prisma/config'
+import { prisma } from '@/libs/prisma/config'
 
 export const getAllTodosByUserId = async (userId: number) => {
   const todos = await prisma.todo.findMany({

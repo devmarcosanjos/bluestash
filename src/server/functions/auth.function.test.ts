@@ -11,7 +11,9 @@ jest.mock('@/libs/supabase/supabase-server')
 
 describe('signinInWithMagicLink', () => {
   const mockSupabaseClient = {
-    auth: { signInWithOtp: jest.fn() },
+    auth: {
+      signInWithOtp: jest.fn(),
+    },
   }
 
   beforeEach(() => {
@@ -19,13 +21,15 @@ describe('signinInWithMagicLink', () => {
     supabaseCreateClientMock.mockResolvedValue(mockSupabaseClient)
   })
 
-  afterEach(() => jest.clearAllMocks())
-
   it('should throw an error if signInWithOtp returns an error', async () => {
+    // Arrange
     mockSupabaseClient.auth.signInWithOtp.mockResolvedValue({ error: true })
     const email = faker.internet.email()
+
+    // act
     const sut = signinInWithMagicLink(email)
 
+    // Assert
     await expect(sut).rejects.toEqual('Could not send magic-link email')
   })
 
@@ -39,7 +43,7 @@ describe('signinInWithMagicLink', () => {
 
     // Assert
     expect(mockSupabaseClient.auth.signInWithOtp).toHaveBeenCalledWith({
-      email,
+      email: email,
       options: { emailRedirectTo: `${APP_URL}/auth/callback` },
     })
   })

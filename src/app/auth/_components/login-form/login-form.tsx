@@ -1,10 +1,10 @@
 'use client'
 
-import {useActionState} from 'react'
+import { useActionState } from 'react'
 
-import {Check, CircleX} from 'lucide-react'
+import { Check, CircleX } from 'lucide-react'
 
-import {handleLoginForm} from '@/app/auth/actions'
+import { handleLoginForm } from '@/app/auth/actions'
 
 type StateProps = {
   status: boolean | null

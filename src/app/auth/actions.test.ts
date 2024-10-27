@@ -6,33 +6,33 @@ import { handleLoginForm } from './actions'
 
 jest.mock('@/server/functions/auth.function')
 
-const makeSUT = async () => {
-  const initialState = faker.word.noun()
-  const initialFormData = new FormData()
-  initialFormData.set('email', faker.internet.email())
-
-  const sut = await handleLoginForm(initialState, initialFormData)
-
-  return {
-    sut,
-    initialState,
-    initialFormData,
-  }
-}
-
 describe('handleLoginForm()', () => {
   it('should execute and return an object with status equals true', async () => {
-    const { sut, initialFormData } = await makeSUT()
+    // ARRANGE
+    const state = faker.word.noun()
+    const formData = new FormData()
+    formData.set('email', faker.internet.email())
 
-    expect(signinInWithMagicLink).toHaveBeenCalledWith(initialFormData.get('email'))
+    // ACT
+    const sut = await handleLoginForm(state, formData)
+
+    // ASSERT
+    expect(signinInWithMagicLink).toHaveBeenCalledWith(formData.get('email'))
     expect(sut).toStrictEqual({ status: true })
   })
 
   it('should execute and return an object with status equals false', async () => {
+    // Arrange
+    const state = faker.word.noun()
+    const formData = new FormData()
+    formData.set('email', faker.internet.email())
+
     jest.mocked(signinInWithMagicLink).mockRejectedValue('some error')
 
-    const { sut } = await makeSUT()
+    // Act
+    const sut = await handleLoginForm(state, formData)
 
+    // Assert
     expect(sut).toStrictEqual({ status: false, message: 'some error' })
   })
 })
