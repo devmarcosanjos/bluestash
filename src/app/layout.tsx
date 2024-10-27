@@ -1,11 +1,11 @@
-import type {Metadata} from 'next'
+import type { Metadata } from 'next'
 
-import {Roboto} from 'next/font/google'
+import { Roboto } from 'next/font/google'
 
 import './globals.css'
-import {LayoutWapper} from './_components'
+import { LayoutWrapper, Providers } from './_components'
 
-const roboto = Roboto({subsets: ['latin'], weight: ['400', '500', '700']})
+const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
   title: 'My app',
@@ -18,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body className={`${roboto.className} antialiased`}>
-        <LayoutWapper>{children}</LayoutWapper>
+        <Providers>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </Providers>
       </body>
     </html>
   )

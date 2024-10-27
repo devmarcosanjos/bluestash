@@ -3,19 +3,23 @@ import { makeAutoObservable } from 'mobx'
 import { CACHE_THEME } from '@/config/tokens'
 import { localCache } from '@/libs/local-cache/local-cache'
 
-type ThemeOptions = 'default' | 'defaultDark'
+/**
+ * !This is only an example of a store.
+ * !It's not being used in the application
+ * !remove this comment
+ */
 
-class ThemeStore {
-  theme: ThemeOptions | null = null
-  constructor() {
+export type ThemeOptions = 'default' | 'defaultDark'
+
+export class ThemeStore {
+  theme: ThemeOptions | null = 'default'
+  constructor(theme: ThemeOptions | null) {
     makeAutoObservable(this)
 
-    const theme = localCache.get<ThemeOptions | null>(CACHE_THEME)
-    if (theme) this.setTheme(theme)
+    this.setTheme(theme)
   }
 
-  setTheme(theme: ThemeOptions) {
-    console.log({ theme })
+  setTheme(theme: ThemeOptions | null) {
     this.theme = theme
   }
 
@@ -32,4 +36,3 @@ class ThemeStore {
     }
   }
 }
-export const themeStore = new ThemeStore()

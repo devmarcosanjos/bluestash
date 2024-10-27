@@ -1,19 +1,17 @@
 'use client'
 
-import {ReactNode} from 'react'
+import { ReactNode } from 'react'
 
-import {observer} from 'mobx-react-lite'
-
-import {themeStore} from '@/app/_stores/theme.store'
+import { ThemeProvider } from 'next-themes'
 
 type Props = {
   children: ReactNode
 }
 
-export const LayoutWapper = observer(({children}: Props) => {
+export const LayoutWrapper = ({ children }: Props) => {
   return (
-    <main suppressHydrationWarning data-theme={themeStore.theme} className='min-h-screen w-full'>
+    <ThemeProvider attribute='data-theme' defaultTheme={'defaultTheme'}>
       {children}
-    </main>
+    </ThemeProvider>
   )
-})
+}
