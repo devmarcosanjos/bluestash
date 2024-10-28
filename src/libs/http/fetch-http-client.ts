@@ -1,4 +1,4 @@
-import {HttpMethods, HttpResponse} from './types'
+import { HttpMethods, HttpResponse } from './types'
 
 export class FetchHttpClient {
   private token: string = ''
@@ -39,10 +39,17 @@ export class FetchHttpClient {
   }
 
   private async adaptResponse<T>(response: Response): Promise<HttpResponse<T>> {
-    const json = await response.json()
-    return {
-      status: response.status,
-      body: json as T,
+    try {
+      const json = await response.json()
+      return {
+        status: response.status,
+        body: json as T,
+      }
+    } catch (error) {
+      return {
+        status: response.status,
+        body: null as T,
+      }
     }
   }
 

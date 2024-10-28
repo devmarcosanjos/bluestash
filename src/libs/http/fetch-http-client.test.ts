@@ -163,7 +163,7 @@ describe('FetchHttpClient', () => {
   })
 
   describe('PATCH', () => {
-    it('Should call PUT method properly with the correct response', () => {
+    it('Should call PATCH method properly with the correct response', () => {
       const { sut, basePath, token } = makeSut()
       const putMock = sut.patch('/example', { data: true })
 
@@ -180,6 +180,25 @@ describe('FetchHttpClient', () => {
       })
 
       expect(putMock).resolves.toStrictEqual({ body: true, status: 200 })
+    })
+
+    it('Should return a null body when the response is empty', () => {
+      const { sut, basePath, token } = makeSut()
+      const putMock = sut.patch('/example', { data: true })
+
+      fetch.mockResponse({ json: () => Promise.reject() })
+
+      expect(fetch).toHaveBeenCalledWith(`${basePath}/example`, {
+        method: 'PATCH',
+        body: JSON.stringify({ data: true }),
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+
+      expect(putMock).resolves.toStrictEqual({ body: null, status: 200 })
     })
   })
 
