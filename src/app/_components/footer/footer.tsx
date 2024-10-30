@@ -7,13 +7,13 @@ export const Footer = () => {
     <footer className='footer footer-center gap-6 rounded bg-base-100 p-8 text-base-content'>
       <nav className='grid grid-flow-col gap-4'>
         <Link href='/privacy-policy' className='link-hover link'>
-          About us
+          Sobre
         </Link>
         <Link href='/contact' className='link-hover link'>
-          Contact
+          Contato
         </Link>
         <Link href='/privacy-policy' className='link-hover link'>
-          Privacy policy
+          Políticas de privacidade
         </Link>
       </nav>
       <nav>
