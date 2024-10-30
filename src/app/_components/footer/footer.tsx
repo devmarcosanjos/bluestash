@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import {InstagramIcon, XIcon} from '@/app/_components/icons'
+import { InstagramIcon, XIcon } from '@/app/_components/icons'
 
 export const Footer = () => {
   return (
@@ -29,8 +29,8 @@ export const Footer = () => {
       <aside>
         <p>
           Copyright © {new Date().getFullYear()} - All right reserved by{' '}
-          <Link target='_blank' href='https://nullref.software'>
-            Nullref Software LTDA
+          <Link target='_blank' href='https://blue'>
+            BlueStash Software
           </Link>
         </p>
       </aside>
