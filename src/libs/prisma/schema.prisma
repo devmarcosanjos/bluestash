@@ -9,21 +9,42 @@ datasource db {
 }
 
 model todo {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?
-  userId      Int
-  createdAt   DateTime  @default(now()) @db.Date
-  updatedAt   DateTime? @db.Date
-  users       users     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "todo_userId_users_id_fk")
+  id                        Int       @id @default(autoincrement())
+  name                      String
+  description               String?
+  userId                    Int
+  createdAt                 DateTime  @default(now()) @db.Date
+  updatedAt                 DateTime? @db.Date
+  priority                  String?
+  completed                 Boolean?  @default(false)
+  start_date                DateTime? @db.Timestamptz(6)
+  end_date                  DateTime? @db.Timestamptz(6)
+  categoria_id              BigInt?
+  user_id                   Int?
+  category                  category? @relation(fields: [categoria_id], references: [id], onDelete: Cascade)
+  users                     users     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "todo_userId_users_id_fk")
+  users_todo_user_idTousers users?    @relation("todo_user_idTousers", fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model users {
-  id        Int       @id @default(autoincrement())
-  uid       String    @unique(map: "users_uid_unique")
-  name      String?    
-  email     String    @unique(map: "users_email_unique")
-  createdAt DateTime  @default(now()) @db.Date
-  updatedAt DateTime? @db.Date
-  todo      todo[]
+  id                       Int        @id @default(autoincrement())
+  uid                      String     @unique(map: "users_uid_unique")
+  name                     String?
+  email                    String     @unique(map: "users_email_unique")
+  createdAt                DateTime   @default(now()) @db.Date
+  updatedAt                DateTime?  @db.Date
+  category                 category[]
+  todo                     todo[]
+  todo_todo_user_idTousers todo[]     @relation("todo_user_idTousers")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model category {
+  id         BigInt    @id(map: "categoria_pkey") @default(autoincrement())
+  name       String?
+  created_at DateTime  @db.Timestamptz(6)
+  update_at  DateTime? @db.Timestamptz(6)
+  user_id    Int?
+  users      users?    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "categoria_user_id_fkey")
+  todo       todo[]
 }
