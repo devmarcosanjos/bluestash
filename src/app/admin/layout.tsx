@@ -2,9 +2,10 @@ import { ReactNode } from 'react'
 
 import { Metadata } from 'next'
 
+import { HeaderAdmin } from '@/app/admin/_components'
+import Sidebar from '@/app/admin/_components/sidebar/sidebar'
 import { getCurrentUser } from '@/server/functions/user.function'
 
-import { HeaderAdmin } from './_components'
 export const metadata: Metadata = {
   description: '',
   title: 'Admin',
@@ -18,9 +19,12 @@ export default async function Layout({ children }: Props) {
   const user = await getCurrentUser()
 
   return (
-    <div className='flex h-screen w-full flex-col items-center'>
-      <HeaderAdmin user={user} />
-      <div className='flex w-full flex-1 justify-center p-5'>{children}</div>
+    <div className='flex h-screen w-full flex-row'>
+      <Sidebar />
+      <div className='flex-1 px-5'>
+        <HeaderAdmin user={user} />
+        {children}
+      </div>
     </div>
   )
 }

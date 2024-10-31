@@ -2,19 +2,19 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import {redirect} from 'next/navigation'
+import { redirect } from 'next/navigation'
 
-import {LogOut} from 'lucide-react'
+import { LogOut } from 'lucide-react'
 
-import {UserModel} from '@/types/models'
-import {ThemeToggle} from '@/app/_components'
-import {supabase} from '@/libs/supabase/supabase-client'
+import { UserModel } from '@/types/models'
+import { ThemeToggle } from '@/app/_components'
+import { supabase } from '@/libs/supabase/supabase-client'
 
 type Props = {
   user: UserModel
 }
 
-export const HeaderAdmin = ({user}: Props) => {
+export const HeaderAdmin = ({ user }: Props) => {
   const userInitial = user?.email.split('@')[0][0]
 
   const handleLogout = async () => {
@@ -23,7 +23,7 @@ export const HeaderAdmin = ({user}: Props) => {
   }
 
   return (
-    <div className='navbar bg-base-300'>
+    <div className='navbar'>
       <div className='navbar-start'>
         <Link href='/admin' className='btn btn-ghost text-xl'>
           <Image alt='Logo' width={120} height={80} src='/logo/logo.svg' />

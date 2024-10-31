@@ -1,4 +1,4 @@
-import {TodoList} from './_components/todoList'
+import { TodoList } from '@/app/admin/_components'
 
 export default function Page() {
   return (
