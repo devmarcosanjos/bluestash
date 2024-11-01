@@ -23,10 +23,9 @@ export const ButtonNewTask = () => {
             <option disabled selected>
               Qual Lista?
             </option>
-            <option>Home</option>
+            <option>Todo List</option>
             <option>Work</option>
             <option>Frella</option>
-            <option>Sem Lista</option>
           </select>
         </li>
 
@@ -45,10 +44,14 @@ export const ButtonNewTask = () => {
         </li>
         <div className='mx-2 flex flex-row-reverse gap-2'>
           <li>
-            <button className='btn btn-outline btn-success'>Save</button>
+            <button className='btn rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600'>
+              Save
+            </button>
           </li>
           <li>
-            <button className='btn btn-outline btn-error'>Reset</button>
+            <button className='btn rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600'>
+              Reset
+            </button>
           </li>
         </div>
       </ul>

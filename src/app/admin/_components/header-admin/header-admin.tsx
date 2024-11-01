@@ -15,6 +15,7 @@ type Props = {
 
 export const HeaderAdmin = ({ user }: Props) => {
   const userInitial = user?.email.split('@')[0][0]
+  const userName = user?.name
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -26,9 +27,9 @@ export const HeaderAdmin = ({ user }: Props) => {
       <div className='navbar-center flex'>
         <div className='flex flex-col'>
           <h1 className='font-bold text-secondary'>
-            <span>Bom dia</span>, <span>Marcos!</span>
+            <span>Bom dia</span>, <span>{userName}!</span>
           </h1>
-          <p className='font font-light'>01/11/2024</p>
+          <p className='font font-light'>{new Date().toLocaleDateString('pt-BR')}</p>
         </div>
       </div>
       <div className='navbar-end w-full'>
