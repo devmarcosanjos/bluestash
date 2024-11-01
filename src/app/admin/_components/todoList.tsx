@@ -17,8 +17,8 @@ export const TodoList = () => {
   }, [])
 
   return (
-    <div className='flex w-full '>
-      <table className='table w-full'>
+    <div className='flex w-full pt-2'>
+      <table className='table w-full rounded-lg bg-base-100'>
         {/* head */}
         <thead>
           <tr>

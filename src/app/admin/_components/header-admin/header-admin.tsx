@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
 import { LogOut } from 'lucide-react'
@@ -23,23 +22,16 @@ export const HeaderAdmin = ({ user }: Props) => {
   }
 
   return (
-    <div className='navbar'>
-      <div className='navbar-start'>
-        <Link href='/admin' className='btn btn-ghost text-xl'>
-          <Image alt='Logo' width={120} height={80} src='/logo/logo.svg' />
-        </Link>
-      </div>
+    <div className='navbar mt-2'>
       <div className='navbar-center flex'>
-        <ul className='menu menu-horizontal px-1'>
-          <li>
-            <Link href='/admin'>Dashboard</Link>
-          </li>
-          <li>
-            <Link href='/admin/todo'>Todo</Link>
-          </li>
-        </ul>
+        <div className='flex flex-col'>
+          <h1 className='font-bold text-secondary'>
+            <span>Bom dia</span>, <span>Marcos!</span>
+          </h1>
+          <p className='font font-light'>01/11/2024</p>
+        </div>
       </div>
-      <div className='navbar-end'>
+      <div className='navbar-end w-full'>
         <ThemeToggle />
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
