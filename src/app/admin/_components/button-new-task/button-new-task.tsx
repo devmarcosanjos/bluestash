@@ -2,26 +2,32 @@ import { PlusIcon } from 'lucide-react'
 
 export const ButtonNewTask = () => {
   return (
-    <div className='dropdown dropdown-top'>
+    <div className='dropdown dropdown-end dropdown-top'>
       <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
-        <button className='btn btn-primary btn-active w-32'>
+        <button className='btn btn-primary flex items-center gap-2 rounded-lg px-4 py-2'>
           <PlusIcon size={18} />
-          New task
+          <span>New Task</span>
         </button>
       </div>
+
       <ul
         tabIndex={0}
-        className='menu dropdown-content z-[1] w-96 rounded-box bg-base-100 p-2 shadow'>
-        <li className='pb-2'>
-          <label className='input  flex items-center gap-2'>
-            <PlusIcon size={18} />
-            <input type='text' className='grow' placeholder='Create new Task' />
+        className='menu dropdown-content z-[1] w-96 rounded-lg border border-gray-200 bg-white p-4 shadow-lg'>
+        <li className='mb-3'>
+          <label className='input flex items-center gap-2 rounded-lg border bg-gray-50 px-3 py-2'>
+            <PlusIcon size={18} className='text-gray-400' />
+            <input
+              type='text'
+              placeholder='Create new task'
+              className='flex-1 bg-transparent text-gray-700 outline-none'
+            />
           </label>
         </li>
-        <li className='p-2'>
-          <select className='select select-bordered  w-full'>
+
+        <li className='mb-3'>
+          <select className='select select-bordered w-full rounded-lg bg-gray-50 text-gray-700'>
             <option disabled selected>
-              Qual Lista?
+              Which list?
             </option>
             <option>Todo List</option>
             <option>Work</option>
@@ -29,30 +35,31 @@ export const ButtonNewTask = () => {
           </select>
         </li>
 
-        <li className='p-2'>
-          <textarea placeholder='Add notes' className='textarea textarea-ghost'></textarea>
+        <li className='mb-3'>
+          <textarea
+            placeholder='Add notes'
+            className='textarea w-full resize-none rounded-lg bg-gray-50 text-gray-700'></textarea>
+          rows={3}
         </li>
-        <li className='p-2'>
-          <select className='select select-bordered  w-full '>
+
+        <li className='mb-3'>
+          <select className='select select-bordered w-full rounded-lg bg-gray-50 text-gray-700'>
             <option disabled selected>
-              Add to priority
+              Set priority
             </option>
             <option>Low</option>
-            <option>Mean</option>
-            <option>Hight</option>
+            <option>Medium</option>
+            <option>High</option>
           </select>
         </li>
-        <div className='mx-2 flex flex-row-reverse gap-2'>
-          <li>
-            <button className='btn rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600'>
-              Save
-            </button>
-          </li>
-          <li>
-            <button className='btn rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600'>
-              Reset
-            </button>
-          </li>
+
+        <div className='mt-4 flex justify-end gap-2'>
+          <button className='btn rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600'>
+            Save
+          </button>
+          <button className='btn rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600'>
+            Reset
+          </button>
         </div>
       </ul>
     </div>
