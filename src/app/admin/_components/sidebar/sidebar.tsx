@@ -7,7 +7,7 @@ import { ListCheck, PlusIcon } from 'lucide-react'
 
 const Sidebar = () => {
   return (
-    <div className='m-2 w-64 rounded-lg bg-base-100'>
+    <div className='m-2 w-64 rounded-lg bg-base-200'>
       <div className='navbar-start flex w-full items-center justify-center px-6 pb-10 pt-6'>
         <Link href='/admin' className='text-xl'>
           <Image alt='Logo' width={120} height={80} src='/logo/logo.svg' />
@@ -16,29 +16,20 @@ const Sidebar = () => {
 
       <div className='flex w-full flex-col gap-2 px-6'>
         <Link href='/admin' className='flex w-full'>
-          <button className='btn flex-1 border-none bg-white shadow-none'>
+          <button className='btn flex-1 border-none bg-secondary shadow-none'>
             <div className='flex flex-grow items-center gap-2'>
               <ListCheck size={18} />
-              <span className='font-light text-primary-content'>TodoList</span>
+              <span className='font-light '>TodoList</span>
             </div>
             <div className='badge badge-secondary'>+99</div>
           </button>
         </Link>
-        <Link href='/admin' className='flex w-full'>
-          <button className='btn flex-1 border-none bg-white shadow-none'>
-            <div className='flex flex-grow items-center gap-2'>
-              <ListCheck size={18} />
-              <span className='font-light text-primary-content'>Work</span>
-            </div>
-            <div className='badge badge-secondary'>+1</div>
-          </button>
-        </Link>
 
         <Link href='#' className='flex w-full'>
-          <button className='btn flex-1 bg-base-200'>
+          <button className='btn btn-primary flex-1'>
             <div className='flex items-center gap-2'>
               <PlusIcon size={18} />
-              <span className='font-light text-primary-content'>Create new list</span>
+              <span className='font-light'>Create new list</span>
             </div>
           </button>
         </Link>

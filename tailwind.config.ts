@@ -21,31 +21,26 @@ const config: Config = {
     themes: [
       {
         default: {
-          'primary': '#f9d72f',
-          'primary-focus': '#e9c307',
-          'primary-content': '#18182f',
+          'primary': '#07254E',
+          'primary-focus': '#07254E',
+          'primary-content': '#FFFFFF',
 
-          'secondary': '#dfa62a',
-          'secondary-focus': '#be8b1e',
-          'secondary-content': '#ffffff',
+          'secondary': '#FFFFFF',
+          'secondary-focus': '#F5F5F5',
+          'secondary-content': '#07254E',
 
-          'accent': '#18182f',
-          'accent-focus': '#111122',
-          'accent-content': '#ffffff',
+          'neutral': '#636363',
+          // 'neutral-focus': '#111122',
+          // 'neutral-content': '#ffffff',
 
-          'neutral': '#18182f',
-          'neutral-focus': '#111122',
-          'neutral-content': '#ffffff',
-
-          'base-100': '#ffffff',
-          'base-200': '#f5f5f5',
-          'base-300': '#e3e3e3',
+          'base-100': '#f5f5f5',
+          'base-200': '#FFFFFF',
           'base-content': '#000000',
 
-          'info': '#1c92f2',
-          'success': '#009485',
-          'warning': '#ff9900',
-          'error': '#ff5724',
+          'info': '#07254E',
+          'success': '#4ABC86',
+          'warning': '#F86F2D',
+          'error': '#EA3838',
 
           '--rounded-box': '1rem',
           '--rounded-btn': '.5rem',

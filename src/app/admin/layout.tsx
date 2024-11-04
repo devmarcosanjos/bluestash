@@ -19,9 +19,9 @@ export default async function Layout({ children }: Props) {
   const user = await getCurrentUser()
 
   return (
-    <div className='flex h-screen w-full flex-row bg-base-300'>
+    <div className='flex h-screen w-full  flex-row'>
       <Sidebar />
-      <div className='flex-1 px-5'>
+      <div className='mx-auto max-w-7xl flex-1 px-5'>
         <HeaderAdmin user={user} />
         {children}
       </div>

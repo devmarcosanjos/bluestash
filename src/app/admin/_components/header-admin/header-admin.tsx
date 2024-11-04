@@ -26,10 +26,12 @@ export const HeaderAdmin = ({ user }: Props) => {
     <div className='navbar mt-2'>
       <div className='navbar-center flex'>
         <div className='flex flex-col'>
-          <h1 className='font-bold text-secondary'>
+          <h1 className='text-4xl font-bold text-primary'>
             <span>Bom dia</span>, <span>{userName}!</span>
           </h1>
-          <p className='font font-light'>{new Date().toLocaleDateString('pt-BR')}</p>
+          <p className='font font-light text-neutral'>
+            {new Date().toLocaleString('pt-BR', { dateStyle: 'full' })}
+          </p>
         </div>
       </div>
       <div className='navbar-end w-full'>
@@ -37,8 +39,8 @@ export const HeaderAdmin = ({ user }: Props) => {
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
             <div className='avatar placeholder'>
-              <div className='w-10 rounded-full bg-accent'>
-                <span className='text-xl text-white'>{userInitial}</span>
+              <div className='w-10 rounded-full bg-primary'>
+                <span className='text-xl text-primary-content'>{userInitial}</span>
               </div>
             </div>
           </div>

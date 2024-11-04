@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
+import { ClockIcon, EllipsisVerticalIcon } from 'lucide-react'
+
 import { todoApi } from '@/apis/todo.api'
 import { TodoModel } from '@/types/models'
 
@@ -17,35 +19,26 @@ export const TodoList = () => {
   }, [])
 
   return (
-    <div className='flex w-full pt-2'>
-      <table className='table w-full rounded-lg bg-base-100'>
-        {/* head */}
-        <thead>
-          <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* row 1 */}
-          {todos.map(todo => (
-            <tr key={todo.id} className='bg-base-100'>
-              <th>
-                <label>
-                  <input type='checkbox' className='checkbox' />
-                </label>
-              </th>
-              <td className='font-bold'>{todo.name}</td>
-              <td className='break-all'>{todo.description}</td>
-              <th>
-                <button className='btn btn-ghost btn-xs'>details</button>
-              </th>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className='mt-7 flex w-full flex-col gap-2'>
+      {todos.map(todo => (
+        <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200 p-3'>
+          <input type='checkbox' className='checkbox-primary checkbox checkbox-sm' />
+          <span className='flex-grow break-all'>{todo.description}</span>
+          {todo.start_date && todo.end_date && (
+            <div className='flex items-center gap-2'>
+              <ClockIcon size={18} />
+              <span>{todo.start_date}</span>
+              <span>-</span>
+              <span>{todo.end_date}</span>
+            </div>
+          )}
+          <button className='btn btn-square btn-sm bg-base-100'>
+            <span>
+              <EllipsisVerticalIcon size={18} className='text-base-content' />
+            </span>
+          </button>
+        </div>
+      ))}
     </div>
   )
 }
