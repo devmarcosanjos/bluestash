@@ -3,7 +3,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
+import { Settings } from 'luxon'
 import { ListCheck, PlusIcon } from 'lucide-react'
+
+Settings.defaultLocale = 'pt-BR'
 
 const Sidebar = () => {
   return (

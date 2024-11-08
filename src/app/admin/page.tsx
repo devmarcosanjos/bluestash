@@ -1,16 +1,20 @@
-import { Calendar1Icon, ClockIcon, EllipsisVerticalIcon } from 'lucide-react'
+'use client'
+
+import { useState } from 'react'
+
+import { ClockIcon, EllipsisVerticalIcon } from 'lucide-react'
 
 import { ButtonNewTask, TodoList } from '@/app/admin/_components'
+import { DatePickerButton } from '@/app/admin/_components/date-picker-button'
 
 export default function Page() {
+  const [date, setDate] = useState(new Date())
   return (
     <div className='flex min-h-screen flex-col gap-2'>
-      <div className='flex items-end pt-6'>
-        <h1 className='flex-grow text-3xl font-bold leading-[1.875rem]'>TodoList</h1>
-        <button className='btn btn-primary'>
-          <Calendar1Icon size={18} />
-          Today
-        </button>
+      <div className='flex items-end justify-between pt-6'>
+        <h1 className='text-3xl font-bold leading-[1.875rem]'>TodoList</h1>
+
+        <DatePickerButton value={date} onChange={setDate} />
       </div>
       <TodoList />
 
