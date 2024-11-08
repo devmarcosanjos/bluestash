@@ -9,6 +9,7 @@ import { DatePickerButton } from '@/app/admin/_components/date-picker-button'
 
 export default function Page() {
   const [date, setDate] = useState(new Date())
+  const [showNewTask, setShowNewTask] = useState(false)
   return (
     <div className='flex min-h-screen flex-col gap-2'>
       <div className='flex items-end justify-between pt-6'>
@@ -35,7 +36,7 @@ export default function Page() {
       </div>
 
       <div className='fixed bottom-4 right-4'>
-        <ButtonNewTask />
+        <ButtonNewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} />
       </div>
     </div>
   )

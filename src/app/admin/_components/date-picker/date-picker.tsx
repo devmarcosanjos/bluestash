@@ -15,12 +15,11 @@ import { Input } from '../input'
 import { ClickOutsideDetector } from '../click-outside-detector'
 
 type Props = {
-  label: string
   value: Date
   onChange: (date: Date) => void
 }
 
-export const DatePicker = ({ label, value, onChange }: Props) => {
+export const DatePicker = ({ value, onChange }: Props) => {
   const ref = useRef<HTMLDetailsElement>(null)
 
   const handleSelectDate = (date: Date) => {
@@ -42,12 +41,7 @@ export const DatePicker = ({ label, value, onChange }: Props) => {
             w-full
             marker:[content:""]
           `}>
-          <Input
-            readOnly
-            label={label}
-            IconEnd={Calendar}
-            value={DateTime.fromJSDate(value).toLocaleString()}
-          />
+          <Input readOnly IconEnd={Calendar} value={DateTime.fromJSDate(value).toLocaleString()} />
         </summary>
 
         <div
