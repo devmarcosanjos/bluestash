@@ -41,6 +41,10 @@ const config: Config = {
           'success': '#4ABC86',
           'warning': '#F86F2D',
           'error': '#EA3838',
+          'success-content': '#ffffff',
+          'error-content': '#ffffff',
+          'warning-content': '#ffffff',
+          'info-content': '#ffffff',
 
           '--rounded-box': '1rem',
           '--rounded-btn': '.5rem',

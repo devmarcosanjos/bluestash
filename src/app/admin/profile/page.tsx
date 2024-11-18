@@ -1,13 +1,34 @@
-import { Mail, User2 } from 'lucide-react'
+import { User2 } from 'lucide-react'
 
 export default function Page() {
   return (
     <div className=' w-full rounded-lg bg-white p-8'>
-      <h1 className='mb-6 text-center text-3xl font-semibold text-gray-700'>Profile</h1>
+      <input type='file' className='file-input file-input-primary file-input-xs w-full max-w-xs' />
 
       <div className='flex flex-col gap-4'>
+        <label className='form-control w-full max-w-xs'>
+          <div className='label'>
+            <span className='label-text'>Nome completo</span>
+          </div>
+          <input
+            type='text'
+            placeholder='Nome Completo'
+            className='input input-bordered w-full max-w-xs'
+          />
+        </label>
+
+        <label className='form-control w-full max-w-xs'>
+          <div className='label'>
+            <span className='label-text'>Email</span>
+          </div>
+          <input
+            type='email'
+            placeholder='email@email.com'
+            className='input input-bordered w-full max-w-xs'
+          />
+        </label>
+
         <label className='input-group flex items-center rounded-lg border border-base-300 bg-white px-2 py-2'>
-          <Mail size={20} className='text-base-content' />
           <input
             type='text'
             placeholder='Email'
@@ -21,14 +42,6 @@ export default function Page() {
             type='text'
             placeholder='Name'
             className='ml-2 w-full bg-transparent p-2 text-base-content outline-none'
-          />
-        </label>
-
-        <label className='form-control w-full'>
-          <span className='mb-2 block text-gray-600'>Picture</span>
-          <input
-            type='file'
-            className='file-input file-input-bordered file-input-primary w-full rounded-lg'
           />
         </label>
 
