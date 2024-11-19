@@ -6,6 +6,7 @@ export const getAllTodosByUserId = async (userId: number) => {
       id: true,
       name: true,
       description: true,
+      start_date: true,
     },
     where: {
       userId: {

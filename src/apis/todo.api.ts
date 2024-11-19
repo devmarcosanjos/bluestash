@@ -1,6 +1,6 @@
-import {TodoModel} from '@/types/models'
-import {APP_URL} from '@/config/env-client'
-import {FetchHttpClient} from '@/libs/http/fetch-http-client'
+import { TodoModel } from '@/types/models'
+import { APP_URL } from '@/config/env-client'
+import { FetchHttpClient } from '@/libs/http/fetch-http-client'
 
 class TodoApi {
   private httpClient: FetchHttpClient
@@ -9,7 +9,7 @@ class TodoApi {
   }
 
   async getAllTodos() {
-    const {body} = await this.httpClient.get<TodoModel[]>('/todo')
+    const { body } = await this.httpClient.get<TodoModel[]>('/todo')
     return body
   }
 }
