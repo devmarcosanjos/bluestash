@@ -22,12 +22,25 @@ export const HeaderAdmin = ({ user }: Props) => {
     redirect('/')
   }
 
+  const getCurrentHour = () => {
+    const currentHour = new Date().getHours()
+
+    if (currentHour >= 6 && currentHour < 12) {
+      return 'Bom dia'
+    }
+    if (currentHour >= 12 && currentHour < 18) {
+      return 'Boa tarde'
+    } else {
+      return 'Boa noite'
+    }
+  }
+
   return (
     <div className='navbar mt-2'>
       <div className='navbar-center flex'>
         <div className='flex flex-col'>
           <h1 className='text-4xl font-bold text-primary'>
-            <span>Bom dia</span>, <span>{userName}!</span>
+            <span>{getCurrentHour()}</span>, <span>{userName || userInitial}!</span>
           </h1>
           <p className='font font-light text-neutral'>
             {new Date().toLocaleString('pt-BR', { dateStyle: 'full' })}
