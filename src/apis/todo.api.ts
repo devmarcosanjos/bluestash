@@ -12,6 +12,11 @@ class TodoApi {
     const { body } = await this.httpClient.get<TodoModel[]>('/todo')
     return body
   }
+
+  async createTodo(todo: TodoModel) {
+    const { body } = await this.httpClient.post<TodoModel[]>('/todo', todo)
+    return body
+  }
 }
 
 export const todoApi = new TodoApi()

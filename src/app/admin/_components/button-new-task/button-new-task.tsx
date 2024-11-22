@@ -28,6 +28,7 @@ interface ButtonNewTaskProps {
 
 export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProps) => {
   const [open, setOpen] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -42,7 +43,8 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
     },
   })
 
-  function handleSaveTask(data: TaskSchema) {
+  async function handleSaveTask(data: TaskSchema) {
+    // salvar nova tarefa
     console.log(data)
   }
 
