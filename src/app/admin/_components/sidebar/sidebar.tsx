@@ -16,6 +16,10 @@ Settings.defaultLocale = 'pt-BR'
 const Sidebar = () => {
   const [category, setCategory] = useState<CategoryModel[]>([])
 
+  const handleCategorySelect = (id: string) => {
+    console.log('Category selected:', id)
+  }
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -37,26 +41,18 @@ const Sidebar = () => {
 
       <div className='flex w-full flex-col gap-2 px-6'>
         {category.map((item, index) => (
-          <Link href='/admin' key={item.id || index} className='flex w-full'>
-            <button className='btn flex-1 border-none bg-secondary shadow-none'>
-              <div className='flex flex-grow items-center gap-2'>
-                <ListCheck size={18} />
-                <span className='font-light'>{item.name}</span>
-              </div>
-              <div className='badge badge-secondary'>+99</div>
-            </button>
-          </Link>
-        ))}
-
-        {/* <Link href='/admin' className='flex w-full'>
-          <button className='btn flex-1 border-none bg-secondary shadow-none'>
+          // <Link href='/admin' key={item.id || index} className='flex w-full'>
+          <button
+            key={item.id || index}
+            onClick={() => handleCategorySelect(item.id)}
+            className='btn flex-1 border-none bg-secondary shadow-none'>
             <div className='flex flex-grow items-center gap-2'>
               <ListCheck size={18} />
-              <span className='font-light'>TodoList</span>
+              <span className='font-light'>{item.name}</span>
             </div>
-            <div className='badge badge-secondary'>+99</div>
           </button>
-        </Link> */}
+          // </Link>
+        ))}
 
         <Link href='#' className='flex w-full'>
           <button className='btn btn-primary flex-1'>

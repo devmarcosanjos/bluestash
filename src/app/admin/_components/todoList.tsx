@@ -9,10 +9,12 @@ import { TodoModel } from '@/types/models'
 
 interface TodoListProps {
   selectedDate: Date
+  selectedCategory?: number
 }
 
-export const TodoList = ({ selectedDate }: TodoListProps) => {
+export const TodoList = ({ selectedDate, selectedCategory }: TodoListProps) => {
   const [todos, setTodos] = useState<TodoModel[]>([])
+  const [loading, setLoading] = useState(true)
 
   const isToday = (date: string) => {
     const taskDate = new Date(date)
@@ -23,15 +25,32 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
     )
   }
 
-  const filteredTodos = todos.filter(todo => todo.start_date && isToday(todo.start_date))
+  // const filteredTodos = todos.filter(todo => todo.start_date && isToday(todo.start_date))
+
+  const filteredTodos = todos.filter(todo => {
+    const matchDate = todo.start_date && isToday(todo.start_date)
+    const matchCategory = !selectedCategory || todo.categoria_id === selectedCategory.toString()
+
+    return matchDate && matchCategory
+  })
 
   useEffect(() => {
     const getData = async () => {
-      const todos = await todoApi.getAllTodos()
-      setTodos(todos)
+      try {
+        const todos = await todoApi.getAllTodos()
+        setTodos(todos)
+      } catch (error) {
+        console.error('Erro ao buscar tarefas:', error)
+      } finally {
+        setLoading(false)
+      }
     }
     getData()
-  }, [])
+  }, [selectedCategory])
+
+  if (loading) {
+    return <p className='text-center'>Carregando tarefas...</p>
+  }
 
   return (
     <div className='mt-7 flex w-full flex-col gap-2'>
