@@ -3,6 +3,8 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
+import { revalidatePath } from 'next/cache'
+
 import { z } from 'zod'
 import { PlusIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -53,6 +55,9 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
     console.log(data)
 
     await createTodoAction(data)
+    await revalidatePath('/admin')
+
+    reset()
   }
 
   useEffect(() => {
