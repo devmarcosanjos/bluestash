@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { ClockIcon, EllipsisVerticalIcon } from 'lucide-react'
+import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-react'
 
 import { todoApi } from '@/apis/todo.api'
 import { TodoModel } from '@/types/models'
@@ -49,9 +49,27 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
               </div>
             )}
             <button className='btn btn-square btn-sm bg-base-100'>
-              <span>
-                <EllipsisVerticalIcon size={18} className='text-base-content' />
-              </span>
+              <div className='dropdown dropdown-end'>
+                <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
+                  <EllipsisVerticalIcon size={18} className='text-base-content' />
+                </div>
+                <ul
+                  tabIndex={0}
+                  className='menu dropdown-content z-[1] w-52 rounded-box bg-base-100  p-2 shadow'>
+                  <li>
+                    <button className='text-base-content'>
+                      <PenIcon size={18} />
+                      Editar
+                    </button>
+                  </li>
+                  <li>
+                    <button className='text-error'>
+                      <Trash2Icon size={18} />
+                      Deletar
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </button>
           </div>
         ))
