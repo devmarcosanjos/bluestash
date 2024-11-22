@@ -1,31 +1,22 @@
 'use server'
 
-import { todoApi } from '@/apis/todo.api'
-import { TodoModel } from '@/types/models'
+import { TaskSchema } from '@/app/admin/_components'
 import { getCurrentUser } from '@/server/functions/user.function'
+import { createTodoFunction } from '@/server/functions/todo.function'
 
-export const createTodoAction = async ({
-  name,
-  description,
-  categoria_id,
-  completed,
-  start_date,
-  priority,
-}: Omit<TodoModel, 'id' | 'end_date'>) => {
+export const createTodoAction = async ({ date, list, notes, priority, task }: TaskSchema) => {
   const user = await getCurrentUser()
 
   try {
-    const newTodo: TodoModel = {
-      userId: user.id,
-      name,
-      description,
-      categoria_id,
-      completed,
-      start_date,
+    const createdTodo = await createTodoFunction({
+      start_date: date,
+      categoria_id: Number(list),
+      description: notes || '',
       priority,
-    }
+      name: task,
+      user_id: user.id,
+    })
 
-    const createdTodo = await todoApi.createTodo(newTodo)
     console.log('Deu certo')
     return createdTodo
   } catch (error) {

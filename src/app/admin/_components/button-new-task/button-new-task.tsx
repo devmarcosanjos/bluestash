@@ -1,25 +1,28 @@
 'use client'
 
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
 
 import { z } from 'zod'
 import { PlusIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { merge } from '@/utils'
+import { categoryApi } from '@/apis/category.api'
+import { createTodoAction } from '@/app/admin/actions'
+import { CategoryModel } from '@/types/models/category.model'
 import { DatePicker } from '@/app/admin/_components/date-picker'
 import { ClickOutsideDetector } from '@/app/admin/_components/click-outside-detector'
 
-const taskSchema = z.object({
+export const taskSchema = z.object({
   task: z.string().min(1, 'Campo obrigatório'),
-  list: z.enum(['Todo List', 'Work', 'Frella'], { message: 'Campo obrigatório' }),
+  list: z.string().min(1, 'Campo obrigatório'),
   priority: z.enum(['1', '2', '3'], { message: 'Campo obrigatório' }),
   date: z.date(),
   notes: z.string().optional(),
 })
 
-type TaskSchema = z.infer<typeof taskSchema>
+export type TaskSchema = z.infer<typeof taskSchema>
 
 interface ButtonNewTaskProps {
   showNewTask: Date
@@ -28,6 +31,7 @@ interface ButtonNewTaskProps {
 
 export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProps) => {
   const [open, setOpen] = useState(false)
+  const [category, setCategory] = useState<CategoryModel[]>([])
 
   const {
     register,
@@ -42,11 +46,22 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
       date: showNewTask,
     },
   })
+  console.log(errors)
 
   async function handleSaveTask(data: TaskSchema) {
-    // salvar nova tarefa
+    // todo: implementar  salvar tarefa
     console.log(data)
+
+    await createTodoAction(data)
   }
+
+  useEffect(() => {
+    const getData = async () => {
+      const category = await categoryApi.getAllCategory()
+      setCategory(category)
+    }
+    getData()
+  }, [])
 
   return (
     <div className={merge(['dropdown dropdown-end dropdown-top', open && 'dropdown-open'])}>
@@ -94,9 +109,11 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
                   <option disabled value=''>
                     Lista
                   </option>
-                  <option>Todo List</option>
-                  <option>Work</option>
-                  <option>Frella</option>
+                  {category.map(item => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
               </li>
               <li className=''>

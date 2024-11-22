@@ -1,5 +1,5 @@
-import { TodoModel } from '@/types/models'
 import { APP_URL } from '@/config/env-client'
+import { CreateTodoModel, TodoModel } from '@/types/models'
 import { FetchHttpClient } from '@/libs/http/fetch-http-client'
 
 class TodoApi {
@@ -13,7 +13,7 @@ class TodoApi {
     return body
   }
 
-  async createTodo(todo: TodoModel) {
+  async createTodo(todo: CreateTodoModel) {
     const { body } = await this.httpClient.post<TodoModel[]>('/todo', todo)
     return body
   }
