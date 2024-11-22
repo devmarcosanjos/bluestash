@@ -1,11 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-react'
 
-import { todoApi } from '@/apis/todo.api'
-import { TodoModel } from '@/types/models'
+import { TodoContext } from '@/app/admin/context/todo.contenxt'
 
 interface TodoListProps {
   selectedDate: Date
@@ -13,8 +12,9 @@ interface TodoListProps {
 }
 
 export const TodoList = ({ selectedDate, selectedCategory }: TodoListProps) => {
-  const [todos, setTodos] = useState<TodoModel[]>([])
-  const [loading, setLoading] = useState(true)
+  const { todos } = useContext(TodoContext)
+
+  console.log('todos:', todos)
 
   const isToday = (date: string) => {
     const taskDate = new Date(date)
@@ -25,8 +25,6 @@ export const TodoList = ({ selectedDate, selectedCategory }: TodoListProps) => {
     )
   }
 
-  // const filteredTodos = todos.filter(todo => todo.start_date && isToday(todo.start_date))
-
   const filteredTodos = todos.filter(todo => {
     const matchDate = todo.start_date && isToday(todo.start_date)
     const matchCategory = !selectedCategory || todo.categoria_id === selectedCategory.toString()
@@ -34,31 +32,13 @@ export const TodoList = ({ selectedDate, selectedCategory }: TodoListProps) => {
     return matchDate && matchCategory
   })
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const todos = await todoApi.getAllTodos()
-        setTodos(todos)
-      } catch (error) {
-        console.error('Erro ao buscar tarefas:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    getData()
-  }, [selectedCategory])
-
-  if (loading) {
-    return <p className='text-center'>Carregando tarefas...</p>
-  }
-
   return (
     <div className='mt-7 flex w-full flex-col gap-2'>
       {filteredTodos.length > 0 ? (
         filteredTodos.map(todo => (
           <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200 p-3'>
             <input type='checkbox' className='checkbox-primary checkbox checkbox-sm' />
-            <span className='flex-grow break-all'>{todo.description}</span>
+            <span className='flex-grow break-all'>{todo.name}</span>
             {todo.start_date && todo.end_date && (
               <div className='flex items-center gap-2'>
                 <ClockIcon size={18} />

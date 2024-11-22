@@ -1,36 +1,29 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { Settings } from 'luxon'
-import { ListCheck, PlusIcon } from 'lucide-react'
+import { ListCheck } from 'lucide-react'
 
-import { categoryApi } from '@/apis/category.api'
-import { CategoryModel } from '@/types/models/category.model'
+import { CategoryContext } from '@/app/admin/context/category.contenxt'
 
 Settings.defaultLocale = 'pt-BR'
 
 const Sidebar = () => {
-  const [category, setCategory] = useState<CategoryModel[]>([])
+  // const [category, setCategory] = useState<CategoryModel[]>([])
+  const { category } = useContext(CategoryContext)
 
-  const handleCategorySelect = (id: string) => {
+  if (!category || category === 0) {
+    return <p>Loading categories...</p>
+  }
+
+  const handleCategorySelect = (id: number) => {
     console.log('Category selected:', id)
   }
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await categoryApi.getAllCategory()
-        setCategory(data)
-      } catch (error) {
-        console.error('Erro ao buscar categorias:', error)
-      }
-    }
-    getData()
-  }, [])
   return (
     <div className='m-2 w-64 rounded-lg bg-base-200'>
       <div className='navbar-start flex w-full items-center justify-center px-6 pb-10 pt-6'>
@@ -40,10 +33,9 @@ const Sidebar = () => {
       </div>
 
       <div className='flex w-full flex-col gap-2 px-6'>
-        {category.map((item, index) => (
-          // <Link href='/admin' key={item.id || index} className='flex w-full'>
+        {category.map(item => (
           <button
-            key={item.id || index}
+            key={item.id}
             onClick={() => handleCategorySelect(item.id)}
             className='btn flex-1 border-none bg-secondary shadow-none'>
             <div className='flex flex-grow items-center gap-2'>
@@ -51,14 +43,12 @@ const Sidebar = () => {
               <span className='font-light'>{item.name}</span>
             </div>
           </button>
-          // </Link>
         ))}
 
         <Link href='#' className='flex w-full'>
           <button className='btn btn-primary flex-1'>
             <div className='flex items-center gap-2'>
-              <PlusIcon size={18} />
-              <span className='font-light'>Create new list</span>
+              <span className='font-light'>Relatórios</span>
             </div>
           </button>
         </Link>
