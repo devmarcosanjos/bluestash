@@ -1,13 +1,22 @@
 'use client'
 
-import { createContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 import { CategoryModel } from '@/types/models'
 import { categoryApi } from '@/apis/category.api'
 
-export const CategoryContext = createContext()
+interface CategoryContextProps {
+  category: CategoryModel[]
+  setCategory: (category: CategoryModel[]) => void
+}
 
-const CategoryContextProvider = ({ children }) => {
+interface Props {
+  children: ReactNode
+}
+
+export const CategoryContext = createContext<CategoryContextProps>({} as CategoryContextProps)
+
+const CategoryContextProvider = ({ children }: Props) => {
   const [category, setCategory] = useState<CategoryModel[]>([])
 
   useEffect(() => {
