@@ -1,20 +1,17 @@
 'use client'
 
-import { useContext } from 'react'
-
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { Settings } from 'luxon'
 import { ListCheck } from 'lucide-react'
 
-import { CategoryContext } from '@/app/admin/context/category.contenxt'
+import { CategoryModel } from '@/types/models'
 
 Settings.defaultLocale = 'pt-BR'
 
 const Sidebar = () => {
-  // const [category, setCategory] = useState<CategoryModel[]>([])
-  const { category } = useContext(CategoryContext)
+  const [category, setCategory] = useState<CategoryModel[]>([])
 
   if (!category || category === 0) {
     return <p>Loading categories...</p>
