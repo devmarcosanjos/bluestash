@@ -1,25 +1,43 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { Settings } from 'luxon'
 import { ListCheck } from 'lucide-react'
 
 import { CategoryModel } from '@/types/models'
+import { categoryApi } from '@/apis/category.api'
 
 Settings.defaultLocale = 'pt-BR'
 
 const Sidebar = () => {
+  const pathname = usePathname()
+  const router = useRouter()
+
   const [category, setCategory] = useState<CategoryModel[]>([])
 
-  if (!category || category === 0) {
-    return <p>Loading categories...</p>
+  const handleCategorySelect = (id: number) => {
+    const searchParams = new URLSearchParams()
+    searchParams.append('category', id.toString())
+
+    router.push(`${pathname}?${searchParams.toString()}`)
   }
 
-  const handleCategorySelect = (id: number) => {
-    console.log('Category selected:', id)
-  }
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await categoryApi.getAllCategory()
+        setCategory(data)
+      } catch (error) {
+        console.error('Erro ao buscar categorias:', error)
+      }
+    }
+    getData()
+  }, [])
 
   return (
     <div className='m-2 w-64 rounded-lg bg-base-200'>
