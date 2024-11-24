@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { Settings } from 'luxon'
 import { ListCheck } from 'lucide-react'
 
+import { merge } from '@/utils'
 import { CategoryModel } from '@/types/models'
 import { categoryApi } from '@/apis/category.api'
 
@@ -17,13 +18,18 @@ Settings.defaultLocale = 'pt-BR'
 const Sidebar = () => {
   const pathname = usePathname()
   const router = useRouter()
+  const params = useSearchParams()
 
   const [category, setCategory] = useState<CategoryModel[]>([])
 
   const handleCategorySelect = (id: number) => {
-    const searchParams = new URLSearchParams()
-    searchParams.append('category', id.toString())
+    const searchParams = new URLSearchParams(params.toString())
 
+    if (params.has('category') && Number(params.get('category')) === id) {
+      searchParams.delete('category')
+    } else {
+      searchParams.set('category', id.toString())
+    }
     router.push(`${pathname}?${searchParams.toString()}`)
   }
 
@@ -52,7 +58,12 @@ const Sidebar = () => {
           <button
             key={item.id}
             onClick={() => handleCategorySelect(item.id)}
-            className='btn flex-1 border-none bg-secondary shadow-none'>
+            className={merge([
+              'btn flex-1 border-none bg-secondary shadow-none ',
+              params.has('category') &&
+                Number(params.get('category')) == item.id &&
+                'bg-red-500 text-white',
+            ])}>
             <div className='flex flex-grow items-center gap-2'>
               <ListCheck size={18} />
               <span className='font-light'>{item.name}</span>
