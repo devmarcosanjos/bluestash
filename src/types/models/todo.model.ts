@@ -6,7 +6,7 @@ export interface TodoModel {
   completed: boolean
   start_date: string
   end_date: string
-  categoria_id: string
+  categoria_id: number
   user_id: number
 }
 

@@ -1,31 +1,56 @@
 'use client'
 
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
+import { useSearchParams } from 'next/navigation'
+
 import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-react'
 
+import { todoApi } from '@/apis/todo.api'
+import { TodoModel } from '@/types/models'
+
 interface TodoListProps {
-  _selectedDate: Date
-  _selectedCategory?: number
+  selectedDate: Date
 }
 
-export const TodoList = ({ _selectedDate, _selectedCategory }: TodoListProps) => {
-  const filteredTodos = [] as any
-  // console.log('todos:', todos)
+export const TodoList = ({ selectedDate }: TodoListProps) => {
+  const [todos, setTodos] = useState<TodoModel[]>([])
+  const params = useSearchParams()
 
-  // const isToday = (date: string) => {
-  //   const taskDate = new Date(date)
-  //   return (
-  //     selectedDate.getDate() === taskDate.getDate() &&
-  //     selectedDate.getMonth() === taskDate.getMonth() &&
-  //     selectedDate.getFullYear() === taskDate.getFullYear()
-  //   )
-  // }
+  const isToday = useCallback(
+    (date: string) => {
+      const taskDate = new Date(date)
+      return (
+        selectedDate.getDate() === taskDate.getDate() &&
+        selectedDate.getMonth() === taskDate.getMonth() &&
+        selectedDate.getFullYear() === taskDate.getFullYear()
+      )
+    },
+    [selectedDate],
+  )
 
-  // const filteredTodos = todos.filter(todo => {
-  //   const matchDate = todo.start_date && isToday(todo.start_date)
-  //   const matchCategory = !selectedCategory || todo.categoria_id === selectedCategory.toString()
+  const filteredTodos = useMemo(() => {
+    const categoryId = params.get('category')
+    return todos.filter(todo => {
+      const matchDate = todo.start_date && isToday(todo.start_date)
+      const matchCategory = todo.categoria_id === Number(categoryId)
 
-  //   return matchDate && matchCategory
-  // })
+      if (categoryId) return matchDate && matchCategory
+      return matchDate
+    })
+  }, [isToday, params, todos])
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const todos = await todoApi.getAllTodos()
+        setTodos(todos)
+      } catch (error) {
+        return console.error('Erro ao buscar tarefas:', error)
+      }
+    }
+    getData()
+  }, [])
 
   return (
     <div className='mt-7 flex w-full flex-col gap-2'>
