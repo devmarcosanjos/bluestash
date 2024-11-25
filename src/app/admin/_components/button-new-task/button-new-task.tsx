@@ -3,8 +3,6 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { revalidatePath } from 'next/cache'
-
 import { z } from 'zod'
 import { PlusIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { merge } from '@/utils'
 import { categoryApi } from '@/apis/category.api'
 import { createTodoAction } from '@/app/admin/actions'
+import { useTodo } from '@/app/admin/_context/todo.context'
 import { CategoryModel } from '@/types/models/category.model'
 import { DatePicker } from '@/app/admin/_components/date-picker'
 import { ClickOutsideDetector } from '@/app/admin/_components/click-outside-detector'
@@ -34,6 +33,7 @@ interface ButtonNewTaskProps {
 export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProps) => {
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState<CategoryModel[]>([])
+  const { refetch } = useTodo()
 
   const {
     register,
@@ -51,11 +51,8 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
   console.log(errors)
 
   async function handleSaveTask(data: TaskSchema) {
-    // todo: implementar  salvar tarefa
-    console.log(data)
-
     await createTodoAction(data)
-    await revalidatePath('/admin')
+    refetch()
 
     reset()
   }

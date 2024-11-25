@@ -1,5 +1,7 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
+
 import { TaskSchema } from '@/app/admin/_components'
 import { getCurrentUser } from '@/server/functions/user.function'
 import { createTodoFunction } from '@/server/functions/todo.function'
@@ -17,7 +19,7 @@ export const createTodoAction = async ({ date, list, notes, priority, task }: Ta
       user_id: user.id,
     })
 
-    console.log('Deu certo')
+    await revalidatePath('/admin')
     return createdTodo
   } catch (error) {
     console.error('Erro ao criar a tarefa:', error)
