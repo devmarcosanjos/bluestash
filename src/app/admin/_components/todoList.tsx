@@ -18,7 +18,7 @@ interface TodoListProps {
 export const TodoList = ({ selectedDate }: TodoListProps) => {
   const [todos, setTodos] = useState<TodoModel[]>([])
   const params = useSearchParams()
-  const { refetchCount, setInitialData } = useTodoForm()
+  const { refetchCount, setInitialData, setDropdownOpen } = useTodoForm()
 
   const handleCheckboxClick = async (taskId: number) => {
     const newTasks = todos.map(async todo => {
@@ -69,6 +69,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
   }, [isToday, params, todos])
 
   const handleTodoEdit = (todo: TodoModel) => {
+    setDropdownOpen(true)
     setInitialData(todo)
   }
 

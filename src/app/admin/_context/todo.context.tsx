@@ -17,10 +17,11 @@ interface Props {
 interface TodoFormContextProps {
   refetch: () => void
   refetchCount: number
-  initialData: TodoModel | undefined
   setInitialData: Dispatch<SetStateAction<TodoModel | undefined>>
   setNewTaskDate: Dispatch<SetStateAction<Date>>
   formHandler: UseFormReturn<Partial<TaskSchema>, any, TaskSchema>
+  dropdownOpen: boolean
+  setDropdownOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const TodoFormContext = createContext<TodoFormContextProps>({} as TodoFormContextProps)
@@ -28,21 +29,15 @@ const TodoFormContext = createContext<TodoFormContextProps>({} as TodoFormContex
 export const TodoFormContextProvider = ({ children }: Props) => {
   const [refetchCount, setRefetchCount] = useState(0)
   const [newTaskDate, setNewTaskDate] = useState<Date>(() => new Date())
-
-  ///
-  const minhaFuncao = () => {
-    console.log('fui executado BITCH')
-  }
-  const [_bla, _blabla] = useState<any>(minhaFuncao())
-  ///
   const [initialData, setInitialData] = useState<TodoModel | undefined>()
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const mergedValues: Partial<TaskSchema> = {
     task: initialData?.name ?? '',
     list: initialData?.categoria_id.toString() ?? '',
     priority: initialData?.priority as PriorityOptions,
     date: initialData?.start_date ? new Date(initialData?.start_date) : newTaskDate,
-    notes: initialData?.description,
+    notes: initialData?.description ?? '',
   }
 
   const formHandler = useForm<Partial<TaskSchema>, any, TaskSchema>({
@@ -54,9 +49,24 @@ export const TodoFormContextProvider = ({ children }: Props) => {
     setRefetchCount(prev => prev + 1)
   }
 
+  useEffect(() => {
+    if (!dropdownOpen) {
+      formHandler.reset()
+      setInitialData(undefined)
+    }
+  }, [dropdownOpen, formHandler])
+
   return (
     <TodoFormContext.Provider
-      value={{ refetch, refetchCount, initialData, setInitialData, setNewTaskDate, formHandler }}>
+      value={{
+        refetch,
+        refetchCount,
+        setInitialData,
+        setNewTaskDate,
+        formHandler,
+        setDropdownOpen,
+        dropdownOpen,
+      }}>
       {children}
     </TodoFormContext.Provider>
   )

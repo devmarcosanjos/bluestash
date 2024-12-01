@@ -19,9 +19,9 @@ interface ButtonNewTaskProps {
 }
 
 export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProps) => {
-  const [open, setOpen] = useState(false)
   const [category, setCategory] = useState<CategoryModel[]>([])
-  const { refetch, formHandler } = useTodoForm(showNewTask)
+  const { refetch, formHandler, setDropdownOpen, dropdownOpen } = useTodoForm(showNewTask)
+
   const {
     register,
     reset,
@@ -31,13 +31,11 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
     setValue,
   } = formHandler
 
-  console.log({ isValid, errors })
-
   async function handleSaveTask(data: TaskSchema) {
     await createTodoAction(data)
     refetch()
-
     reset()
+    setDropdownOpen(false)
   }
 
   useEffect(() => {
@@ -49,17 +47,17 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
   }, [])
 
   return (
-    <div className={merge(['dropdown dropdown-end dropdown-top', open && 'dropdown-open'])}>
+    <div className={merge(['dropdown dropdown-end dropdown-top', dropdownOpen && 'dropdown-open'])}>
       <div role='button' className='flex items-center hover:cursor-pointer'>
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => setDropdownOpen(true)}
           className='btn btn-primary flex w-[500px] items-center gap-2 rounded-lg px-4 py-2'>
           <PlusIcon size={18} />
           <span>New Task</span>
         </button>
       </div>
 
-      <ClickOutsideDetector onClickOutside={() => setOpen(false)}>
+      <ClickOutsideDetector onClickOutside={() => setDropdownOpen(false)}>
         <form onSubmit={handleSubmit(handleSaveTask)}>
           <ul className='menu dropdown-content z-[1] w-[500px] rounded-lg border border-gray-200 bg-white p-4 shadow-lg'>
             <li className='mb-3'>
@@ -85,7 +83,6 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
               <li className=''>
                 <select
                   id='list'
-                  defaultValue=''
                   className={merge([
                     'select select-bordered flex w-full items-center rounded-lg bg-gray-50 text-gray-700',
                     errors.list && 'border-red-500',
@@ -103,7 +100,6 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
               </li>
               <li className=''>
                 <select
-                  defaultValue=''
                   className={merge([
                     'select select-bordered w-full rounded-lg bg-gray-50 text-gray-700',
                     errors.priority && 'border-red-500',
@@ -145,7 +141,7 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
                 className='btn btn-error rounded-lg bg-error px-4 py-2'
                 onClick={() => {
                   reset()
-                  setOpen(false)
+                  setDropdownOpen(false)
                 }}>
                 Reset
               </button>
