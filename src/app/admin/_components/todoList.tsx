@@ -8,6 +8,7 @@ import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-rea
 
 import { todoApi } from '@/apis/todo.api'
 import { TodoModel } from '@/types/models'
+import { updateTodoAction } from '@/app/admin/actions'
 import { useTodo } from '@/app/admin/_context/todo.context'
 
 interface TodoListProps {
@@ -19,19 +20,23 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
   const params = useSearchParams()
   const { refetchCount } = useTodo()
 
-  const handleCheckboxClick = (taskId: number) => {
-    const newTasks = todos.map(todo => {
+  const handleCheckboxClick = async (taskId: number) => {
+    const newTasks = todos.map(async todo => {
       if (todo.id !== taskId) return todo
 
       if (todo.completed === false || todo.completed === undefined) {
-        return { ...todo, completed: true }
+        const updateTodo = { ...todo, completed: true }
+        await updateTodoAction(updateTodo)
+        return updateTodo
       }
 
-      return { ...todo, completed: false }
+      const updateTodo = { ...todo, completed: false }
+      await updateTodoAction(updateTodo)
+      return updateTodo
     })
 
-    console.log('newTasks', newTasks)
-    setTodos(newTasks)
+    const newTaskResolver = await Promise.all(newTasks)
+    setTodos(newTaskResolver)
   }
 
   const getStatusClass = (isConpleted: boolean) => {
@@ -85,7 +90,6 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
               onChange={() => handleCheckboxClick(todo.id)}
               className='checkbox-primary checkbox checkbox-sm'
             />
-            {/* <span className={`flex-grow break-all ${getStatusClass()}`}>{todo.name}</span> */}
             <span className={`flex-grow break-all  ${getStatusClass(todo.completed)}`}>
               {todo.name}
             </span>
