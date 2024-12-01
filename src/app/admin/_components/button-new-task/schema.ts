@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+export type PriorityOptions = '1' | '2' | '3'
+
 export const taskSchema = z.object({
   task: z.string().min(1, 'Campo obrigatório'),
   list: z.string().min(1, 'Campo obrigatório'),

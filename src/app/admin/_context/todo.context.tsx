@@ -3,8 +3,12 @@ import { createContext, Dispatch, ReactNode, SetStateAction, use, useEffect, use
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { CreateTodoModel } from '@/types/models'
-import { taskSchema, TaskSchema } from '@/app/admin/_components/button-new-task/schema'
+import { TodoModel } from '@/types/models'
+import {
+  PriorityOptions,
+  taskSchema,
+  TaskSchema,
+} from '@/app/admin/_components/button-new-task/schema'
 
 interface Props {
   children: ReactNode
@@ -13,9 +17,9 @@ interface Props {
 interface TodoFormContextProps {
   refetch: () => void
   refetchCount: number
-  formData: CreateTodoModel | undefined
-  setFormData: Dispatch<SetStateAction<CreateTodoModel | undefined>>
-  setNewTaskDate: Dispatch<SetStateAction<Date | undefined>>
+  initialData: TodoModel | undefined
+  setInitialData: Dispatch<SetStateAction<TodoModel | undefined>>
+  setNewTaskDate: Dispatch<SetStateAction<Date>>
   formHandler: UseFormReturn<Partial<TaskSchema>, any, TaskSchema>
 }
 
@@ -23,22 +27,36 @@ const TodoFormContext = createContext<TodoFormContextProps>({} as TodoFormContex
 
 export const TodoFormContextProvider = ({ children }: Props) => {
   const [refetchCount, setRefetchCount] = useState(0)
-  const [formData, setFormData] = useState<CreateTodoModel | undefined>()
-  const [newTaskDate, setNewTaskDate] = useState<Date | undefined>()
+  const [newTaskDate, setNewTaskDate] = useState<Date>(() => new Date())
+
+  ///
+  const minhaFuncao = () => {
+    console.log('fui executado BITCH')
+  }
+  const [_bla, _blabla] = useState<any>(minhaFuncao())
+  ///
+  const [initialData, setInitialData] = useState<TodoModel | undefined>()
+
+  const mergedValues: Partial<TaskSchema> = {
+    task: initialData?.name ?? '',
+    list: initialData?.categoria_id.toString() ?? '',
+    priority: initialData?.priority as PriorityOptions,
+    date: initialData?.start_date ? new Date(initialData?.start_date) : newTaskDate,
+    notes: initialData?.description,
+  }
 
   const formHandler = useForm<Partial<TaskSchema>, any, TaskSchema>({
     resolver: zodResolver(taskSchema),
-    values: {
-      date: newTaskDate,
-    },
+    values: mergedValues,
   })
+
   const refetch = () => {
     setRefetchCount(prev => prev + 1)
   }
 
   return (
     <TodoFormContext.Provider
-      value={{ refetch, refetchCount, formData, setFormData, setNewTaskDate, formHandler }}>
+      value={{ refetch, refetchCount, initialData, setInitialData, setNewTaskDate, formHandler }}>
       {children}
     </TodoFormContext.Provider>
   )
@@ -48,7 +66,7 @@ export const useTodoForm = (newTaskDate?: Date) => {
   const context = use(TodoFormContext)
 
   useEffect(() => {
-    context.setNewTaskDate(newTaskDate)
+    if (newTaskDate) context.setNewTaskDate(newTaskDate)
   }, [context, newTaskDate])
 
   return { ...context }

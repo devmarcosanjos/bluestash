@@ -18,7 +18,7 @@ interface TodoListProps {
 export const TodoList = ({ selectedDate }: TodoListProps) => {
   const [todos, setTodos] = useState<TodoModel[]>([])
   const params = useSearchParams()
-  const { refetchCount } = useTodoForm()
+  const { refetchCount, setInitialData } = useTodoForm()
 
   const handleCheckboxClick = async (taskId: number) => {
     const newTasks = todos.map(async todo => {
@@ -68,6 +68,10 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
     })
   }, [isToday, params, todos])
 
+  const handleTodoEdit = (todo: TodoModel) => {
+    setInitialData(todo)
+  }
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -112,7 +116,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
                   tabIndex={0}
                   className='menu dropdown-content z-[1] w-52 rounded-box bg-base-100  p-2 shadow'>
                   <li>
-                    <button className='text-base-content'>
+                    <button className='text-base-content' onClick={() => handleTodoEdit(todo)}>
                       <PenIcon size={18} />
                       Editar
                     </button>
