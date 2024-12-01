@@ -40,6 +40,8 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
   }
 
   const getStatusClass = (isConpleted: boolean) => {
+    console.log('isConpleted', isConpleted)
+
     if (isConpleted === true) {
       return 'line-through text-base-content'
     }
@@ -73,6 +75,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
       try {
         const todos = await todoApi.getAllTodos()
         setTodos(todos)
+        console.log(todos)
       } catch (error) {
         return console.error('Erro ao buscar tarefas:', error)
       }

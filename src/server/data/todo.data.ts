@@ -9,6 +9,7 @@ export const getAllTodosByUserId = async (userId: number) => {
       description: true,
       start_date: true,
       categoria_id: true,
+      completed: true,
     },
     where: {
       user_id: {
