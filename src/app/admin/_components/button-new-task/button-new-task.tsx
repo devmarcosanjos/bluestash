@@ -6,12 +6,12 @@ import { PlusIcon } from 'lucide-react'
 
 import { merge } from '@/utils'
 import { categoryApi } from '@/apis/category.api'
-import { createTodoAction } from '@/app/admin/actions'
 import { CategoryModel } from '@/types/models/category.model'
 import { useTodoForm } from '@/app/admin/_context/todo.context'
 import { DatePicker } from '@/app/admin/_components/date-picker'
-import { TaskSchema } from '@/app/admin/_components/button-new-task/schema'
+import { createTodoAction, updateTodoAction } from '@/app/admin/actions'
 import { ClickOutsideDetector } from '@/app/admin/_components/click-outside-detector'
+import { PriorityOptions, TaskSchema } from '@/app/admin/_components/button-new-task/schema'
 
 interface ButtonNewTaskProps {
   showNewTask: Date
@@ -20,7 +20,8 @@ interface ButtonNewTaskProps {
 
 export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProps) => {
   const [category, setCategory] = useState<CategoryModel[]>([])
-  const { refetch, formHandler, setDropdownOpen, dropdownOpen } = useTodoForm(showNewTask)
+  const { refetch, formHandler, setDropdownOpen, dropdownOpen, initialData } =
+    useTodoForm(showNewTask)
 
   const {
     register,
@@ -32,7 +33,18 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
   } = formHandler
 
   async function handleSaveTask(data: TaskSchema) {
-    await createTodoAction(data)
+    if (initialData && initialData.id) {
+      await updateTodoAction({
+        id: initialData.id,
+        categoria_id: Number(data.list),
+        name: data.task,
+        description: data.notes || '',
+        start_date: data.date,
+        priority: data.priority as PriorityOptions,
+      })
+    } else {
+      await createTodoAction(data)
+    }
     refetch()
     reset()
     setDropdownOpen(false)

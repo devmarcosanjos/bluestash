@@ -17,6 +17,7 @@ interface Props {
 interface TodoFormContextProps {
   refetch: () => void
   refetchCount: number
+  initialData: TodoModel | undefined
   setInitialData: Dispatch<SetStateAction<TodoModel | undefined>>
   setNewTaskDate: Dispatch<SetStateAction<Date>>
   formHandler: UseFormReturn<Partial<TaskSchema>, any, TaskSchema>
@@ -66,6 +67,7 @@ export const TodoFormContextProvider = ({ children }: Props) => {
         formHandler,
         setDropdownOpen,
         dropdownOpen,
+        initialData,
       }}>
       {children}
     </TodoFormContext.Provider>

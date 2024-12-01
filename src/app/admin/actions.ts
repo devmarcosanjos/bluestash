@@ -2,9 +2,9 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { TodoModel } from '@/types/models'
-import { TaskSchema } from '@/app/admin/_components'
+import { CreateTodoModel } from '@/types/models'
 import { getCurrentUser } from '@/server/functions/user.function'
+import { TaskSchema } from '@/app/admin/_components/button-new-task/schema'
 import { createTodoFunction, updateTodoFunction } from '@/server/functions/todo.function'
 
 export const createTodoAction = async ({ date, list, notes, priority, task }: TaskSchema) => {
@@ -27,11 +27,10 @@ export const createTodoAction = async ({ date, list, notes, priority, task }: Ta
     throw new Error('Falha ao criar a tarefa.')
   }
 }
-export const updateTodoAction = async (todo: TodoModel) => {
+export const updateTodoAction = async (todo: CreateTodoModel) => {
   try {
     const updateTodo = await updateTodoFunction(todo)
 
-    await revalidatePath('/admin')
     return updateTodo
   } catch (error) {
     console.error('Erro ao atualizar a tarefa:', error)

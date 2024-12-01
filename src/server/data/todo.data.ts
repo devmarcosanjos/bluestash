@@ -1,5 +1,5 @@
 import { prisma } from '@/libs/prisma/config'
-import { ApiTodoModel, TodoModel } from '@/types/models'
+import { ApiTodoModel, CreateTodoModel } from '@/types/models'
 
 export const getAllTodosByUserId = async (userId: number) => {
   const todos = await prisma.todo.findMany({
@@ -27,11 +27,15 @@ export const createTodo = (data: ApiTodoModel) => {
   })
 }
 
-export const updateTodo = (data: TodoModel) => {
-  return prisma.todo.update({
-    where: {
-      id: data.id,
-    },
-    data,
-  })
+export const updateTodo = (data: CreateTodoModel) => {
+  try {
+    return prisma.todo.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
