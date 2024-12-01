@@ -1,29 +1,17 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { z } from 'zod'
 import { PlusIcon } from 'lucide-react'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 import { merge } from '@/utils'
 import { categoryApi } from '@/apis/category.api'
 import { createTodoAction } from '@/app/admin/actions'
-import { useTodo } from '@/app/admin/_context/todo.context'
 import { CategoryModel } from '@/types/models/category.model'
+import { useTodoForm } from '@/app/admin/_context/todo.context'
 import { DatePicker } from '@/app/admin/_components/date-picker'
+import { TaskSchema } from '@/app/admin/_components/button-new-task/schema'
 import { ClickOutsideDetector } from '@/app/admin/_components/click-outside-detector'
-
-export const taskSchema = z.object({
-  task: z.string().min(1, 'Campo obrigatório'),
-  list: z.string().min(1, 'Campo obrigatório'),
-  priority: z.enum(['1', '2', '3'], { message: 'Campo obrigatório' }),
-  date: z.date(),
-  notes: z.string().optional(),
-})
-
-export type TaskSchema = z.infer<typeof taskSchema>
 
 interface ButtonNewTaskProps {
   showNewTask: Date
@@ -33,22 +21,17 @@ interface ButtonNewTaskProps {
 export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProps) => {
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState<CategoryModel[]>([])
-  const { refetch } = useTodo()
-
+  const { refetch, formHandler } = useTodoForm(showNewTask)
   const {
     register,
-    handleSubmit,
     reset,
-    setValue,
-    getValues,
+    handleSubmit,
     formState: { errors, isValid },
-  } = useForm<TaskSchema>({
-    resolver: zodResolver(taskSchema),
-    defaultValues: {
-      date: showNewTask,
-    },
-  })
-  console.log(errors)
+    getValues,
+    setValue,
+  } = formHandler
+
+  console.log({ isValid, errors })
 
   async function handleSaveTask(data: TaskSchema) {
     await createTodoAction(data)

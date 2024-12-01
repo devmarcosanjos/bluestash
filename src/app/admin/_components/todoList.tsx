@@ -9,7 +9,7 @@ import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-rea
 import { todoApi } from '@/apis/todo.api'
 import { TodoModel } from '@/types/models'
 import { updateTodoAction } from '@/app/admin/actions'
-import { useTodo } from '@/app/admin/_context/todo.context'
+import { useTodoForm } from '@/app/admin/_context/todo.context'
 
 interface TodoListProps {
   selectedDate: Date
@@ -18,7 +18,7 @@ interface TodoListProps {
 export const TodoList = ({ selectedDate }: TodoListProps) => {
   const [todos, setTodos] = useState<TodoModel[]>([])
   const params = useSearchParams()
-  const { refetchCount } = useTodo()
+  const { refetchCount } = useTodoForm()
 
   const handleCheckboxClick = async (taskId: number) => {
     const newTasks = todos.map(async todo => {
