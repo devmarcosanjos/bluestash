@@ -19,6 +19,27 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
   const params = useSearchParams()
   const { refetchCount } = useTodo()
 
+  const handleCheckboxClick = (taskId: number) => {
+    const newTasks = todos.map(todo => {
+      if (todo.id !== taskId) return todo
+
+      if (todo.completed === false || todo.completed === undefined) {
+        return { ...todo, completed: true }
+      }
+
+      return { ...todo, completed: false }
+    })
+
+    console.log('newTasks', newTasks)
+    setTodos(newTasks)
+  }
+
+  const getStatusClass = (isConpleted: boolean) => {
+    if (isConpleted === true) {
+      return 'line-through text-base-content'
+    }
+  }
+
   const isToday = useCallback(
     (date: string) => {
       const taskDate = new Date(date)
@@ -59,8 +80,16 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
       {filteredTodos.length > 0 ? (
         filteredTodos.map((todo: any) => (
           <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200 p-3'>
-            <input type='checkbox' className='checkbox-primary checkbox checkbox-sm' />
-            <span className='flex-grow break-all'>{todo.name}</span>
+            <input
+              type='checkbox'
+              onChange={() => handleCheckboxClick(todo.id)}
+              className='checkbox-primary checkbox checkbox-sm'
+            />
+            {/* <span className={`flex-grow break-all ${getStatusClass()}`}>{todo.name}</span> */}
+            <span className={`flex-grow break-all  ${getStatusClass(todo.completed)}`}>
+              {todo.name}
+            </span>
+
             {todo.start_date && todo.end_date && (
               <div className='flex items-center gap-2'>
                 <ClockIcon size={18} />
@@ -69,7 +98,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
                 <span>{todo.end_date}</span>
               </div>
             )}
-            <button className='btn btn-square btn-sm bg-base-100'>
+            <div className='btn btn-square btn-sm bg-base-100'>
               <div className='dropdown dropdown-end'>
                 <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
                   <EllipsisVerticalIcon size={18} className='text-base-content' />
@@ -91,7 +120,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
                   </li>
                 </ul>
               </div>
-            </button>
+            </div>
           </div>
         ))
       ) : (
