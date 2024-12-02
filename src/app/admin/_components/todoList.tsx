@@ -31,6 +31,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
           ...updateTodo,
           start_date: new Date(updateTodo.start_date),
         })
+        toast('Todo completado!', { type: 'success' })
         return updateTodo
       }
 
@@ -39,6 +40,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
         ...updateTodo,
         start_date: new Date(updateTodo.start_date),
       })
+      toast('Todo a fazer!', { type: 'warning' })
       return updateTodo
     })
 
