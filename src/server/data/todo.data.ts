@@ -39,3 +39,15 @@ export const updateTodo = (data: CreateTodoModel) => {
     console.log(error)
   }
 }
+
+export const deleteTodo = (data: CreateTodoModel) => {
+  try {
+    return prisma.todo.delete({
+      where: {
+        id: data.id,
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}

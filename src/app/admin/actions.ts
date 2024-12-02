@@ -5,7 +5,11 @@ import { revalidatePath } from 'next/cache'
 import { CreateTodoModel } from '@/types/models'
 import { getCurrentUser } from '@/server/functions/user.function'
 import { TaskSchema } from '@/app/admin/_components/button-new-task/schema'
-import { createTodoFunction, updateTodoFunction } from '@/server/functions/todo.function'
+import {
+  createTodoFunction,
+  deleteTodoFunction,
+  updateTodoFunction,
+} from '@/server/functions/todo.function'
 
 export const createTodoAction = async ({ date, list, notes, priority, task }: TaskSchema) => {
   const user = await getCurrentUser()
@@ -35,5 +39,16 @@ export const updateTodoAction = async (todo: CreateTodoModel) => {
   } catch (error) {
     console.error('Erro ao atualizar a tarefa:', error)
     throw new Error('Falha ao atualizar a tarefa.')
+  }
+}
+
+export const deleteTodoAction = async (todo: CreateTodoModel) => {
+  try {
+    const deleteTodo = await deleteTodoFunction(todo)
+
+    return deleteTodo
+  } catch (error) {
+    console.error('Erro ao deletar a tarefa', error)
+    throw new Error('Falha ao deletar a tarefa')
   }
 }

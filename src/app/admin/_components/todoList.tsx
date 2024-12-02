@@ -8,8 +8,8 @@ import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-rea
 
 import { todoApi } from '@/apis/todo.api'
 import { TodoModel } from '@/types/models'
-import { updateTodoAction } from '@/app/admin/actions'
 import { useTodoForm } from '@/app/admin/_context/todo.context'
+import { deleteTodoAction, updateTodoAction } from '@/app/admin/actions'
 
 interface TodoListProps {
   selectedDate: Date
@@ -79,6 +79,18 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
     setInitialData(todo)
   }
 
+  const handleTodoDelete = async (todo: TodoModel) => {
+    console.log('delete', todo)
+
+    const todoWithDate = {
+      ...todo,
+      start_date: new Date(todo.start_date),
+      end_date: new Date(todo.end_date),
+    }
+
+    await deleteTodoAction(todoWithDate)
+  }
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -129,7 +141,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
                     </button>
                   </li>
                   <li>
-                    <button className='text-error'>
+                    <button className='text-error' onClick={() => handleTodoDelete(todo)}>
                       <Trash2Icon size={18} />
                       Deletar
                     </button>
