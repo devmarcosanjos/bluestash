@@ -26,12 +26,18 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
 
       if (todo.completed === false || todo.completed === undefined) {
         const updateTodo = { ...todo, completed: true }
-        await updateTodoAction(updateTodo)
+        await updateTodoAction({
+          ...updateTodo,
+          start_date: new Date(updateTodo.start_date),
+        })
         return updateTodo
       }
 
       const updateTodo = { ...todo, completed: false }
-      await updateTodoAction(updateTodo)
+      await updateTodoAction({
+        ...updateTodo,
+        start_date: new Date(updateTodo.start_date),
+      })
       return updateTodo
     })
 
