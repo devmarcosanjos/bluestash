@@ -1,5 +1,6 @@
 'use client'
 
+import { toast } from 'react-toastify'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useSearchParams } from 'next/navigation'
@@ -18,7 +19,7 @@ interface TodoListProps {
 export const TodoList = ({ selectedDate }: TodoListProps) => {
   const [todos, setTodos] = useState<TodoModel[]>([])
   const params = useSearchParams()
-  const { refetchCount, setInitialData, setDropdownOpen } = useTodoForm()
+  const { refetchCount, setInitialData, setDropdownOpen, refetch } = useTodoForm()
 
   const handleCheckboxClick = async (taskId: number) => {
     const newTasks = todos.map(async todo => {
@@ -80,8 +81,6 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
   }
 
   const handleTodoDelete = async (todo: TodoModel) => {
-    console.log('delete', todo)
-
     const todoWithDate = {
       ...todo,
       start_date: new Date(todo.start_date),
@@ -89,6 +88,8 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
     }
 
     await deleteTodoAction(todoWithDate)
+    toast('Todo deletado!', { type: 'success' })
+    refetch()
   }
 
   useEffect(() => {

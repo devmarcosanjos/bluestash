@@ -1,6 +1,5 @@
 'use client'
 
-import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
 
 import { PlusIcon } from 'lucide-react'
@@ -49,7 +48,7 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
     refetch()
     reset()
     setDropdownOpen(false)
-    toast('Todo salvo!', { type: 'success' })
+    // toast('Todo salvo!', { type: 'success' })
   }
 
   useEffect(() => {
