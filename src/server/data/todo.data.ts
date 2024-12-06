@@ -10,6 +10,7 @@ export const getAllTodosByUserId = async (userId: number) => {
       start_date: true,
       categoria_id: true,
       completed: true,
+      priority: true,
     },
     where: {
       user_id: {
