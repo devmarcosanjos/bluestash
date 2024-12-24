@@ -37,6 +37,10 @@ const InputProfile = ({ user, onAccountDeleted }: Props) => {
     setIsModalOpen(false)
   }
 
+  if (!user) {
+    return <div>Erro: informações do usuário não disponíveis.</div>
+  }
+
   return (
     <div className='w-full rounded-lg bg-white p-8 shadow-md'>
       <div className='flex flex-col gap-6'>

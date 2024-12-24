@@ -1,14 +1,14 @@
-import {NextRequest, NextResponse} from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-import {EmailOtpType} from '@supabase/supabase-js'
+import { EmailOtpType } from '@supabase/supabase-js'
 
-import {createUser, getUserByUid} from '@/server/data/user.data'
-import {supabaseCreateClient} from '@/libs/supabase/supabase-server'
+import { createUser, getUserByUid } from '@/server/data/user.data'
+import { supabaseCreateClient } from '@/libs/supabase/supabase-server'
 
 export const GET = async (request: NextRequest) => {
   const supabase = await supabaseCreateClient()
 
-  const {searchParams} = new URL(request.url)
+  const { searchParams } = new URL(request.url)
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType
   const redirectUrl = new URL('/auth', request.url)
@@ -18,7 +18,7 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.redirect(redirectUrl)
   }
 
-  const {error, data} = await supabase.auth.verifyOtp({token_hash: token_hash!, type})
+  const { error, data } = await supabase.auth.verifyOtp({ token_hash: token_hash!, type })
 
   if (error || !data.user) {
     redirectUrl.searchParams.append('status', 'login-failed')

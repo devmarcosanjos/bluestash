@@ -12,3 +12,12 @@ export const getCurrentUser = async () => {
     return redirect('/auth')
   }
 }
+
+export const deleteUserAccount = async (userId: string) => {
+  try {
+    const supabase = await supabaseCreateClient()
+    await supabase.auth.deleteUser(userId)
+  } catch (error) {
+    console.error('Erro ao deletar conta', error)
+  }
+}
