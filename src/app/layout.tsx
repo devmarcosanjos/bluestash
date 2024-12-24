@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { Roboto } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 
 import './globals.css'
 import { LayoutWrapper, Providers } from './_components'
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Providers>
           <LayoutWrapper>{children}</LayoutWrapper>
         </Providers>
+        <Analytics />
       </body>
     </html>
   )
