@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 
 import { UserModel } from '@/types/models'
+import { updateUserAction } from '@/app/admin/profile/actions'
 
 type Props = {
   user: UserModel
@@ -18,8 +19,12 @@ const InputProfile = ({ user, onAccountDeleted }: Props) => {
     setName(event.target.value)
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setOriginalName(name)
+    await updateUserAction({
+      ...user,
+      name: name,
+    })
   }
 
   const isNameChanged = name !== originalName
@@ -83,7 +88,7 @@ const InputProfile = ({ user, onAccountDeleted }: Props) => {
         <div className='form-control mt-12 w-full'>
           <label className='label'>
             <span className='label-text text-lg font-semibold'>
-              Deseja excluri sua conta e todos seus registros?
+              Deseja excluir sua conta e todos seus registros?
             </span>
           </label>
           <button

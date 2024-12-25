@@ -57,3 +57,11 @@ export const deleteUser = async (userId: number) => {
     },
   })
 }
+export const updateUser = async (uid: string, user: CreateUserModel) => {
+  await prisma.users.update({
+    where: {
+      uid: uid,
+    },
+    data: user,
+  })
+}
