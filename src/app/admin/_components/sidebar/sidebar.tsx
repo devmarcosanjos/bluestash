@@ -71,10 +71,10 @@ const Sidebar = () => {
           </button>
         ))}
 
-        <Link href='#' className='flex w-full'>
+        <Link href='/admin/dashboard' className='flex w-full'>
           <button className='btn btn-primary flex-1'>
             <div className='flex items-center gap-2'>
-              <span className='font-light'>Relatórios</span>
+              <span className='font-light'>Dashboard</span>
             </div>
           </button>
         </Link>
