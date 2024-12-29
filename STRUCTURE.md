@@ -1,6 +1,6 @@
-# Entendendo as Decisões Arquiteturais e Estrutura do Boilerplate
+# Decisões Arquiteturais
 
-## Algumas ferramentas, libs e padrões
+## Ferramentas, libs e padrões
 
 - 📏 **ESLint**
 - 💖 **Prettier**
@@ -17,7 +17,7 @@
 - 🤖 **React**
 - 🪄 **DaisyUi**
 
-## Estrutura do Boilerplate
+## Estrutura
 
 ### Configurações setup
 
