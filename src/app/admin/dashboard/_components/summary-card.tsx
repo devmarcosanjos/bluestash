@@ -1,5 +1,5 @@
 interface SummaryCardProps {
-  icon: string
+  icon: React.ReactNode
   title: string
   value: string
 }
