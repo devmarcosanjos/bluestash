@@ -4,15 +4,11 @@ export const getDataTodo = async () => {
   const totalTodos = await prisma.todo.count()
 
   const completedTodos = await prisma.todo.count({
-    where: {
-      completed: true,
-    },
+    where: { completed: true },
   })
 
   const incompletedTodos = await prisma.todo.count({
-    where: {
-      completed: false,
-    },
+    where: { completed: false },
   })
 
   const todosMonth = await prisma.todo.findMany({

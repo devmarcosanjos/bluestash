@@ -12,8 +12,9 @@ import {
   LucideTally5,
 } from 'lucide-react'
 
+import { dataDashboardAction } from '@/app/admin/dashboard/actions'
 import SummaryCard from '@/app/admin/dashboard/_components/summary-card'
-import { DashboardDataType, dataDashboardAction } from '@/app/admin/dashboard/actions'
+import { DashboardDataType } from '@/server/functions/dashboard.function'
 
 export default function Page() {
   const [dashboardData, setDashboardData] = useState<DashboardDataType>({

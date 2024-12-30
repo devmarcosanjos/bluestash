@@ -1,22 +1,12 @@
 'use server'
 
-import { getDataTodo } from '@/server/data/dashboard.data'
-
-export type DashboardDataType = {
-  totalTodos: number
-  completedTodos: number
-  incompletedTodos: number
-  todosMonth: any[] // Substitua 'any' por um tipo específico
-  todosWeek: any[]
-  todosDay: any[]
-}
+import { DashboardDataType, fetchDashboardData } from '@/server/functions/dashboard.function'
 
 export const dataDashboardAction = async (): Promise<DashboardDataType> => {
   try {
-    const data = await getDataTodo()
-    return data
+    return await fetchDashboardData()
   } catch (error) {
-    console.error('Erro ao carregar os dados', error)
+    console.error('Erro ao carregar os dados no action:', error)
     return {
       totalTodos: 0,
       completedTodos: 0,
