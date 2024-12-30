@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { Settings } from 'luxon'
 import { ListCheck } from 'lucide-react'
@@ -16,21 +16,29 @@ import { categoryApi } from '@/apis/category.api'
 Settings.defaultLocale = 'pt-BR'
 
 const Sidebar = () => {
-  const pathname = usePathname()
   const router = useRouter()
   const params = useSearchParams()
 
   const [category, setCategory] = useState<CategoryModel[]>([])
 
   const handleCategorySelect = (id: number) => {
-    const searchParams = new URLSearchParams(params.toString())
+    const searchParams = new URLSearchParams(params.toString() || '')
 
-    if (params.has('category') && Number(params.get('category')) === id) {
+    if (searchParams.has('category') && Number(searchParams.get('category')) === id) {
       searchParams.delete('category')
     } else {
       searchParams.set('category', id.toString())
     }
-    router.push(`${pathname}?${searchParams.toString()}`)
+
+    if (searchParams.has('category')) {
+      router.push(`/admin/?${searchParams.toString()}`)
+    } else {
+      router.push('admin/')
+    }
+  }
+
+  const handlePathDashboard = () => {
+    return router.push(`/admin/dashboard`)
   }
 
   useEffect(() => {
@@ -71,13 +79,11 @@ const Sidebar = () => {
           </button>
         ))}
 
-        <Link href='/admin/dashboard' className='flex w-full'>
-          <button className='btn btn-primary flex-1'>
-            <div className='flex items-center gap-2'>
-              <span className='font-light'>Dashboard</span>
-            </div>
-          </button>
-        </Link>
+        <button className='btn btn-primary flex-1' onClick={() => handlePathDashboard()}>
+          <div className='flex items-center gap-2'>
+            <span className='font-light'>Dashboard</span>
+          </div>
+        </button>
       </div>
     </div>
   )
