@@ -77,8 +77,8 @@ export default function Page() {
         />
         <SummaryCard
           icon={<LucideTally5 />}
-          title='Total de Todos Semana'
           value={todosWeek.length.toString()}
+          title='Total de Todos Pendentes Semana'
         />
         <SummaryCard
           title='Total de Todos Hoje'
@@ -89,7 +89,7 @@ export default function Page() {
       <div className='grid grid-cols-2 gap-6'>
         <SummaryCard
           icon={<LucideLoader />}
-          title='Tarefas Pendentes'
+          title='Total de Tarefas Pendentes'
           value={incompletedTodos.toString()}
         />
         <SummaryCard
