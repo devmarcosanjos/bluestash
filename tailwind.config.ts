@@ -70,8 +70,8 @@ const config: Config = {
           'accent-content': '#1b1c22',
 
           'neutral': '#22212c',
-          'neutral-focus': '#1b1c22',
-          'neutral-content': '#d5ccff',
+          // 'neutral-focus': '#1b1c22',
+          // 'neutral-content': '#d5ccff',
 
           'base-100': '#302f3d',
           'base-200': '#22212c',

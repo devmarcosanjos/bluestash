@@ -70,7 +70,7 @@ const Sidebar = () => {
               'btn flex-1 border-none bg-secondary shadow-none ',
               params.has('category') &&
                 Number(params.get('category')) == item.id &&
-                'bg-red-500 text-white',
+                'bg-secondary-focus text-secondary-content',
             ])}>
             <div className='flex flex-grow items-center gap-2'>
               <ListCheck size={18} />
