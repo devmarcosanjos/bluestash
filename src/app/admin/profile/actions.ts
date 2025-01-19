@@ -1,6 +1,7 @@
 'use server'
 
 import { UserModel } from '@/types/models'
+import { deleteAuthSupabaseUser } from '@/server/functions/auth.function'
 import { deleteAllTodosFromUserFunction } from '@/server/functions/todo.function'
 import {
   deleteUserByUserId,
@@ -13,12 +14,9 @@ export const updateUserAction = async (updateUser: UserModel) => {
 }
 
 export const deleteAccountAction = async () => {
-  /**
-   * [x] Delete from todo table
-   * [x] Delete user from from database
-   * [] Delete user from supabase auth
-   */
   const user = await getCurrentUser()
+
   await deleteAllTodosFromUserFunction(user.id)
   await deleteUserByUserId(user.id)
+  await deleteAuthSupabaseUser(user.uid)
 }

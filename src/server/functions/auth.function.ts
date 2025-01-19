@@ -26,3 +26,9 @@ export const getAuthenticatedSupabaseUser = async () => {
 
   return authenticatedUser
 }
+
+export const deleteAuthSupabaseUser = async (uid: string) => {
+  const supabase = await supabaseCreateClient()
+
+  await supabase.auth.admin.deleteUser(uid)
+}

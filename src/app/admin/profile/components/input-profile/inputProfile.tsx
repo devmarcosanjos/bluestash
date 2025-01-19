@@ -2,7 +2,10 @@
 
 import React, { useState } from 'react'
 
+import { useRouter } from 'next/navigation'
+
 import { UserModel } from '@/types/models'
+import { supabase } from '@/libs/supabase/supabase-client'
 import { deleteAccountAction, updateUserAction } from '@/app/admin/profile/actions'
 
 type Props = {
@@ -10,6 +13,8 @@ type Props = {
 }
 
 const InputProfile = ({ user }: Props) => {
+  const router = useRouter()
+
   const [name, setName] = useState(user?.name || '')
   const [originalName, setOriginalName] = useState(user?.name || '')
   const [isModalOpen, setIsModalOpen] = useState(false) // Estado para controlar o modal
@@ -33,9 +38,10 @@ const InputProfile = ({ user }: Props) => {
   }
 
   const confirmDeleteAccount = async () => {
-    //
     await deleteAccountAction()
     setIsModalOpen(false)
+    await supabase.auth.signOut()
+    router.push('/auth')
   }
 
   const closeModal = () => {
