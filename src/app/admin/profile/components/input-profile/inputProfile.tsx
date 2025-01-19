@@ -7,10 +7,9 @@ import { updateUserAction } from '@/app/admin/profile/actions'
 
 type Props = {
   user: UserModel
-  onAccountDeleted: () => void
 }
 
-const InputProfile = ({ user, onAccountDeleted }: Props) => {
+const InputProfile = ({ user }: Props) => {
   const [name, setName] = useState(user?.name || '')
   const [originalName, setOriginalName] = useState(user?.name || '')
   const [isModalOpen, setIsModalOpen] = useState(false) // Estado para controlar o modal
@@ -34,7 +33,6 @@ const InputProfile = ({ user, onAccountDeleted }: Props) => {
   }
 
   const confirmDeleteAccount = () => {
-    onAccountDeleted()
     setIsModalOpen(false)
   }
 
@@ -95,6 +93,11 @@ const InputProfile = ({ user, onAccountDeleted }: Props) => {
             onClick={handleDeleteAccount}
             className='btn rounded-lg bg-red-500 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
             Excluir Conta
+          </button>
+          <button
+            onClick={handleDeleteAccount}
+            className='btn rounded-lg bg-red-200 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
+            Reset
           </button>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default async function Layout({ children }: Props) {
 
   return (
     <div>
-      <InputProfile user={user} onAccountDeleted={() => null} />
+      <InputProfile user={user} />
       {children}
     </div>
   )
