@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 
 import { UserModel } from '@/types/models'
-import { updateUserAction } from '@/app/admin/profile/actions'
+import { deleteAccountAction, updateUserAction } from '@/app/admin/profile/actions'
 
 type Props = {
   user: UserModel
@@ -32,7 +32,9 @@ const InputProfile = ({ user }: Props) => {
     setIsModalOpen(true)
   }
 
-  const confirmDeleteAccount = () => {
+  const confirmDeleteAccount = async () => {
+    //
+    await deleteAccountAction()
     setIsModalOpen(false)
   }
 
@@ -94,9 +96,7 @@ const InputProfile = ({ user }: Props) => {
             className='btn rounded-lg bg-red-500 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
             Excluir Conta
           </button>
-          <button
-            onClick={handleDeleteAccount}
-            className='btn rounded-lg bg-red-200 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
+          <button className='btn rounded-lg bg-red-200 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
             Reset
           </button>
         </div>

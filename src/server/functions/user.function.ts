@@ -14,14 +14,6 @@ export const getCurrentUser = async () => {
   }
 }
 
-export const deleteUserAccount = async (userId: string) => {
-  try {
-    const supabase = await supabaseCreateClient()
-    await supabase.auth.admin.deleteUser(userId)
-  } catch (error) {
-    console.error('Erro ao deletar conta', error)
-  }
-}
 export const updateUserFunc = async (updateUSer: UserModel) => {
   const { uid } = await getCurrentUser()
 

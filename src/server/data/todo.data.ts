@@ -52,3 +52,15 @@ export const deleteTodo = (data: CreateTodoModel) => {
     console.log(error)
   }
 }
+
+export const deleteAllUsersTodos = (userId: number) => {
+  try {
+    return prisma.todo.deleteMany({
+      where: {
+        user_id: userId,
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
