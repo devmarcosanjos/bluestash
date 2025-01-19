@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { UserModel } from '@/types/models'
 import { supabaseCreateClient } from '@/libs/supabase/supabase-server'
-import { getAuthenticatedUser, updateUser } from '@/server/data/user.data'
+import { deleteUser, getAuthenticatedUser, updateUser } from '@/server/data/user.data'
 
 export const getCurrentUser = async () => {
   try {
@@ -18,4 +18,8 @@ export const updateUserFunc = async (updateUSer: UserModel) => {
   const { uid } = await getCurrentUser()
 
   await updateUser(uid, updateUSer)
+}
+
+export const deleteUserByUserId = async (userId: number) => {
+  await deleteUser(userId)
 }
