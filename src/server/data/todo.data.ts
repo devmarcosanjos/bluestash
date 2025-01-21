@@ -64,3 +64,15 @@ export const deleteAllUsersTodos = (userId: number) => {
     console.log(error)
   }
 }
+
+export const showAllTodosFunction = (userId: number) => {
+  try {
+    return prisma.todo.findMany({
+      where: {
+        user_id: userId,
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -1,5 +1,11 @@
 import { ApiTodoModel, CreateTodoModel } from '@/types/models'
-import { createTodo, deleteAllUsersTodos, deleteTodo, updateTodo } from '@/server/data/todo.data'
+import {
+  createTodo,
+  deleteAllUsersTodos,
+  deleteTodo,
+  showAllTodosFunction,
+  updateTodo,
+} from '@/server/data/todo.data'
 
 export const createTodoFunction = async (todo: ApiTodoModel) => {
   return await createTodo(todo)
@@ -15,4 +21,8 @@ export const deleteTodoFunction = async (todo: CreateTodoModel) => {
 
 export const deleteAllTodosFromUserFunction = async (userId: number) => {
   return await deleteAllUsersTodos(userId)
+}
+
+export const getShowAllTodosFunction = async (userId: number) => {
+  return await showAllTodosFunction(userId)
 }

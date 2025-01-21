@@ -45,7 +45,7 @@ export default function Page() {
   const { totalTodos, completedTodos, incompletedTodos, todosMonth, todosWeek, todosDay } =
     dashboardData
 
-  const completionRate = (completedTodos / totalTodos) * 100
+  const completionRate = totalTodos > 0 ? (completedTodos / totalTodos) * 100 : 0
 
   if (isLoading) {
     return <p>Carregando...</p>
