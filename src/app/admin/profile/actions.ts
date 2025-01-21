@@ -20,3 +20,9 @@ export const deleteAccountAction = async () => {
   await deleteUserByUserId(user.id)
   await deleteAuthSupabaseUser(user.uid)
 }
+
+export const deleteTodosByUser = async () => {
+  const user = await getCurrentUser()
+
+  await deleteAllTodosFromUserFunction(user.id)
+}

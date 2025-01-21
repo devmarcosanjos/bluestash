@@ -6,7 +6,11 @@ import { useRouter } from 'next/navigation'
 
 import { UserModel } from '@/types/models'
 import { supabase } from '@/libs/supabase/supabase-client'
-import { deleteAccountAction, updateUserAction } from '@/app/admin/profile/actions'
+import {
+  deleteAccountAction,
+  deleteTodosByUser,
+  updateUserAction,
+} from '@/app/admin/profile/actions'
 
 type Props = {
   user: UserModel
@@ -18,6 +22,7 @@ const InputProfile = ({ user }: Props) => {
   const [name, setName] = useState(user?.name || '')
   const [originalName, setOriginalName] = useState(user?.name || '')
   const [isModalOpen, setIsModalOpen] = useState(false) // Estado para controlar o modal
+  const [isButtonReset, setIsButtonReset] = useState(true)
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
@@ -35,6 +40,17 @@ const InputProfile = ({ user }: Props) => {
 
   const handleDeleteAccount = () => {
     setIsModalOpen(true)
+    setIsButtonReset(false)
+  }
+
+  const handleDeleteTodos = async () => {
+    setIsModalOpen(true)
+    setIsButtonReset(true)
+  }
+
+  const confirmDeleteTodos = async () => {
+    await deleteTodosByUser()
+    setIsModalOpen(false)
   }
 
   const confirmDeleteAccount = async () => {
@@ -91,7 +107,15 @@ const InputProfile = ({ user }: Props) => {
         </div>
 
         {/* Botão para excluir conta */}
-        <div className='form-control mt-12 w-full'>
+        <div className='form-control mt-12 w-full space-y-6'>
+          <label className='label'>
+            <span className='label-text text-lg font-semibold'>Deseja reset a conta?</span>
+          </label>
+          <button
+            onClick={handleDeleteTodos}
+            className='btn rounded-lg bg-red-500 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
+            Reset
+          </button>
           <label className='label'>
             <span className='label-text text-lg font-semibold'>
               Deseja excluir sua conta e todos seus registros?
@@ -100,10 +124,7 @@ const InputProfile = ({ user }: Props) => {
           <button
             onClick={handleDeleteAccount}
             className='btn rounded-lg bg-red-500 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
-            Excluir Conta
-          </button>
-          <button className='btn rounded-lg bg-red-200 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600 focus:outline-none'>
-            Reset
+            Excluir
           </button>
         </div>
       </div>
@@ -122,11 +143,19 @@ const InputProfile = ({ user }: Props) => {
                 className='btn rounded-md bg-gray-500 px-6 py-2 text-white hover:bg-gray-600 focus:outline-none'>
                 Cancelar
               </button>
-              <button
-                onClick={confirmDeleteAccount}
-                className='btn rounded-md bg-red-500 px-6 py-2 text-white hover:bg-red-600 focus:outline-none'>
-                Confirmar
-              </button>
+              {isButtonReset ? (
+                <button
+                  onClick={confirmDeleteTodos}
+                  className='btn rounded-md bg-red-500 px-6 py-2 text-white hover:bg-red-600 focus:outline-none'>
+                  Confirmar Reset
+                </button>
+              ) : (
+                <button
+                  onClick={confirmDeleteAccount}
+                  className='btn rounded-md bg-red-500 px-6 py-2 text-white hover:bg-red-600 focus:outline-none'>
+                  Confirmar Exclusão
+                </button>
+              )}
             </div>
           </div>
         </div>
