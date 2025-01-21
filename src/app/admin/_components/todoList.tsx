@@ -110,47 +110,52 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
     <div className='mt-7 flex w-full flex-col gap-2'>
       {filteredTodos.length > 0 ? (
         filteredTodos.map(todo => (
-          <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200 p-3'>
-            <input
-              type='checkbox'
-              defaultChecked={todo.completed}
-              onChange={() => handleCheckboxClick(todo.id)}
-              className='checkbox-primary checkbox checkbox-sm'
-            />
-            <span className={`flex-grow break-all  ${getStatusClass(todo.completed)}`}>
-              {todo.name}
-            </span>
+          <div tabIndex={0} key={todo.id} className='collapse !overflow-visible '>
+            <div className='collapse-title p-0'>
+              <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200  p-3'>
+                <input
+                  type='checkbox'
+                  defaultChecked={todo.completed}
+                  onChange={() => handleCheckboxClick(todo.id)}
+                  className='checkbox-primary checkbox checkbox-sm'
+                />
+                <span className={`flex-grow break-all  ${getStatusClass(todo.completed)}`}>
+                  {todo.name}
+                </span>
 
-            {todo.start_date && todo.end_date && (
-              <div className='flex items-center gap-2'>
-                <ClockIcon size={18} />
-                <span>{todo.start_date}</span>
-                <span>-</span>
-                <span>{todo.end_date}</span>
-              </div>
-            )}
-            <div className='btn btn-square btn-sm bg-base-100'>
-              <div className='dropdown dropdown-end'>
-                <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
-                  <EllipsisVerticalIcon size={18} className='text-base-content' />
+                {todo.start_date && todo.end_date && (
+                  <div className='flex items-center gap-2'>
+                    <ClockIcon size={18} />
+                    <span>{todo.start_date}</span>
+                    <span>-</span>
+                    <span>{todo.end_date}</span>
+                  </div>
+                )}
+                <div className='btn btn-square btn-sm bg-base-100'>
+                  <details className='dropdown dropdown-end'>
+                    <summary className='btn btn-square btn-sm relative z-[20]  bg-base-100 hover:cursor-pointer'>
+                      <EllipsisVerticalIcon size={18} className='text-base-content' />
+                    </summary>
+                    <ul className='= menu dropdown-content relative z-[100] w-52 rounded-box  bg-red-100 p-2 shadow'>
+                      <li>
+                        <button className='text-base-content' onClick={() => handleTodoEdit(todo)}>
+                          <PenIcon size={18} />
+                          Editar
+                        </button>
+                      </li>
+                      <li>
+                        <button className='text-error' onClick={() => handleTodoDelete(todo)}>
+                          <Trash2Icon size={18} />
+                          Deletar
+                        </button>
+                      </li>
+                    </ul>
+                  </details>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className='menu dropdown-content z-[1] w-52 rounded-box bg-base-100  p-2 shadow'>
-                  <li>
-                    <button className='text-base-content' onClick={() => handleTodoEdit(todo)}>
-                      <PenIcon size={18} />
-                      Editar
-                    </button>
-                  </li>
-                  <li>
-                    <button className='text-error' onClick={() => handleTodoDelete(todo)}>
-                      <Trash2Icon size={18} />
-                      Deletar
-                    </button>
-                  </li>
-                </ul>
               </div>
+            </div>
+            <div className='collapse-content -mt-2 rounded-bl-lg rounded-br-lg bg-base-200 pt-4'>
+              {todo.description}
             </div>
           </div>
         ))
