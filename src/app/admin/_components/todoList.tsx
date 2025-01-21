@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
-import { ClockIcon, EllipsisVerticalIcon, PenIcon, Trash2Icon } from 'lucide-react'
+import { ClockIcon, PenIcon, Trash2Icon } from 'lucide-react'
 
 import { todoApi } from '@/apis/todo.api'
 import { TodoModel } from '@/types/models'
@@ -107,12 +107,12 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
   }, [refetchCount])
 
   return (
-    <div className='mt-7 flex w-full flex-col gap-2'>
+    <div className='indicator mt-7 flex w-full flex-col gap-2'>
       {filteredTodos.length > 0 ? (
         filteredTodos.map(todo => (
           <div tabIndex={0} key={todo.id} className='collapse !overflow-visible '>
-            <div className='collapse-title p-0'>
-              <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200  p-3'>
+            <div className='collapse-title p-0 '>
+              <div key={todo.id} className='flex items-center gap-2 rounded-lg bg-base-200  p-3 '>
                 <input
                   type='checkbox'
                   defaultChecked={todo.completed}
@@ -131,9 +131,60 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
                     <span>{todo.end_date}</span>
                   </div>
                 )}
-                <div className='btn btn-square btn-sm bg-base-100'>
+                <div className='flex items-center space-x-2'>
+                  <div>
+                    {Number(todo.categoria_id) === 1 && (
+                      <span className='rounded-md bg-blue-700 p-1 text-xs text-white'>
+                        <span className='font-light'>Todo List</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    {Number(todo.categoria_id) === 2 && (
+                      <span className='rounded-md bg-fuchsia-700 p-1 text-xs text-white'>
+                        <span className='font-light'>Work</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    {Number(todo.priority) === 1 && (
+                      <span className='rounded-md bg-red-700 p-1 text-xs text-white'>
+                        <span className='font-light'>Prioridade: Alta</span>
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    {Number(todo.priority) === 2 && (
+                      <span className='rounded-md bg-yellow-700 p-1 text-xs text-white'>
+                        <span className='font-light'>Prioridade: Média</span>
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    {Number(todo.priority) === 3 && (
+                      <span className='rounded-md bg-green-700 p-1 text-xs text-white'>
+                        <span className='font-light'>Prioridade: Baixa</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={() => handleTodoEdit(todo)}
+                    className='btn btn-square btn-sm text-base-content '>
+                    <PenIcon size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleTodoDelete(todo)}
+                    className='btn btn-square btn-sm text-error'>
+                    <Trash2Icon size={18} />
+                  </button>
+                </div>
+
+                {/* <div className=' btn btn-square btn-sm flex bg-blue-500 '>
                   <details className='dropdown dropdown-end'>
-                    <summary className='btn btn-square btn-sm relative z-[20]  bg-base-100 hover:cursor-pointer'>
+                    <summary className='btn btn-square btn-sm relative z-[20]  bg-red-500 hover:cursor-pointer'>
                       <EllipsisVerticalIcon size={18} className='text-base-content' />
                     </summary>
                     <ul className='= menu dropdown-content relative z-[100] w-52 rounded-box  bg-red-100 p-2 shadow'>
@@ -151,7 +202,7 @@ export const TodoList = ({ selectedDate }: TodoListProps) => {
                       </li>
                     </ul>
                   </details>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className='collapse-content -mt-2 rounded-bl-lg rounded-br-lg bg-base-200 pt-4'>
