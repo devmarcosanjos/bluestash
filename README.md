@@ -1,4 +1,6 @@
-# Bluestash
+<img src="./public/logo/logo.svg" />
+<br/>
+<br/>
 
 Bluestash é um aplicativo voltado para a organização pessoal e aumento da produtividade, com foco na gestão de tarefas diárias. Ele oferece ferramentas intuitivas para criar, organizar, e monitorar tarefas, além de permitir o acompanhamento de prazos e status das atividades, otimizando a rotina de usuários em diferentes contextos, como tarefas pessoais e profissionais.
 
