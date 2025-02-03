@@ -7,7 +7,6 @@
 - 🐶 **Husky**
 - 🚫 **lint-staged**
 - 💅 **TailwindCSS**
-- 🐙 **MOBX**
 - 🃏 **Jest**
 - 👽 **Next.js 14**
 - 🎲 **Supabase**

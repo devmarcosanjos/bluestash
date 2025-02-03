@@ -1,0 +1,225 @@
+.
+├── apis
+│   ├── category.api.ts
+│   ├── email-form.ts
+│   └── todo.api.ts
+├── app
+│   ├── _components
+│   │   ├── footer
+│   │   │   ├── footer.tsx
+│   │   │   └── index.ts
+│   │   ├── header
+│   │   │   ├── header.tsx
+│   │   │   └── index.ts
+│   │   ├── hero
+│   │   │   ├── hero.tsx
+│   │   │   └── index.ts
+│   │   ├── icons
+│   │   │   ├── index.ts
+│   │   │   ├── instagram.tsx
+│   │   │   └── x.tsx
+│   │   ├── index.ts
+│   │   ├── layout-wrapper
+│   │   │   ├── index.ts
+│   │   │   └── layout-wrapper.tsx
+│   │   ├── providers
+│   │   │   ├── index.ts
+│   │   │   └── providers.tsx
+│   │   └── theme-toggle
+│   │       ├── index.ts
+│   │       └── theme-toggle.tsx
+│   ├── _hooks
+│   │   └── use-theme.tsx
+│   ├── _stores
+│   │   └── theme.store.example.ts
+│   ├── admin
+│   │   ├── _components
+│   │   │   ├── PriorityLabel
+│   │   │   │   └── index.tsx
+│   │   │   ├── button-new-task
+│   │   │   │   ├── button-new-task.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   └── schema.ts
+│   │   │   ├── click-outside-detector
+│   │   │   │   ├── click-outside-detector.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── date-picker
+│   │   │   │   ├── date-picker.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── date-picker-button
+│   │   │   │   ├── date-picker-button.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── header-admin
+│   │   │   │   ├── header-admin.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── index.ts
+│   │   │   ├── input
+│   │   │   │   ├── index.ts
+│   │   │   │   └── input.tsx
+│   │   │   ├── sidebar
+│   │   │   │   ├── index.ts
+│   │   │   │   └── sidebar.tsx
+│   │   │   ├── table
+│   │   │   │   ├── index.ts
+│   │   │   │   └── table.tsx
+│   │   │   ├── todo-separator
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── todoSeparator.tsx
+│   │   │   └── todoList.tsx
+│   │   ├── _context
+│   │   │   └── todo.context.tsx
+│   │   ├── actions.ts
+│   │   ├── dashboard
+│   │   │   ├── _components
+│   │   │   │   └── summary-card.tsx
+│   │   │   ├── actions.ts
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── profile
+│   │       ├── actions.ts
+│   │       ├── components
+│   │       │   └── input-profile
+│   │       ├── layout.tsx
+│   │       └── page.tsx
+│   ├── api
+│   │   ├── category
+│   │   │   └── route.ts
+│   │   ├── email
+│   │   │   └── contact-form
+│   │   │       └── route.ts
+│   │   └── todo
+│   │       └── route.ts
+│   ├── auth
+│   │   ├── _components
+│   │   │   ├── index.ts
+│   │   │   └── login-form
+│   │   │       ├── index.ts
+│   │   │       └── login-form.tsx
+│   │   ├── actions.test.ts
+│   │   ├── actions.ts
+│   │   ├── callback
+│   │   │   └── route.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── contact
+│   │   ├── _components
+│   │   │   ├── contact-form
+│   │   │   │   ├── contact-form.tsx
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts
+│   │   └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   └── privacy-policy
+│       ├── components
+│       │   ├── privacy-policy-en.tsx
+│       │   └── privacy-policy-pt.tsx
+│       ├── layout.tsx
+│       └── page.tsx
+├── config
+│   ├── env-client.ts
+│   ├── env-server.ts
+│   └── tokens.ts
+├── emails
+│   ├── notion-magic-link.tsx
+│   ├── plaid-verify-identity.tsx
+│   ├── singlebio-confirm-email.tsx
+│   ├── static
+│   │   ├── logo.png
+│   │   ├── notion-logo.png
+│   │   ├── plaid-logo.png
+│   │   ├── plaid.png
+│   │   ├── stripe-logo.png
+│   │   ├── vercel-arrow.png
+│   │   ├── vercel-logo.png
+│   │   ├── vercel-team.png
+│   │   └── vercel-user.png
+│   ├── stripe-welcome.tsx
+│   └── vercel-invite-user.tsx
+├── estrutura.txt
+├── libs
+│   ├── http
+│   │   ├── fetch-http-client.test.ts
+│   │   ├── fetch-http-client.ts
+│   │   └── types.ts
+│   ├── i18n
+│   │   └── config.ts
+│   ├── local-cache
+│   │   ├── local-cache.test.ts
+│   │   ├── local-cache.ts
+│   │   └── mocks
+│   │       └── local-storage.mock.ts
+│   ├── prisma
+│   │   ├── config.ts
+│   │   ├── migrations
+│   │   │   ├── 20241022022630_init
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20241023004035_null
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20241121234622_remove_user_id
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20241122001432_update_category
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20241122001623_dev
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20241122002446_update
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20241122002724_update_2
+│   │   │   │   └── migration.sql
+│   │   │   └── migration_lock.toml
+│   │   ├── mocks
+│   │   │   └── config.mock.ts
+│   │   └── schema.prisma
+│   ├── resend
+│   │   └── config.ts
+│   └── supabase
+│       ├── middleware
+│       │   └── refresh-session.middleware.ts
+│       ├── supabase-client.ts
+│       └── supabase-server.ts
+├── locales
+│   ├── config.ts
+│   ├── en-US.json
+│   └── pt-BR.json
+├── middleware.ts
+├── mocks
+│   └── user.mock.ts
+├── server
+│   ├── data
+│   │   ├── category.data.ts
+│   │   ├── dashboard.data.ts
+│   │   ├── todo.data.test.ts
+│   │   ├── todo.data.ts
+│   │   └── user.data.ts
+│   ├── functions
+│   │   ├── auth.function.test.ts
+│   │   ├── auth.function.ts
+│   │   ├── dashboard.function.ts
+│   │   ├── private-route.function.test.ts
+│   │   ├── private-route.function.ts
+│   │   ├── todo.function.ts
+│   │   ├── user.function.test.ts
+│   │   └── user.function.ts
+│   └── middlewares
+│       └── verify-authentication.middleware.ts
+├── types
+│   ├── enums
+│   │   ├── example.enum.ts
+│   │   └── index.ts
+│   ├── models
+│   │   ├── category.model.ts
+│   │   ├── index.ts
+│   │   ├── todo.model.ts
+│   │   └── user.model.ts
+│   └── utilities
+│       ├── email.utility.ts
+│       └── index.ts
+└── utils
+    ├── classes-merge.ts
+    └── index.ts
+
+76 directories, 146 files

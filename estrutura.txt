@@ -1,0 +1,45 @@
+.
+├── README.md
+├── STRUCTURE.md
+├── arquitetura.excalidraw
+├── commitlint.config.js
+├── coverage
+│   ├── base.css
+│   ├── block-navigation.js
+│   ├── favicon.png
+│   ├── index.html
+│   ├── prettify.css
+│   ├── prettify.js
+│   ├── sort-arrow-sprite.png
+│   ├── sorter.js
+│   └── src
+├── desing.excalidraw
+├── erase.excalidraw
+├── eslint.config.mjs
+├── estrutura.txt
+├── info-hours.json
+├── jest-setup.tsx
+├── jest.config.ts
+├── next-env.d.ts
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+├── public
+│   └── logo
+├── src
+│   ├── apis
+│   ├── app
+│   ├── config
+│   ├── emails
+│   ├── libs
+│   ├── locales
+│   ├── middleware.ts
+│   ├── mocks
+│   ├── server
+│   ├── types
+│   └── utils
+├── tailwind.config.ts
+├── tsconfig.json
+└── yarn.lock
+
+15 directories, 27 files
