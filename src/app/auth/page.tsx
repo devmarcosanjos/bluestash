@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import {ArrowLeft} from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 
-import {LoginForm} from './_components'
+import { LoginForm } from './_components'
 
 export default function Page() {
   return (
-    <div className='flex h-screen w-full flex-col items-center justify-center bg-base-200'>
+    <div className='flex h-screen w-full flex-col items-center justify-center bg-base-200  bg-gradient-to-r from-blue-500 to-purple-600'>
       <div className='flex w-[350px] flex-col rounded-lg bg-base-100 px-5 pb-6 pt-3 shadow-lg '>
         <Link href='./' title='Go back' className='btn btn-circle btn-ghost btn-sm'>
           <ArrowLeft size={18} />

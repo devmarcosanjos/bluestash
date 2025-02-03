@@ -9,7 +9,7 @@ import { LayoutWrapper, Providers } from './_components'
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
-  title: 'BlueStash',
+  title: 'BLUESTASH',
   description: 'Aplicação de gerenciamento de tarefas',
 }
 

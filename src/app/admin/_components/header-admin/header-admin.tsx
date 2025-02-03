@@ -6,7 +6,6 @@ import { redirect } from 'next/navigation'
 import { LogOut } from 'lucide-react'
 
 import { UserModel } from '@/types/models'
-import { ThemeToggle } from '@/app/_components'
 import { supabase } from '@/libs/supabase/supabase-client'
 
 type Props = {
@@ -48,7 +47,7 @@ export const HeaderAdmin = ({ user }: Props) => {
         </div>
       </div>
       <div className='navbar-end w-full'>
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='flex items-center hover:cursor-pointer'>
             <div className='avatar placeholder'>

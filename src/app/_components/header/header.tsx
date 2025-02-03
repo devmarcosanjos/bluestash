@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import {APP_URL} from '@/config/env-client'
-import {ThemeToggle} from '@/app/_components/theme-toggle'
+import { APP_URL } from '@/config/env-client'
 
 export const Header = () => {
   return (
@@ -16,7 +15,7 @@ export const Header = () => {
       </div>
 
       <div className='navbar-end'>
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
         <Link href='/auth' className='btn btn-primary px-8'>
           Login
         </Link>

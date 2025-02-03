@@ -1,10 +1,15 @@
 export const Hero = () => {
   return (
-    <div className='hero flex-1 bg-base-200'>
+    <div className='hero min-h-screen bg-gradient-to-r from-blue-500 to-purple-600'>
       <div className='hero-content text-center'>
-        <div className='max-w-md'>
-          <h1 className='text-8xl font-bold text-primary'>BlueStash</h1>
-          <p className='text-secondary-focust py-6'>Aplicação de gerenciamento de tarefas</p>
+        <div className='max-w-2xl'>
+          <h1 className='animate-fade-in-down text-8xl font-bold text-white'>
+            BLUE<span className='text-8xl font-thin text-white opacity-80'>STASH</span>
+          </h1>
+          <p className='animate-fade-in-up mb-8 mt-6 text-lg text-white/80'>
+            Aplicação de gerenciamento de tarefas intuitiva e eficiente.
+          </p>
+          <div className='animate-fade-in-up flex justify-center gap-4'></div>
         </div>
       </div>
     </div>
