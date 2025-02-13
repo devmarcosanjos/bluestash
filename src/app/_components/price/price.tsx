@@ -14,7 +14,7 @@ export default function Price() {
           <h1 className='text-lg font-bold text-primary-content'>Mensal</h1>
           <p className='text-sm text-neutral-content'>Apenas</p>
           <p className='mt-7 font-bold'>
-            <span className='text-2xl text-primary-content'>R$09,99</span>/mês
+            <span className='text-2xl text-primary-content'>R$ 09,99</span>/mês
           </p>
           <button disabled className='btn btn-neutral mt-7 cursor-not-allowed opacity-50'>
             <p className='text-primary-content'>Assinar</p>
