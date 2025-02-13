@@ -29,7 +29,7 @@ export default function Price() {
           <h1 className='text-lg font-bold text-white'>Anual</h1>
           <p className='text-sm text-gray-300'>Economize com</p>
           <p className='mt-7 font-bold'>
-            <span className='text-2xl text-white'>R$00,00</span>/ano
+            <span className='text-2xl text-white'>R$ 00,00</span>/ano
           </p>
           <div className='btn mt-7 bg-neutral hover:bg-opacity-75'>
             <Link href='/auth' className='text-primary-content'>
