@@ -20,31 +20,99 @@ const config: Config = {
     themeRoot: ':root', // The element that receives theme color CSS variables
     themes: [
       {
-        default: {
-          'primary': '#07254E',
-          'primary-focus': '#07254E',
+        // default: {
+        //   'primary': '#07254E',
+        //   'primary-focus': '#07254E',
+        //   'primary-content': '#FFFFFF',
+
+        //   'secondary': '#FFFFFF',
+        //   'secondary-focus': '#F5F5F5',
+        //   'secondary-content': '#07254E',
+
+        //   'neutral': '#636363',
+        //   // 'neutral-focus': '#111122',
+        //   // 'neutral-content': '#ffffff',
+
+        //   'base-100': '#f5f5f5',
+        //   'base-200': '#FFFFFF',
+        //   'base-content': '#000000',
+
+        //   'info': '#07254E',
+        //   'success': '#4ABC86',
+        //   'warning': '#F86F2D',
+        //   'error': '#EA3838',
+        //   'success-content': '#ffffff',
+        //   'error-content': '#ffffff',
+        //   'warning-content': '#ffffff',
+        //   'info-content': '#ffffff',
+
+        //   '--rounded-box': '1rem',
+        //   '--rounded-btn': '.5rem',
+        //   '--rounded-badge': '1.9rem',
+
+        //   '--animation-btn': '.25s',
+        //   '--animation-input': '.2s',
+
+        //   '--navbar-padding': '.5rem',
+        //   '--border-btn': '1px',
+        // },
+        // defaultDark: {
+        //   'primary': '#ffb3d9',
+        //   'primary-focus': '#ff80bf',
+        //   'primary-content': '#1b1c22',
+
+        //   'secondary': '#b9ffb3',
+        //   'secondary-focus': '#8aff80',
+        //   'secondary-content': '#1b1c22',
+
+        //   'accent': '#ffffb3',
+        //   'accent-focus': '#ffff80',
+        //   'accent-content': '#1b1c22',
+
+        //   'neutral': '#22212c',
+        //   // 'neutral-focus': '#1b1c22',
+        //   // 'neutral-content': '#d5ccff',
+
+        //   'base-100': '#302f3d',
+        //   'base-200': '#22212c',
+        //   'base-300': '#1b1c22',
+        //   'base-content': '#d5ccff',
+
+        //   'info': '#1c92f2',
+        //   'success': '#009485',
+        //   'warning': '#ff9900',
+        //   'error': '#ff5724',
+        // },
+        blueStash: {
+          'primary': '#4b2dbb',
+          'primary-focus': '#171031',
           'primary-content': '#FFFFFF',
 
-          'secondary': '#FFFFFF',
-          'secondary-focus': '#F5F5F5',
-          'secondary-content': '#07254E',
+          'secondary': '#30b9e3',
+          'secondary-focus': '#102831',
+          'secondary-content': '#FFFFFF',
 
-          'neutral': '#636363',
-          // 'neutral-focus': '#111122',
-          // 'neutral-content': '#ffffff',
+          'accent': '#87bb2d',
+          'accent-focus': '#222D26',
+          'accent-content': '#FFFFFF',
 
-          'base-100': '#f5f5f5',
-          'base-200': '#FFFFFF',
-          'base-content': '#000000',
+          'neutral': '#19191A',
+          'neutral-focus': '#323234',
+          'neutral-content': '#cdcdcc',
 
-          'info': '#07254E',
-          'success': '#4ABC86',
-          'warning': '#F86F2D',
-          'error': '#EA3838',
-          'success-content': '#ffffff',
-          'error-content': '#ffffff',
-          'warning-content': '#ffffff',
-          'info-content': '#ffffff',
+          'base-100': '#050505',
+          'base-200': '#0F0F10',
+          'base-300': '#19191A',
+          'base-content': '#b2b2b2',
+
+          'info': '#30b9e3',
+          'success': '#87bb2d',
+          'warning': '#dccb2e',
+          'error': '#b5446b',
+
+          'border-primary': '#19191A',
+          'border-secondary': '#323234',
+          'border-tertiary': '#97979B',
 
           '--rounded-box': '1rem',
           '--rounded-btn': '.5rem',
@@ -55,33 +123,6 @@ const config: Config = {
 
           '--navbar-padding': '.5rem',
           '--border-btn': '1px',
-        },
-        defaultDark: {
-          'primary': '#ffb3d9',
-          'primary-focus': '#ff80bf',
-          'primary-content': '#1b1c22',
-
-          'secondary': '#b9ffb3',
-          'secondary-focus': '#8aff80',
-          'secondary-content': '#1b1c22',
-
-          'accent': '#ffffb3',
-          'accent-focus': '#ffff80',
-          'accent-content': '#1b1c22',
-
-          'neutral': '#22212c',
-          // 'neutral-focus': '#1b1c22',
-          // 'neutral-content': '#d5ccff',
-
-          'base-100': '#302f3d',
-          'base-200': '#22212c',
-          'base-300': '#1b1c22',
-          'base-content': '#d5ccff',
-
-          'info': '#1c92f2',
-          'success': '#009485',
-          'warning': '#ff9900',
-          'error': '#ff5724',
         },
       },
     ],
