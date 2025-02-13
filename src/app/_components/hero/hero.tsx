@@ -3,7 +3,9 @@ import Image from 'next/image'
 export const Hero = () => {
   return (
     <div className='container mx-5 grid gap-4 text-wrap p-2 py-20 text-center'>
-      <p className='text-/6 justify-center font-bold text-primary-content'>7 dias grátis</p>
+      <p className='text-/6 justify-center font-bold text-primary-content'>
+        Melhor que barato, é grátis! 🚀
+      </p>
       <h1 className='text-2xl text-primary-content md:text-4xl lg:text-6xl'>
         Transforme suas ideias em ações. Organize seu dia, conquiste seus objetivos.
       </h1>

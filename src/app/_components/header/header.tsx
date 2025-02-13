@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <header className='flex w-full justify-center bg-transparent p-2 sm:mx-5 sm:p-4'>
       <div className='container flex w-full items-center justify-between gap-6 md:gap-8'>
-        <div className='max-sm:hidden sm:flex-initial'>
+        <div className='max-lg:hidden lg:flex-initial'>
           <ul className='flex gap-4 *:text-primary-content'>
             <li>
               <a href='/'>Inicio</a>
