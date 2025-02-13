@@ -1,13 +1,15 @@
+import Price from '@/app/_components/price/price'
 import { Footer, Header, Hero } from '@/app/_components'
 
 export default async function Home() {
   return (
-    <div className='flex min-h-screen w-full flex-col '>
-      <div className='flex h-screen w-full flex-col items-center'>
+    <div className='container mx-auto flex min-h-screen w-full flex-col'>
+      <div className='flex  w-full flex-col items-center sm:mx-11'>
         <Header />
         <Hero />
+        <Price />
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }
