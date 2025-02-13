@@ -83,6 +83,47 @@ const config: Config = {
           'warning': '#ff9900',
           'error': '#ff5724',
         },
+        blueStash: {
+          'primary': '#4b2dbb',
+          'primary-focus': '#171031',
+          'primary-content': '#FFFFFF',
+
+          'secondary': '#30b9e3',
+          'secondary-focus': '#102831',
+          'secondary-content': '#FFFFFF',
+
+          'accent': '#87bb2d',
+          'accent-focus': '#222D26',
+          'accent-content': '#FFFFFF',
+
+          'neutral': '#19191A',
+          'neutral-focus': '#323234',
+          'neutral-content': '#cdcdcc',
+
+          'base-100': '#050505',
+          'base-200': '#0F0F10',
+          'base-300': '#19191A',
+          'base-content': '#b2b2b2',
+
+          'info': '#30b9e3',
+          'success': '#87bb2d',
+          'warning': '#dccb2e',
+          'error': '#b5446b',
+
+          'border-primary': '#19191A',
+          'border-secondary': '#323234',
+          'border-tertiary': '#97979B',
+
+          '--rounded-box': '1rem',
+          '--rounded-btn': '.5rem',
+          '--rounded-badge': '1.9rem',
+
+          '--animation-btn': '.25s',
+          '--animation-input': '.2s',
+
+          '--navbar-padding': '.5rem',
+          '--border-btn': '1px',
+        },
       },
     ],
   },
