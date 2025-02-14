@@ -15,10 +15,10 @@ export const Hero = () => {
       <div className='flex items-center justify-center rounded-md'>
         <Image
           alt=''
-          width={500}
-          height={300}
+          width={1000}
+          height={800}
           src='/bluestash-ladingpage.png'
-          className='h-auto max-w-[100%] rounded-lg object-cover lg:max-w-[500px]'
+          className='h-auto max-w-[100%] rounded-lg object-cover lg:max-w-[1000px]'
         />
       </div>
     </div>
