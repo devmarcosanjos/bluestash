@@ -71,7 +71,7 @@ const InputProfile = ({ user }: Props) => {
   return (
     <div
       data-theme='blueStash'
-      className='w-full rounded-lg border border-neutral-content p-8 shadow-md'>
+      className='mt-8 w-full rounded-lg border border-base-300 p-8 shadow-md'>
       <div className='flex flex-col gap-6'>
         <div className='form-control w-full'>
           <label className='label'>
