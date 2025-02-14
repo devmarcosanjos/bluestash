@@ -12,7 +12,7 @@ export default function Page() {
 
   return (
     <TodoFormContextProvider>
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 '>
         <div className='flex items-end justify-between pt-6'>
           <h1 className='text-3xl font-bold leading-[1.875rem]'>TodoList</h1>
           <DatePickerButton value={date} onChange={setDate} />
