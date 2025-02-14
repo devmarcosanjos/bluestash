@@ -22,7 +22,7 @@ export default async function Layout({ children }: Props) {
 
   return (
     <div data-theme='blueStash' className='flex h-screen w-auto flex-row'>
-      <ToastContainer position='top-right' />
+      <ToastContainer position='top-right' data-theme='blueStash' />
 
       <Sidebar />
       <div className='relative mx-auto max-w-7xl flex-1  px-5'>

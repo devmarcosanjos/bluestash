@@ -52,12 +52,12 @@ export default function Page() {
   }
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div data-theme='blueStash' className='flex flex-col gap-2'>
       <div className='flex items-end justify-between p-6'>
-        <h1 className='text-3xl font-bold leading-[1.875rem]'>Dashboard</h1>
+        <h1 className='text-3xl font-bold leading-[1.875rem] text-primary'>Dashboard</h1>
       </div>
 
-      <div className='grid grid-cols-2 gap-6'>
+      <div className='grid grid-cols-2 gap-6 '>
         <SummaryCard
           title='Total de Todos'
           icon={<LucideListChecks />}
