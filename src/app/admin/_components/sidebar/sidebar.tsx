@@ -36,9 +36,9 @@ const Sidebar = () => {
     <aside
       data-theme='blueStash'
       className=' flex w-64 flex-col border-r border-r-primary/50 p-4 text-primary-content'>
-      <div className='mb-16 mt-5 justify-start gap-4'>
+      <div className='mb-16 mt-5 inline-flex justify-start gap-4'>
         <AudioWaveform className='h-8 w-8 font-bold text-primary' />
-        <h1 className='text-4xl font-extralight text-primary-content'>Bluestash</h1>
+        <h1 className='text-2xl font-extralight text-primary-content'>Bluestash</h1>
       </div>
 
       <div className='flex flex-1 flex-col justify-between'>
