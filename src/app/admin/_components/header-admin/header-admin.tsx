@@ -35,7 +35,7 @@ export const HeaderAdmin = ({ user }: Props) => {
   }
 
   return (
-    <div className='navbar mt-2'>
+    <div data-theme='blueStash' className='navbar mt-2'>
       <div className='navbar-center flex'>
         <div className='flex flex-col'>
           <h1 className='text-4xl font-bold text-primary'>
