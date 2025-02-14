@@ -35,13 +35,13 @@ export const HeaderAdmin = ({ user }: Props) => {
   }
 
   return (
-    <div className='navbar mt-2'>
+    <div data-theme='blueStash' className='navbar mt-6'>
       <div className='navbar-center flex'>
         <div className='flex flex-col'>
-          <h1 className='text-4xl font-bold text-primary'>
+          <h1 className='text-4xl font-bold text-primary-content'>
             <span>{getCurrentHour()}</span>, <span>{userName || userInitial}!</span>
           </h1>
-          <p className='font font-light text-neutral'>
+          <p className='font font-light text-secondary-content'>
             {new Date().toLocaleString('pt-BR', { dateStyle: 'full' })}
           </p>
         </div>

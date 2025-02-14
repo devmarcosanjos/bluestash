@@ -61,7 +61,9 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
   }, [])
 
   return (
-    <div className={merge(['dropdown dropdown-end dropdown-top', dropdownOpen && 'dropdown-open'])}>
+    <div
+      data-theme='blueStash'
+      className={merge(['dropdown dropdown-end dropdown-top', dropdownOpen && 'dropdown-open'])}>
       <div role='button' className='flex items-center hover:cursor-pointer'>
         <button
           onClick={() => setDropdownOpen(true)}
@@ -73,18 +75,18 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
 
       <ClickOutsideDetector onClickOutside={() => setDropdownOpen(false)}>
         <form onSubmit={handleSubmit(handleSaveTask)}>
-          <ul className='menu dropdown-content z-[1] w-[500px] rounded-lg border border-gray-200 bg-white p-4 shadow-lg'>
+          <ul className='menu dropdown-content z-[1] w-[500px] rounded-lg border border-neutral  p-4 shadow-lg'>
             <li className='mb-3'>
               <label
                 className={merge([
-                  'input flex items-center gap-2 rounded-lg border bg-gray-50 px-3 py-2',
+                  'input flex items-center gap-2 rounded-lg border px-3 py-2',
                   errors.task && 'border-red-500',
                 ])}>
-                <PlusIcon size={18} className='text-gray-400' />
+                <PlusIcon size={18} className='text-primary' />
                 <input
                   type='text'
                   placeholder='Create new task'
-                  className='flex-1 bg-transparent text-gray-700 outline-none'
+                  className='flex-1 text-primary-content outline-none'
                   {...register('task')}
                 />
               </label>
@@ -98,15 +100,15 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
                 <select
                   id='list'
                   className={merge([
-                    'select select-bordered flex w-full items-center rounded-lg bg-gray-50 text-gray-700',
+                    'select select-bordered flex w-full items-center rounded-lg  text-primary-content ',
                     errors.list && 'border-red-500',
                   ])}
                   {...register('list')}>
-                  <option disabled value=''>
+                  <option disabled value='' className='bg-black'>
                     Lista
                   </option>
                   {category.map(item => (
-                    <option key={item.id} value={item.id}>
+                    <option key={item.id} value={item.id} className='bg-black'>
                       {item.name}
                     </option>
                   ))}
@@ -115,16 +117,16 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
               <li className=''>
                 <select
                   className={merge([
-                    'select select-bordered w-full rounded-lg bg-gray-50 text-gray-700',
-                    errors.priority && 'border-red-500',
+                    'bg-red select select-bordered w-full rounded-lg text-primary-content text-primary-content',
+                    errors.priority && 'border-error',
                   ])}
                   {...register('priority')}>
-                  <option disabled value=''>
+                  <option disabled value='' className='bg-black '>
                     Prioridade
                   </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  <option className='bg-black '>1</option>
+                  <option className='bg-black '>2</option>
+                  <option className='bg-black'>3</option>
                 </select>
               </li>
               <DatePicker
@@ -140,7 +142,7 @@ export const ButtonNewTask = ({ showNewTask, setShowNewTask }: ButtonNewTaskProp
               <textarea
                 rows={5}
                 placeholder='Add notes'
-                className='textarea w-full resize-none rounded-lg bg-gray-50 text-gray-700'
+                className='textarea w-full resize-none rounded-lg text-2xl text-primary-content'
                 {...register('notes')}></textarea>
             </li>
 

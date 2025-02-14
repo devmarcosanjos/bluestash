@@ -69,7 +69,9 @@ const InputProfile = ({ user }: Props) => {
   }
 
   return (
-    <div className='w-full rounded-lg bg-white p-8 shadow-md'>
+    <div
+      data-theme='blueStash'
+      className='mt-8 w-full rounded-lg border border-base-300 p-8 shadow-md'>
       <div className='flex flex-col gap-6'>
         <div className='form-control w-full'>
           <label className='label'>
@@ -101,7 +103,7 @@ const InputProfile = ({ user }: Props) => {
           <button
             onClick={handleSave}
             disabled={!isNameChanged}
-            className='btn rounded-lg bg-green-500 px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-green-600 focus:outline-none'>
+            className='btn rounded-lg bg-primary px-6 py-2 text-white transition-all duration-300 ease-in-out hover:bg-green-600 focus:outline-none'>
             Salvar
           </button>
         </div>

@@ -21,8 +21,8 @@ export default async function Layout({ children }: Props) {
   const user = await getCurrentUser()
 
   return (
-    <div className='flex h-screen w-auto flex-row '>
-      <ToastContainer position='top-right' />
+    <div data-theme='blueStash' className='flex h-screen w-auto flex-row'>
+      <ToastContainer position='top-right' data-theme='blueStash' />
 
       <Sidebar />
       <div className='relative mx-auto max-w-7xl flex-1  px-5'>

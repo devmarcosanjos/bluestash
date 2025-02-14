@@ -6,12 +6,14 @@ interface SummaryCardProps {
 
 const SummaryCard = ({ icon, title, value }: SummaryCardProps) => {
   return (
-    <div className='rounded-xl bg-primary-content p-4'>
-      <div className='mb-2 flex h-9 w-9 items-center justify-center rounded-md bg-secondary-content bg-opacity-10 text-primary'>
+    <div data-theme='blueStash' className='rounded-xl bg-neutral p-4'>
+      <div className='mb-2 flex h-9 w-9 items-center justify-center rounded-md bg-primary-content bg-opacity-10 text-primary-content'>
         {icon}
       </div>
-      <p className='text-sm font-medium text-primary'>{title}</p>
-      <p className='text-2xl font-semibold text-primary'>{value}</p>
+      <div className='inline-flex w-full items-center justify-between'>
+        <p className='text-lg font-medium text-primary-content'>{title}</p>
+        <p className='text-right text-6xl font-semibold text-primary'>{value}</p>
+      </div>
     </div>
   )
 }
